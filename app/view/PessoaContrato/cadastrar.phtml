@@ -1,0 +1,588 @@
+<ul class="breadcrumbs">
+    <li><a href="<?php echo UrlRequestHelper::mountUrl('Principal'); ?>"><span class="icon mif-home"></span></a></li>
+    <li><a href="<?php echo UrlRequestHelper::mountUrl('Gestao'); ?>">Gestão</a></li>
+    <li><a href="<?php echo UrlRequestHelper::mountUrl('PessoaContrato'); ?>">Contratos</a></li>
+    <li><a>Cadastro</a></li>
+</ul>
+<h1 class="text-light">
+    Contrato<small class="on-right"> Cadastrar</small>
+    <span class="mif-file-text place-right"></span>
+</h1>
+<hr class="thin bg-grayLighter">
+<br>
+<form action="<?php echo UrlRequestHelper::mountUrlPost('PessoaContrato', 'cadastrar'); ?>" method="POST" data-role="validator">
+    <input type="hidden" name="pessoa" value="<?php echo $view_objPessoa->getId(); ?>">
+    <?php if($view_isEmprestimo): ?>
+        <!--<input type="hidden" name="idPessoaOrgao" value="<?php //echo $view_objPessoaConsultaEmprestimo->getPessoaConsulta()->getPessoaOrgao(); ?>">-->
+        <input type="hidden" name="idConvenio" id='idConvenio' value="<?php echo ($view_objPessoaConsultaEmprestimo->getConvenio()!=null)?$view_objPessoaConsultaEmprestimo->getConvenio()->getId():""; ?>">
+        <input type="hidden" name="emprestimo" value="<?php echo $view_objPessoaConsultaEmprestimo->getId(); ?>">
+        <input type="hidden" name="tipoContratoOrigem" id="tipoContratoOrigem" value="<?php echo ($view_objPessoaContratoOrigem!=null)?$view_objPessoaContratoOrigem->getTipoContrato():""; ?>">
+    <?php endif; ?>
+    <div class="flex-grid">
+        <div class="row cell-auto-size no-margin">            
+            <div class="cell colspan6">
+                <label>Nome</label>
+                <div class="input-control text full-size" data-role="input">
+                    <span class="mif-user prepend-icon"></span>
+                    <input type="text" 
+                           value="<?php echo $view_objPessoa->getNome(); ?>"
+                           disabled="disabled"
+
+                           >
+                </div>
+            </div>
+            <div class="cell colspan3">
+                <label>Data de Nascimento</label>
+                <div class="input-control text full-size" data-role="input">
+                    <span class="mif-calendar prepend-icon"></span>
+                    <input type="text" 
+                           value="<?php echo $view_objPessoa->getDataNascimento(); ?>"
+                           disabled="disabled"
+                           data-role='hint' 
+                           data-hint-background='bg-lightBlue' 
+                           data-hint-color='fg-white'
+                           data-hint-mode='2'
+                           data-hint='|<?php echo DataHelper::calcularIdade($view_objPessoa->getDataNascimento()); ?> anos' 
+                           data-hint-position='bottom'
+                           >
+                </div>
+            </div>
+            <div class="cell colspan3">
+                <label>Número CPF</label>
+                <div class="input-control text full-size" data-role="input">
+                    <span class="mif-credit-card prepend-icon"></span>
+                    <input type="text" 
+                           value="<?php echo $view_objPessoa->getNumeroCPF(); ?>"
+                           disabled="disabled"
+                           >
+                </div>
+            </div>
+        </div>
+        <?php if($view_isEmprestimo): ?>
+        <div data-text="Negócio" class="example">
+            <div class="row cell-auto-size no-margin">
+                <div class="cell colspan3">
+                    <label>Nº Contrato</label>
+                    <div class="input-control text full-size" data-role="input">
+                        <span class="mif-file-text prepend-icon"></span>
+                        <input type="text" 
+                               value="<?php echo $view_objPessoaConsultaEmprestimo->getNumeroContrato(); ?>"
+                               disabled="disabled"
+
+                               >
+                    </div>
+                </div>
+                <div class="cell colspan2">
+                    <label>Data Contrato</label>
+                    <div class="input-control text full-size" data-role="input">
+                        <span class="mif-calendar prepend-icon"></span>
+                        <input type="text" 
+                               value="<?php echo $view_objPessoaConsultaEmprestimo->getDataInicioContrato(); ?>"
+                               disabled="disabled"
+                               >
+                    </div>
+                </div>
+                <div class="cell colspan4">
+                    <label>Convênio</label>
+                    <div class="input-control text full-size" data-role="input">
+                        <span class="mif-file-binary prepend-icon"></span>
+                        <input type="text" 
+                               value="<?php echo ($view_objPessoaConsultaEmprestimo->getConvenio()!=null)?$view_objPessoaConsultaEmprestimo->getConvenio()->getNome():""; ?>"
+                               disabled="disabled"
+
+                               >
+                    </div>
+                </div>
+
+                <div class="cell colspan1">
+                    <label>Parcelas</label>
+                    <div class="input-control text full-size" data-role="input">
+                        <input type="text" 
+                               value="<?php echo $view_objPessoaConsultaEmprestimo->getTotalParcela(); ?>"
+                               disabled="disabled"
+                               >
+                    </div>
+                </div>
+                <div class="cell colspan2">
+                    <label>Valor</label>
+                    <div class="input-control text full-size" data-role="input">
+                        <span class="mif-dollar2 prepend-icon"></span>
+                        <input type="text" 
+                               value="<?php echo $view_objPessoaConsultaEmprestimo->getVlrParcela(); ?>"
+                               disabled="disabled"
+                               >
+                    </div>
+                </div>
+            </div>
+        </div>
+        <?php endif; ?>
+        <!--
+                <div class="row cell-auto-size">            
+                    <div class="cell colspan12" id="cell_emprestimos">
+                        <div data-text="Empréstimo" class="example" id="div_emprestimos">
+                            <table id="tabela_emprestimo" class="table border bordered hovered">
+                                <thead>
+                                    <tr>
+                                        <th style="width: 5%"></th>
+                                        <th style="width: 65%">Convênio</th>
+                                        <th style="width: 15%">Valor Parcela</th>
+                                        <th style="width: 15%">Prazo</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+        <?php //foreach ($view_listEmprestimos as $objEmprestimo): ?>
+                                        <tr>
+                                            <td>
+                                                <label class="input-control radio small-check no-margin">
+                                                    <input class="radioEmprestimo" type="radio" name="emprestimo" value="<?php //echo $objEmprestimo->getConvenio()->getId();   ?>" id="<?php //echo $objEmprestimo->getId();   ?>">
+                                                    <span class="check"></span>
+                                                </label>
+                                            </td>
+                                            <td><?php // echo $objEmprestimo->getConvenio()->getNome();   ?></td>
+                                            <td><?php // echo $objEmprestimo->getVlrParcela();   ?></td>
+                                            <td><?php // echo $objEmprestimo->getTotalParcela() . " meses";   ?></td>
+                                        </tr>
+        <?php //endforeach; ?>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div> -->
+        <div class="row cell-auto-size">            
+            <div class="cell colspan3">
+                <label>Tipo Contrato <b class="fg-red">*</b></label>
+                <div class="input-control full-size" data-role="select" data-placeholder="Informe o tipo de contrato">
+                    <select name="tipoContrato"
+                            id="tipoContrato"
+                            data-validate-func="required"
+                            data-validate-hint-position="top"
+                            data-validate-hint="Por Favor, preencha esse campo.">
+                        <option></option>
+                        <?php foreach ($view_listTipoContrato as $objTipoContrato): ?>
+                            <option value="<?php echo $objTipoContrato->getId(); ?>"><?php echo $objTipoContrato->getNome(); ?></option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
+            </div>
+            <div class="cell colspan3 padding-inputs-left1" style="padding-top: 16px;">
+                <label class="input-control checkbox" style="margin-bottom: 0px;">
+                    <input type="checkbox" name="isComissao" value="A" id="isComissao">
+                    <span class="check shadow"></span>
+                    <span class="caption"><span class="no-tablet">Contrato </span>Não Comissionado</span>
+                </label>
+            </div>
+            <div class="cell colspan6 padding-inputs-left1">
+                <label>Parceiro <b class="fg-red">*</b></label>
+                <div class="input-control full-size" data-role="select" data-placeholder="Parceiro/Correspondente">
+                    <select name="parceiro"
+                            id="parceiro"
+                            data-validate-func="required"
+                            data-validate-hint-position="top"
+                            data-validate-hint="Por Favor, preencha esse campo.">
+                        <option></option>
+                        <?php foreach ($view_listParceiro as $objParceiro): ?>
+                            <option value="<?php echo $objParceiro->getId(); ?>"><?php echo $objParceiro->getNome(); ?></option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="row cell-auto-size">
+            <div class="cell colspan3">
+                <label>Número da Proposta <b class="fg-red">*</b></label>
+                <div class="input-control text full-size" data-role="input">
+                    <input type="text" 
+                           id="numeroProposta"
+                           name="numeroProposta"
+                           placeholder="Número da proposta" 
+                           maxlength="100"
+                           data-validate-func="minlength" 
+                           data-validate-arg="4"
+                           data-validate-hint="Minimo de 4 caracteres"
+                           data-validate-hint-position="top"
+                           autocomplete="off"
+                           >
+
+                    <button class="button helper-button clear"><span class="mif-cross"></span></button>
+                    <span class="input-state-error mif-warning"></span>
+                    <span class="input-state-success mif-checkmark"></span>
+                </div>
+            </div>
+            <div class="cell colspan3 padding-inputs-left1">
+                <label>Número do Contrato <b class="fg-red">*</b></label>
+                <div class="input-control text full-size" data-role="input">
+                    <input type="text" 
+                           id="numeroContrato"
+                           name="numeroContrato"
+                           placeholder="Novo número de contrato" 
+                           maxlength="100"
+                           data-validate-func="minlength" 
+                           data-validate-arg="4"
+                           data-validate-hint="Minimo de 4 caracteres"
+                           data-validate-hint-position="top"
+                           autocomplete="off"
+                           >
+
+                    <button class="button helper-button clear"><span class="mif-cross"></span></button>
+                    <span class="input-state-error mif-warning"></span>
+                    <span class="input-state-success mif-checkmark"></span>
+                </div>
+            </div>
+            <div class="cell colspan3 padding-inputs-left1">
+                <label>Data do C<span class="no-tablet">ontrato</span><b class="fg-red"> *</b></label>
+                <div class="input-control text full-size" data-role="input">
+                    <input type="text" 
+                           id="dataContrato"
+                           name="dataContrato"
+                           placeholder="Início do contrato" 
+                           maxlength="10"
+                           data-validate-func="minlength" 
+                           data-validate-arg="4"
+                           data-validate-hint="Minimo de 4 caracteres"
+                           data-validate-hint-position="top"
+                           autocomplete="off"
+                           >
+
+                    <button class="button helper-button clear"><span class="mif-cross"></span></button>
+                    <span class="input-state-error mif-warning"></span>
+                    <span class="input-state-success mif-checkmark"></span>
+                </div>
+            </div>
+            <div class="cell colspan3 padding-inputs-left1">
+                <label>Data Cadas<span class="no-tablet">tro</span><b class="fg-red"> *</b></label>
+                <div class="input-control text full-size" data-role="input">
+                    <input type="text" 
+                           id="dataCadastroContrato"
+                           name="dataCadastroContrato"
+                           placeholder="Cadastro do Contrato" 
+                           data-validate-func="minlength" 
+                           data-validate-arg="4"
+                           data-validate-hint="Por favor preencher este campo"
+                           data-validate-hint-position="top"
+                           autocomplete="off"
+                           >
+
+                    <button class="button helper-button clear"><span class="mif-cross"></span></button>
+                    <span class="input-state-error mif-warning"></span>
+                    <span class="input-state-success mif-checkmark"></span>
+                </div>
+            </div>
+        </div>
+        <div class="row cell-auto-size no-margin">
+            <div class="cell colspan6">
+                <label>Benefício/Matrícula <b class="fg-red">*</b></label>
+                <div class="input-control full-size" data-role="select" data-placeholder="Informe o Orgão/Matrícula do emprestimo.">
+                    <select name="pessoaOrgao"
+                            id="pessoaOrgao"
+                            data-validate-func="required"
+                            data-validate-hint-position="top"
+                            data-validate-hint="Por Favor, preencha esse campo.">
+                        <option></option>
+                        <?php foreach ($view_listPessoaOrgao as $objPessoaOrgao): ?>
+                            <option value="<?php echo $objPessoaOrgao->getId(); ?>"><?php echo $objPessoaOrgao->getOrgao()->getNome(). " - " .$objPessoaOrgao->getTipoSituacao()->getNome(). " - " .$objPessoaOrgao->getMatricula(); ?></option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
+            </div>
+            <div class="cell colspan3 padding-inputs-left1">
+                <label>Status <b class="fg-red">*</b></label>
+                <div class="input-control full-size" data-role="select" data-placeholder="Selecione...">
+                    <select name="tipoSituacao"
+                            id="tipoSituacao"
+                            data-validate-func="required"
+                            data-validate-hint-position="top"
+                            data-validate-hint="Por Favor, preencha esse campo.">
+                        <option></option>
+                        <?php foreach ($view_listTipoSituacao as $objTipoSituacao): ?>
+                            <option value="<?php echo $objTipoSituacao->getId(); ?>"><?php echo $objTipoSituacao->getNome(); ?></option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
+            </div>
+            <div class="cell colspan3 padding-inputs-left1" style="display: none;" id="dataStatus">
+                <label>Data do Status<b class="fg-red"> *</b></label>
+                <div class="input-control text full-size" data-role="input">
+                    <input type="text" 
+                           id="dataTipoSituacao"
+                           name="dataTipoSituacao"
+                           placeholder="Data da Integração/Reprovação" 
+                           maxlength="10"
+                           autocomplete="off"
+                           >
+
+                    <button class="button helper-button clear"><span class="mif-cross"></span></button>
+                    <span class="input-state-error mif-warning"></span>
+                    <span class="input-state-success mif-checkmark"></span>
+                </div>
+            </div>            
+        </div>
+        <div class="row cell-auto-size no-margin">
+            <div class="cell colspan12">
+                <label>Observação <b class="fg-red">*</b></label>
+                <div class="input-control text full-size" data-role="input">
+                    <input type="text" 
+                           id="observacao"
+                           name="observacao"
+                           placeholder="Observações sobre o contrato" 
+                           maxlength="200"
+                           >
+
+                    <button class="button helper-button clear"><span class="mif-cross"></span></button>
+                    <span class="input-state-error mif-warning"></span>
+                    <span class="input-state-success mif-checkmark"></span>
+                </div>
+            </div>
+        </div>
+        <div class="row cell-auto-size no-margin">
+            <div class="cell colspan5">
+                <label>Corretor</label>
+                <div class="input-control full-size" data-role="select" data-placeholder="Informe o corretor">
+                    <select name="corretor"
+                            id="corretor"
+                            >
+                        <option></option>
+                        <?php foreach ($view_listCorretor as $objCorretor): ?>
+                            <option value="<?php echo $objCorretor->getId(); ?>"><?php echo $objCorretor->getNome(); ?></option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
+            </div>
+            <div class="cell colspan3 padding-inputs-left1">
+                <label>Conta Depósito</label>
+                <div class="input-control full-size" data-role="select" data-placeholder="Informe o corretor">
+                    <select name="contaCorretor"
+                            id="contaCorretor"
+                            >
+                        <option></option>
+                        <?php foreach ($view_listCorretor as $objCorretor): ?>
+                            <option value="<?php echo $objCorretor->getId(); ?>"><?php echo $objCorretor->getNome(); ?></option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
+            </div>
+            <div class="cell colspan2 padding-inputs-left1">
+                <label>Data do Dep<span class="no-tablet">ósito</span></label>
+                <div class="input-control text full-size" data-role="input">
+                    <input type="text" 
+                           id="dataPagamentoCorretor"
+                           name="dataPagamentoCorretor"
+                           placeholder="Data do Pagamento" 
+                           maxlength="10"
+                           >
+
+                    <button class="button helper-button clear"><span class="mif-cross"></span></button>
+                    <span class="input-state-error mif-warning"></span>
+                    <span class="input-state-success mif-checkmark"></span>
+                </div>
+            </div>
+            <div class="cell colspan2 padding-inputs-left1">
+                <label>Corretagem<b class="fg-red"> *</b></label>
+                <div class="input-control text full-size" data-role="input">
+                    <input type="text" 
+                           id="comissaoCorretor"
+                           class="calculoComissao"
+                           name="comissaoCorretor"
+                           placeholder="% comissão" 
+                           maxlength="5"
+                           >
+                    <button class="button helper-button clear"><span class="mif-cross"></span></button>
+                    <span class="input-state-error mif-warning"></span>
+                    <span class="input-state-success mif-checkmark"></span>
+                </div>
+            </div>
+        </div>
+        <div class="row cell-auto-size no-margin">
+            <div class="cell colspan12">
+                <h3 class="fg-gray">Financeiro</h3>
+                <hr class="thin bg-grayLighter"/>
+            </div>
+        </div>        
+        <div class="row cell-auto-size">
+            <div class="cell colspan2">
+                <label>Valor Bruto<b class="fg-red"> *</b></label>
+                <div class="input-control text full-size" data-role="input">
+                    <input type="text" 
+                           id="valorBruto"
+                           name="valorBruto"
+                           class="calculoComissao"
+                           placeholder="R$ --"
+                           maxlength="10"
+                           data-validate-func="minlength" 
+                           data-validate-arg="4"
+                           data-validate-hint="Minimo de 4 caracteres"
+                           data-validate-hint-position="top"
+                           autocomplete="off"
+                           >
+                    <button class="button helper-button clear"><span class="mif-cross"></span></button>
+                    <span class="input-state-error mif-warning"></span>
+                    <span class="input-state-success mif-checkmark"></span>
+                </div>
+            </div>
+            <div class="cell colspan2 padding-inputs-left1">
+                <label>Valor Líquido<b class="fg-red"> *</b></label>
+                <div class="input-control text full-size" data-role="input">
+                    <input type="text" 
+                           id="valorLiquido"
+                           name="valorLiquido"
+                           class="calculoComissao"
+                           placeholder="R$ --" 
+                           maxlength="10"
+                           data-validate-func="minlength" 
+                           data-validate-arg="4"
+                           data-validate-hint="Minimo de 4 caracteres"
+                           data-validate-hint-position="top"
+                           autocomplete="off"
+                           >
+
+                    <button class="button helper-button clear"><span class="mif-cross"></span></button>
+                    <span class="input-state-error mif-warning"></span>
+                    <span class="input-state-success mif-checkmark"></span>
+                </div>
+            </div>
+            <div class="cell colspan2 padding-inputs-left1">
+                <label>Valor Parcela<b class="fg-red"> *</b></label>
+                <div class="input-control text full-size" data-role="input">
+                    <input type="text" 
+                           id="valorParcela"
+                           name="valorParcela"
+                           placeholder="R$ --"
+                           maxlength="9"
+                           data-validate-func="required" 
+                           data-validate-hint="Por favor, preencha esse campo"
+                           data-validate-hint-position="top"
+                           autocomplete="off"
+                           >
+
+                    <button class="button helper-button clear"><span class="mif-cross"></span></button>
+                    <span class="input-state-error mif-warning"></span>
+                    <span class="input-state-success mif-checkmark"></span>
+                </div>
+            </div>
+            <div class="cell colspan1 padding-inputs-left1">
+                <label>Parcelas<b class="fg-red"> *</b></label>
+                <div class="input-control text full-size" data-role="input">
+                    <input type="text" 
+                           id="totalParcela"
+                           name="totalParcela"
+                           placeholder="QTD" 
+                           maxlength="2"
+                           data-validate-func="required" 
+                           data-validate-hint="Por favor, preencha esse campo"
+                           data-validate-hint-position="top"
+                           autocomplete="off"
+                           >
+
+                    <button class="button helper-button clear"><span class="mif-cross"></span></button>
+                    <span class="input-state-error mif-warning"></span>
+                    <span class="input-state-success mif-checkmark"></span>
+                </div>
+            </div>
+            <div class="cell colspan5 padding-inputs-left1">
+                <label>Convênio</label>
+                <div class="input-control full-size" data-role="select" data-placeholder="Informe o convênio">
+                    <select name="convenio"
+                            id="convenio"
+                            data-validate-func="required"
+                            data-validate-hint-position="top"
+                            data-validate-hint="Por Favor, preencha esse campo.">
+                        <option value=""></option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="row cell-auto-size">
+            <div class="cell colspan2">
+                <label>Taxa<b class="fg-red"> *</b></label>
+                <div class="input-control text full-size" data-role="input">
+                    <input type="text" 
+                           id="taxa"
+                           name="taxa"
+                           placeholder="% Taxa de Juros" 
+                           maxlength="4"
+                           data-validate-func="minlength" 
+                           data-validate-arg="4"
+                           data-validate-hint="Minimo de 4 caracteres"
+                           data-validate-hint-position="top"
+                           autocomplete="off"
+                           >
+
+                    <button class="button helper-button clear"><span class="mif-cross"></span></button>
+                    <span class="input-state-error mif-warning"></span>
+                    <span class="input-state-success mif-checkmark"></span>
+                </div>
+            </div>
+            <div class="cell colspan2 padding-inputs-left1">
+                <label>Comissão<b class="fg-red"> *</b></label>
+                <div class="input-control text full-size" data-role="input">
+                    <input type="text" 
+                           id="comissao"
+                           name="comissao"
+                           class="calculoComissao"
+                           placeholder="% comissão" 
+                           maxlength="5"
+                           data-validate-func="minlength" 
+                           data-validate-arg="4"
+                           data-validate-hint="Minimo de 4 caracteres"
+                           data-validate-hint-position="top"
+                           autocomplete="off"
+                           >
+
+                    <button class="button helper-button clear"><span class="mif-cross"></span></button>
+                    <span class="input-state-error mif-warning"></span>
+                    <span class="input-state-success mif-checkmark"></span>
+                </div>
+            </div>
+            <div class="cell colspan2 padding-inputs-left1">
+                <span class="place-right no-pc">Comissões:</span>
+            </div>
+            <div class="cell colspan2 padding-inputs-left1">
+                <label><span class="no-tablet">Comissão </span>do Contrato</label>
+                <div class="input-control text full-size " data-role="input">
+                    <span class="mif-calculator2 prepend-icon"></span>
+                    <input type="text" 
+                           id="comissaoContrato"
+                           name="comissaoContrato"
+                           class="bg-grayLighter fg-black"
+                           value=""
+                           readonly
+                           >
+                </div>
+            </div>
+            <div class="cell colspan2 padding-inputs-left1">
+                <label><span class="no-tablet">Comissão </span>à Receber</label>
+                <div class="input-control text full-size " data-role="input">
+                    <span class="mif-calculator2 prepend-icon"></span>
+                    <input type="text" 
+                           id="comissaoReceber"
+                           name="comissaoReceber"
+                           class="bg-grayLighter fg-cobalt"
+                           value=""
+                           readonly
+                           >
+                </div>
+            </div>
+            <div class="cell colspan2 padding-inputs-left1">
+                <label><span class="no-tablet">Comissão </span>à Pagar</label>
+                <div class="input-control text full-size " data-role="input">
+                    <span class="mif-calculator2 prepend-icon"></span>
+                    <input type="text" 
+                           id="comissaoPagar"
+                           name="comissaoPagar"
+                           class="bg-grayLighter fg-red"
+                           value=""
+                           readonly
+                           >
+                </div>
+            </div>
+        </div>
+        <br/>
+        <div class="row flex-just-end">
+            <div class="cell">
+                <button class="button mif-floppy-disk primary">&nbsp;Salvar</button>
+            </div>
+        </div>
+
+    </div>
+
+</form>

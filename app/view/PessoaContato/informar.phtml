@@ -1,0 +1,91 @@
+<ul class="breadcrumbs">
+    <li><a href="<?php echo UrlRequestHelper::mountUrl('Principal'); ?>"><span class="icon mif-home"></span></a></li>
+    <li><a href="<?php echo UrlRequestHelper::mountUrl('Gestão'); ?>">Gestão</a></li>
+    <li><a href="<?php echo UrlRequestHelper::mountUrl('Pessoa'); ?>">Pessoas/Clientes</a></li>
+    <li><a href="<?php echo UrlRequestHelper::mountUrl('Pessoa', 'informar', array('id' => $view_objPessoaContato->getPessoa()->getId())); ?>"><?php echo $view_objPessoaContato->getPessoa()->getNome(); ?></a></li>
+    <li><a>Contato Pessoal</a></li>
+</ul>
+
+<h1 class="text-light">
+    <?php echo $view_objPessoaContato->getTipoContato()->getNome(); ?> <small class="on-right"> Informações</small>
+    <span class="mif-phone place-right"></span>
+</h1>
+<hr class="thin bg-grayLighter">
+<div class="toolbar">
+    <div class="toolbar-section">
+        <button data-role="hint"
+                data-hint-background='bg-olive' 
+                data-hint-color='fg-white'
+                data-hint-mode='2'
+                data-hint="Editar|Clique para editar o contato" 
+                onclick="redirectUrl('<?php echo UrlRequestHelper::mountUrl('PessoaContato', 'editar', array('id' => $view_objPessoaContato->getId())); ?>')" 
+                data-hint-position="top"
+                class="toolbar-button">
+            <span class="mif-pencil"></span>
+        </button>
+        <button data-role="hint"
+                data-hint-background='bg-olive' 
+                data-hint-color='fg-white'
+                data-hint-mode='2'
+                data-hint="Notificar|Clique para incluir uma notificação sobre esse elemento" 
+                onclick="redirectUrl('<?php echo UrlRequestHelper::mountUrl('Notificacao', 'cadastrar', array('id' => $view_objPessoaContato->getId(),'elemento'=>'PessoaContato'));  ?>')" 
+                data-hint-position="top"
+                class="toolbar-button">
+            <span class="mif-notification"></span>
+        </button>
+        <button data-role="hint"
+                data-hint-background='bg-olive' 
+                data-hint-color='fg-white'
+                data-hint-mode='2'
+                data-hint="Excluir|ATENÇÃO! Todos os dados serão excluídos permanentemente" 
+                onclick="excluir('<?php echo UrlRequestHelper::mountUrlGet('PessoaContato', 'deletar', array('id' => $view_objPessoaContato->getId(), 'idPessoa'=> $view_objPessoaContato->getPessoa()->getId())); ?>')" 
+                data-hint-position="top"
+                class="toolbar-button">
+            <span class="mif-bin"></span>
+        </button>
+    </div>
+</div>
+<br>
+<div class="flex-grid">
+    <div class="row cell-auto-size no-margin">
+        <div class="cell colspan2">
+            <label>Número</label>
+            <div class="input-control text full-size" data-role="input">
+                <span class="mif-phone prepend-icon"></span>
+                <input type="text" 
+                       value="<?php echo $view_objPessoaContato->getNumero(); ?>"
+                       disabled="disabled"
+                       >
+            </div>
+        </div>
+        <div class="cell colspan3">
+            <label>Tipo Contato</label>
+            <div class="input-control text full-size" data-role="input">
+                <input type="text" 
+                       value="<?php echo $view_objPessoaContato->getTipoContato()->getNome(); ?>"
+                       disabled="disabled"
+                       >
+            </div>
+        </div>
+        <div class="cell colspan3">
+            <label>Operadora</label>
+            <div class="input-control text full-size" data-role="input">
+                <input type="text" 
+                       value="<?php echo ($view_objPessoaContato->getOperadora()!=null)?$view_objPessoaContato->getOperadora()->getNome():""; ?>"
+                       disabled="disabled"
+                       >
+            </div>
+        </div>
+    </div>
+    <div class="row cell-auto-size no-margin">
+        <div class="cell colspan12">
+            <label>Descrição/Observação</label>
+            <div class="input-control text full-size" data-role="input">
+                <input type="text" 
+                       value="<?php echo $view_objPessoaContato->getDescricao(); ?>"
+                       disabled="disabled"
+                       >
+            </div>
+        </div>
+    </div>
+</div>

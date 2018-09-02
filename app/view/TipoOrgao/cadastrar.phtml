@@ -1,0 +1,68 @@
+<ul class="breadcrumbs">
+    <li><a href="<?php echo UrlRequestHelper::mountUrl('Principal'); ?>"><span class="icon mif-home"></span></a></li>
+    <li><a href="<?php echo UrlRequestHelper::mountUrl('Tipologia'); ?>">Tipologia</a></li>
+    <li><a href="<?php echo UrlRequestHelper::mountUrl('Usuario'); ?>">Tipos de Orgãos</a></li>
+    <li><a>Cadastro</a></li>
+</ul>
+
+<h1 class="text-light">
+    Tipo de Orgão <small class="on-right"> Cadastrar</small>
+    <span class="mif-location-city place-right"></span>
+</h1>
+
+<hr class="thin bg-grayLighter">
+<br>
+
+<form action="<?php echo UrlRequestHelper::mountUrlPost('TipoOrgao', 'cadastrar'); ?>" method="POST" data-role="validator">
+
+    <div class="grid">        
+        <div class="row cell-auto-size">
+            <div class="cell">
+                <label>Nome <b class="fg-red">*</b></label>
+                <div class="input-control text full-size" data-role="input">
+                    <input type="text" 
+                           id="nome"
+                           name="nome"
+                           placeholder="Nome que descreve o tipo de situação" 
+                           maxlength="100"
+                           data-validate-func="minlength" 
+                           data-validate-arg="4"
+                           data-validate-hint="Minimo de 4 caracteres"
+                           data-validate-hint-position="top"
+                           autocomplete="off"
+                           >
+
+                    <button class="button helper-button clear"><span class="mif-cross"></span></button>
+                    <span class="input-state-error mif-warning"></span>
+                    <span class="input-state-success mif-checkmark"></span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="row cell-auto-size">
+
+           <div class="cell">
+               <label>Situação do Orgão <b class="fg-red">*</b></label>
+               <div class="input-control full-size" data-role="select" data-placeholder="Selecione um tipo de Situação">
+                   <select name="tipoSituacao"
+                           id="anunciante"
+                           data-validate-func="required">
+                       <option></option>
+                       <?php foreach ($view_listTipoSituacao as $objTipoSituacao): ?>
+                           <option value="<?php echo $objTipoSituacao->getId(); ?>"><?php echo $objTipoSituacao->getNome(); ?></option>
+                       <?php endforeach; ?>
+                   </select>
+               </div>
+           </div>
+
+       </div>
+
+        <div class="row flex-just-end">
+            <div class="cell">
+                <button class="button mif-floppy-disk primary">&nbsp;Salvar</button>
+            </div>
+        </div>
+
+    </div>
+
+</form>

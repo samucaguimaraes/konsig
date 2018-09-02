@@ -1,0 +1,22 @@
+<ul class="breadcrumbs">
+    <li><a href="<?php echo UrlRequestHelper::mountUrl('Principal'); ?>"><span class="icon mif-home"></span></a></li>
+    <li><a href="<?php echo UrlRequestHelper::mountUrl('Gestao'); ?>">Gestão</a></li>
+    <li><a href="<?php echo UrlRequestHelper::mountUrl('Consulta'); ?>">Consultas</a></li>
+</ul>
+
+<h1 class="text-light">
+    Consulta de Clientes <small class="on-right"></small>
+    <span class="mif-search place-right"></span>
+</h1>
+
+<hr class="thin bg-grayLighter">
+
+<div class="toolbar">
+    <div class="toolbar-section">
+        <button data-role="hint" data-hint="Novo|Clique para cadastrar uma nova colsulta" 
+                onclick="redirectUrl('<?php echo UrlRequestHelper::mountUrl('PessoaConsulta', 'cadastrar'); ?>')" 
+                class="toolbar-button"><span class="mif-plus"></span></button>
+    </div>
+</div>
+<br />
+

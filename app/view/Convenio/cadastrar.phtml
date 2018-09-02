@@ -1,0 +1,148 @@
+<ul class="breadcrumbs">
+    <li><a href="<?php echo UrlRequestHelper::mountUrl('Principal'); ?>"><span class="icon mif-home"></span></a></li>
+    <li><a href="<?php echo UrlRequestHelper::mountUrl('Auxiliar'); ?>">Auxiliar</a></li>
+    <li><a href="<?php echo UrlRequestHelper::mountUrl('Convenio'); ?>">Convenio</a></li>
+    <li><a>Cadastro</a></li>
+</ul>
+
+<h1 class="text-light">
+    Convênio <small class="on-right"> Cadastrar</small>
+    <span class="mif-clipboard place-right"></span>
+</h1>
+
+<hr class="thin bg-grayLighter">
+<br>
+
+<form action="<?php echo UrlRequestHelper::mountUrlPost('Convenio', 'cadastrar'); ?>" method="POST" data-role="validator">
+
+    <div class="flex-grid">        
+        <div class="row">
+            <div class="cell colspan5">
+                <label>Nome <b class="fg-red">*</b></label>
+                <div class="input-control text full-size" data-role="input">
+                    <input type="text" 
+                           id="nome"
+                           name="nome"
+                           placeholder="Informe o nome para o convênio" 
+                           maxlength="100"
+                           data-validate-func="minlength" 
+                           data-validate-arg="4"
+                           data-validate-hint="Minimo de 4 caracteres"
+                           data-validate-hint-position="top"
+                           autocomplete="off"
+                           >
+                    <button class="button helper-button clear"><span class="mif-cross"></span></button>
+                    <span class="input-state-error mif-warning"></span>
+                    <span class="input-state-success mif-checkmark"></span>
+                </div>
+            </div>
+            <div class="cell colspan4 padding-inputs-left1">
+                <label>Banco <b class="fg-red">*</b></label>
+                <div class="input-control full-size" data-role="select" data-placeholder="Selecione um Banco">
+                    <select name="banco"
+                            id="banco"
+                            data-validate-func="required"
+                            data-validate-hint-position="top"
+                            data-validate-hint="Por Favor, preencha esse campo.">
+                        <option></option>
+                        <?php foreach ($view_listBanco as $objBanco): ?>
+                            <option value="<?php echo $objBanco->getId(); ?>"><?php echo $objBanco->getCodigo() ." - ". $objBanco->getNome(); ?></option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
+            </div>
+            <div class="cell colspan3 padding-inputs-left1">
+                <label>Orgão <b class="fg-red">*</b></label>
+                <div class="input-control full-size" data-role="select" data-placeholder="Selecione um Orgao">
+                    <select name="orgao"
+                            id="orgao"
+                            data-validate-func="required"
+                            data-validate-hint-position="top"
+                            data-validate-hint="Por Favor, preencha esse campo.">
+                        <option></option>
+                        <?php foreach ($view_listOrgao as $objOrgao): ?>
+                            <option value="<?php echo $objOrgao->getId(); ?>"><?php echo $objOrgao->getNome(); ?></option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="cell colspan2">
+                <label>Taxa <b class="fg-red">*</b></label>
+                <div class="input-control text full-size" data-role="input">
+                    <input type="text" 
+                           id="valorTaxa"
+                           name="valorTaxa"
+                           placeholder="% Taxa" 
+                           data-validate-func="required"
+                           data-validate-hint="Por Favor, preencha esse campo."
+                           data-validate-hint-position="top"
+                           autocomplete="off"
+                           >
+                    <button class="button helper-button clear"><span class="mif-cross"></span></button>
+                    <span class="input-state-error mif-warning"></span>
+                    <span class="input-state-success mif-checkmark"></span>
+                </div>
+            </div>
+            <div class="cell colspan2 padding-inputs-left1">
+                <label>Prazo Máximo <b class="fg-red">*</b></label>
+                <div class="input-control text full-size" data-role="input">
+                    <input type="text" 
+                           name="prazo"
+                           placeholder="Meses de parcela" 
+                           maxlength="2"
+                           data-validate-func="required"
+                           data-validate-hint="Por Favor, preencha esse campo."
+                           data-validate-hint-position="top"
+                           autocomplete="off"
+                           >
+                    <button class="button helper-button clear"><span class="mif-cross"></span></button>
+                    <span class="input-state-error mif-warning"></span>
+                    <span class="input-state-success mif-checkmark"></span>
+                </div>
+            </div>
+            <div class="cell colspan2 padding-inputs-left1">
+                <label>Idade Mínima <b class="fg-red">*</b></label>
+                <div class="input-control text full-size" data-role="input">
+                    <input type="text" 
+                           name="idadeMinima"
+                           placeholder="Ex.: 21" 
+                           maxlength="2"
+                           data-validate-func="required"
+                           data-validate-hint="Por Favor, preencha esse campo."
+                           data-validate-hint-position="top"
+                           autocomplete="off"
+                           >
+                    <button class="button helper-button clear"><span class="mif-cross"></span></button>
+                    <span class="input-state-error mif-warning"></span>
+                    <span class="input-state-success mif-checkmark"></span>
+                </div>
+            </div>
+            <div class="cell colspan2">
+                <label>Máxima <b class="fg-red">*</b></label>
+                <div class="input-control text full-size" data-role="input">
+                    <input type="text"                           
+                           name="idadeMaxima"
+                           placeholder="Ex.: 75" 
+                           maxlength="2"
+                           data-validate-func="required"
+                           data-validate-hint="Por Favor, preencha esse campo."
+                           data-validate-hint-position="top"
+                           autocomplete="off"
+                           >
+                    <button class="button helper-button clear"><span class="mif-cross"></span></button>
+                    <span class="input-state-error mif-warning"></span>
+                    <span class="input-state-success mif-checkmark"></span>
+                </div>
+            </div>
+        </div>
+        <div class="row flex-just-end">
+            <div class="cell">
+                <button class="button mif-floppy-disk primary">&nbsp;Salvar</button>
+            </div>
+        </div>
+
+    </div>
+
+</form>

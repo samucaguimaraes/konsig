@@ -1,0 +1,152 @@
+<ul class="breadcrumbs">
+    <li><a href="<?php echo UrlRequestHelper::mountUrl('Principal'); ?>"><span class="icon mif-home"></span></a></li>
+    <li><a href="<?php echo UrlRequestHelper::mountUrl('Gestao'); ?>">Gestão</a></li>
+    <li><a href="<?php echo UrlRequestHelper::mountUrl('Notificacao'); ?>">Notificação</a></li>
+    <li><a>Alertas & Notificações</a></li>
+</ul>
+<h1 class="text-light">
+    Alertas <small class="on-right"> ...</small>
+</h1>
+<hr class="thin bg-grayLighter">
+<div class="flex-grid bg-grayLighter padding20">
+    <div class="row cell-auto-size no-margin">
+        <div class="cell colspan2">
+            <span class="tag warning">AGENDA</span>
+        </div>
+        <div class="cell colspan6">
+            <span>Clientes agendados para realização de ligações</span>
+        </div>
+        <div class="cell colspan2">
+            Moderado
+        </div>
+        <div class="cell colspan2">
+            <strong>0</strong>
+
+        </div>
+    </div>
+    <hr class="thin bg-grayLight"/>
+    <div class="row cell-auto-size no-margin">
+        <div class="cell colspan2">
+            <span class="tag warning">ATRASO</span>
+        </div>
+        <div class="cell colspan6">
+            <span>Comissões com atraso de liberação de pagamento</span>
+        </div>
+        <div class="cell colspan2">
+            Moderado
+        </div>
+        <div class="cell colspan2">
+            <strong>0</strong>
+        </div>
+    </div>
+    <hr class="thin bg-grayLight"/>
+    <div class="row cell-auto-size no-margin">
+        <div class="cell colspan2">
+            <span class="tag warning">CONSULTA</span>
+        </div>
+        <div class="cell colspan6">
+            <span>Clientes cadastrados com orgãos associados sem consulta</span>
+        </div>
+        <div class="cell colspan2">
+            Moderado
+        </div>
+        <div class="cell colspan2">
+            <strong><?php echo $view_totalConsulta; ?></strong>
+            <a href='<?php echo UrlRequestHelper::mountUrl('Notificacao', 'listar', array('alerta' => 'consulta')); ?>' title='Visualizar Lista'><span class="mif-eye place-right"></span></a>
+        </div>
+    </div>
+    <hr class="thin bg-grayLight"/>
+    <div class="row cell-auto-size no-margin">
+        <div class="cell colspan2">
+            <span class="tag warning">FÍSICO</span>
+        </div>
+        <div class="cell colspan6">
+            <span>Contratos cadastrados a mais de 4 dias sem entrega de físico</span>
+        </div>
+        <div class="cell colspan2">
+            Moderado
+        </div>
+        <div class="cell colspan2">
+            <strong><?php echo $view_totalContratoFisico; ?></strong>
+            <a href='<?php echo UrlRequestHelper::mountUrl('Notificacao', 'listar', array('alerta' => 'fisico')); ?>' title='Visualizar Lista'><span class="mif-eye place-right"></span></a>
+        </div>
+    </div>
+    <hr class="thin bg-grayLight"/>
+    <div class="row cell-auto-size no-margin">
+        <div class="cell colspan2">
+            <span class="tag warning">HISCON</span>
+        </div>
+        <div class="cell colspan6">
+            <span>Empréstimos cadastrados sem o histórico de consignação</span>
+        </div>
+        <div class="cell colspan2">
+            Moderado
+        </div>
+        <div class="cell colspan2">
+            <strong><?php echo $view_totalHiscon; ?></strong>
+            <a href='<?php echo UrlRequestHelper::mountUrl('Notificacao', 'listar', array('alerta' => 'hiscon')); ?>' title='Visualizar Lista'><span class="mif-eye place-right"></span></a>
+        </div>
+    </div>
+    <hr class="thin bg-grayLight"/>
+    <div class="row cell-auto-size no-margin">
+        <div class="cell colspan2">
+            <span class="tag alert">MARGEM</span>
+        </div>
+        <div class="cell colspan6">
+            <span>Consultas geradas sem informação de Margem Disponível para consignação</span>
+        </div>
+        <div class="cell colspan2">
+            Crítico
+        </div>
+        <div class="cell colspan2">
+            <strong>0</strong>
+        </div>
+    </div>
+    <hr class="thin bg-grayLight"/>
+    <div class="row cell-auto-size no-margin">
+        <div class="cell colspan2">
+            <span class="tag alert">ORGÃO</span>
+        </div>
+        <div class="cell colspan6">
+            <span>Pessoas cadastradas sem associação de orgãos</span>
+        </div>
+        <div class="cell colspan2">
+            Crítico
+        </div>
+        <div class="cell colspan2">
+            <strong>0</strong>
+        </div>
+    </div>
+</div>
+<br/>
+<?php if ($view_isNotificacao): ?>
+    <div class="flex-grid">
+        <div class="row cell-auto-size toolbar_title cells2 no-margin">
+            <div class="cell colspan12">
+                <h1 class="text-light">
+                    Notificações <small class="on-right">...</small>
+                </h1>
+            </div>
+        </div>
+        <hr class="thin bg-grayLighter"/>
+        <div class="row cell-auto-size">
+            <div class="cell">
+                <table class="dataTable border bordered hovered no-footer" id="listNotificacoes" style="width: 100%">
+                    <thead>
+                        <tr>
+                            <td class="sortable-column">Notificação</td>
+                            <td class="sortable-column">Local</td>
+                            <td class="sortable-column">Status</td>
+                            <td class="sortable-column">Data Criação</td>
+                            <td class="sortable-column">Usuário Criador</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+<?php else: ?>
+    <span class="tag warning">Não existem notificações inseridas.</span>
+<?php endif; ?>

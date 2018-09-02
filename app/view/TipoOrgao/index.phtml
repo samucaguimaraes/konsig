@@ -1,0 +1,35 @@
+<ul class="breadcrumbs">
+    <li><a href="<?php echo UrlRequestHelper::mountUrl('Principal'); ?>"><span class="icon mif-home"></span></a></li>
+    <li><a href="<?php echo UrlRequestHelper::mountUrl('Tipologia'); ?>">Tipologia</a></li>
+    <li><a>Orgãos</a></li>
+</ul>
+
+<h1 class="text-light">
+    Orgãos <small class="on-right"> Listar</small>
+    <span class="mif-location-city place-right"></span>
+</h1>
+
+<hr class="thin bg-grayLighter">
+
+<div class="toolbar">
+    <div class="toolbar-section">
+        <button data-role="hint" data-hint="Novo|Clique para cadastrar uma novo tipo de orgao" 
+                onclick="redirectUrl('<?php echo UrlRequestHelper::mountUrl('TipoOrgao', 'cadastrar'); ?>')" 
+                class="toolbar-button"><span class="mif-plus"></span></button>
+    </div>
+</div>
+<br />
+<div class="row cell-auto-size">
+    <div class="cell">
+        <table class="dataTable hovered striped" id="listTiposOrgaos" style="width: 100%">
+            <thead>
+                <tr>
+                    <td class="sortable-column">Nome</td>
+                    <td class="sortable-column">Situação</td>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+</div>

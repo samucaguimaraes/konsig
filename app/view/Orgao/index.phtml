@@ -1,0 +1,38 @@
+<ul class="breadcrumbs">
+    <li><a href="<?php echo UrlRequestHelper::mountUrl('Principal'); ?>"><span class="icon mif-home"></span></a></li>
+    <li><a href="<?php echo UrlRequestHelper::mountUrl('Auxiliar'); ?>">Auxiliares</a></li>
+    <li><a>Orgãos</a></li>
+</ul>
+
+<h1 class="text-light">
+    Orgão <small class="on-right"> Listar</small>
+    <span class="mif-windows place-right"></span>
+</h1>
+
+<hr class="thin bg-grayLighter">
+
+<div class="toolbar">
+    <div class="toolbar-section">
+        <button data-role="hint" data-hint="Novo|Clique para cadastrar uma novo orgao" 
+                onclick="redirectUrl('<?php echo UrlRequestHelper::mountUrl('Orgao', 'cadastrar'); ?>')" 
+                class="toolbar-button"><span class="mif-plus"></span></button>
+        <button data-role="hint" data-hint="Importar|Clique para importar lista de orgãos" 
+                onclick="redirectUrl('<?php echo UrlRequestHelper::mountUrl('TipoContato', 'cadastrar'); ?>')" 
+                class="toolbar-button"><span class="mif-file-upload"></span></button>
+    </div>
+</div>
+<br />
+<div class="row cell-auto-size">
+    <div class="cell">
+        <table class="dataTable hovered striped" id="listOrgaos" style="width: 100%">
+            <thead>
+                <tr>
+                    <td class="sortable-column">Nome</td>
+                    <td class="sortable-column">Sigla</td>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -1,0 +1,124 @@
+<ul class="breadcrumbs">
+    <li><a href="<?php echo UrlRequestHelper::mountUrl('Principal'); ?>"><span class="icon mif-home"></span></a></li>
+    <li><a href="<?php echo UrlRequestHelper::mountUrl('Seguranca'); ?>">Segurança</a></li>
+    <li><a href="<?php echo UrlRequestHelper::mountUrl('Usuario'); ?>">Usuário</a></li>
+    <li><a>Cadastro</a></li>
+</ul>
+
+<h1 class="text-light">
+    Usuário <small class="on-right"> Cadastrar</small>
+    <span class="mif-user-check place-right"></span>
+</h1>
+
+<hr class="thin bg-grayLighter">
+<br>
+
+<form action="<?php echo UrlRequestHelper::mountUrlPost('Usuario', 'cadastrar'); ?>" method="POST" data-role="validator">
+
+    <div class="flex-grid">
+        
+        <div class="row cell-auto-size">
+            <div class="cell">
+                <label>Nome <b class="fg-red">*</b></label>
+                <div class="input-control text full-size" data-role="input">
+
+                    <span class="mif-user prepend-icon"></span>
+                    <input type="text" 
+                           id="nome"
+                           name="nome"
+                           placeholder="Nome completo do usuário sem abreviações" 
+                           maxlength="100"
+                           data-validate-func="minlength" 
+                           data-validate-arg="6"
+                           data-validate-hint="Minimo de 6 caracteres"
+                           data-validate-hint-position="top"
+                           autocomplete="off"
+                           >
+
+                    <button class="button helper-button clear"><span class="mif-cross"></span></button>
+                    <span class="input-state-error mif-warning"></span>
+                    <span class="input-state-success mif-checkmark"></span>
+                </div>
+            </div>
+        </div>
+
+        <br/>
+        <div class="row cell-auto-size">
+            <div class="cell">
+                <label>E-mail <b class="fg-red">*</b></label>
+                <div class="input-control text full-size" data-role="input">
+
+                    <span class="mif-user prepend-icon"></span>
+                    <input type="text" 
+                           id="email"
+                           name="email"
+                           placeholder="Digite o E-mail do usuário" 
+                           maxlength="150"
+                           data-validate-func="email"
+                           data-validate-hint="E-mail invalido"
+                           data-validate-hint-position="top"
+                           autocomplete="off"
+                           >
+
+                    <button class="button helper-button clear"><span class="mif-cross"></span></button>
+                    <span class="input-state-error mif-warning"></span>
+                    <span class="input-state-success mif-checkmark"></span>
+                </div>
+            </div>
+        </div>
+
+        <br/>
+        <div class="row cell-auto-size">
+            <div class="cell size6">
+                <label>Senha <b class="fg-red">*</b></label>
+                <div class="input-control password full-size" data-role="input">
+
+                    <input type="password" 
+                           id="senha"
+                           name="senha"
+                           placeholder="Senha para o usuário" 
+                           maxlength="18"
+                           data-validate-func="minlength" 
+                           data-validate-arg="8"
+                           data-validate-hint="Minimo de 8 caracteres"
+                           data-validate-hint-position="top"
+                           autocomplete="off"
+                           >
+
+                    <button class="button helper-button clear"><span class="mif-cross"></span></button>
+                    <span class="input-state-error mif-warning"></span>
+                    <span class="input-state-success mif-checkmark"></span>
+                </div>
+            </div>
+            <div class="cell">&nbsp;</div>
+            <div class="cell size6">
+                <label>Confirme a Senha <b class="fg-red">*</b></label>
+                <div class="input-control password full-size" data-role="input">
+
+                    <input type="password" 
+                           id="des_senha_conf"
+                           name="des_senha_conf"
+                           placeholder="Senha para o usuário"
+                           maxlength="18"
+                           data-validate-func="compararSenhas"
+                           data-validate-hint="A senha informada é diferente da anterior"
+                           data-validate-hint-position="top"
+                           autocomplete="off"
+                           >
+
+                    <button class="button helper-button clear"><span class="mif-cross"></span></button>
+                    <span class="input-state-error mif-warning"></span>
+                    <span class="input-state-success mif-checkmark"></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row flex-just-end">
+            <div class="cell">
+                <button class="button mif-floppy-disk primary">&nbsp;Salvar</button>
+            </div>
+        </div>
+
+    </div>
+
+</form>

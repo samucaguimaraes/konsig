@@ -1,0 +1,21 @@
+<!-- app-bar -->
+<?php include_once VIEWS . "core/" . TEMPLATE . '/admin/app-bar.phtml'; ?>
+
+<div class="page-content">
+    <div class="flex-grid no-responsive-future" style="height: 100%;">
+        <div class="row" style="height: 100%">
+
+            <!-- siderbar -->
+            <div class="cell size-x200" id="cell-sidebar" style="background-color: #37647d; height: 100%">
+                <?php include_once VIEWS . "core/" . TEMPLATE . '/admin/sidebar.phtml'; ?>
+            </div>
+
+            <!-- content -->
+            <div class="cell auto-size padding20 bg-white" id="cell-content" style="overflow: auto;">
+                <?php echo $tView_content; ?>
+                <div class="padding20"></div>
+            </div>
+
+        </div>
+    </div>
+</div>

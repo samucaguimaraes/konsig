@@ -1,0 +1,38 @@
+<ul class="breadcrumbs">
+    <li><a href="<?php echo UrlRequestHelper::mountUrl('Principal'); ?>"><span class="icon mif-home"></span></a></li>
+    <li><a href="<?php echo UrlRequestHelper::mountUrl('Auxiliar'); ?>">Gestão</a></li>
+    <li><a>Corretores</a></li>
+</ul>
+
+<h1 class="text-light">
+    Corretores <small class="on-right"> Listar</small>
+    <span class="mif-suitcase place-right"></span>
+</h1>
+
+<hr class="thin bg-grayLighter">
+
+<div class="toolbar">
+    <div class="toolbar-section">
+        <button data-role="hint" data-hint="Novo|Clique para cadastrar uma novo corretor" 
+                onclick="redirectUrl('<?php echo UrlRequestHelper::mountUrl('Corretor', 'cadastrar'); ?>')" 
+                class="toolbar-button"><span class="mif-plus"></span></button>
+    </div>
+</div>
+<br />
+<div class="row cell-auto-size">
+    <div class="cell">
+        <table class="dataTable border bordered no-footer" id="listCorretores" style="width: 100%">
+            <thead>
+                <tr>
+                    <td class="sortable-column">Nome</td>
+                    <td class="sortable-column">Número CPF</td>
+                    <td class="sortable-column">Data de Nascimento</td>
+                    <td class="sortable-column">e-mail</td>
+                    <td class="sortable-column">Status</td>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+</div>

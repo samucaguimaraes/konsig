@@ -1,0 +1,79 @@
+<ul class="breadcrumbs">
+    <li><a href="<?php echo UrlRequestHelper::mountUrl('Principal'); ?>"><span class="icon mif-home"></span></a></li>
+    <li><a href="<?php echo UrlRequestHelper::mountUrl('Tipologia'); ?>">Tipologia</a></li>
+    <li><a href="<?php echo UrlRequestHelper::mountUrl('Orgao'); ?>">Orgãos</a></li>
+    <li><a>Cadastro</a></li>
+</ul>
+
+<h1 class="text-light">
+    Orgão <small class="on-right"> Cadastrar</small>
+    <span class="mif-plus place-right"></span>
+</h1>
+
+<hr class="thin bg-grayLighter">
+<br>
+<form action="<?php echo UrlRequestHelper::mountUrlPost('Orgao', 'cadastrar'); ?>" method="POST" data-role="validator">
+    <div class="flex-grid">
+      
+        <div class="row cells3 cell-auto-size">
+            <div class="cell colspan6">
+                <label>Nome <b class="fg-red">*</b></label>
+                <div class="input-control text full-size" data-role="input">
+                    <input type="text" 
+                           id="nome"
+                           name="nome"
+                           placeholder="Informe o nome do orgão sem abreveações " 
+                           maxlength="100"
+                           data-validate-func="minlength" 
+                           data-validate-arg="4"
+                           data-validate-hint="Minimo de 4 caracteres"
+                           data-validate-hint-position="top"
+                           autocomplete="off"
+                           >
+
+                    <button class="button helper-button clear"><span class="mif-cross"></span></button>
+                    <span class="input-state-error mif-warning"></span>
+                    <span class="input-state-success mif-checkmark"></span>
+                </div>
+            </div>
+            <div class="cell colspan3 padding-inputs-left1">
+                <label>Sigla</label>
+                <div class="input-control text full-size" data-role="input">
+                    <input type="text" 
+                           name="sigla"
+                           placeholder="Sigla do orgão" 
+                           maxlength="100"
+                           autocomplete="off"
+                           >
+
+                    <button class="button helper-button clear"><span class="mif-cross"></span></button>
+                    <span class="input-state-error mif-warning"></span>
+                    <span class="input-state-success mif-checkmark"></span>
+                </div>
+            </div>
+            <div class="cell padding-inputs-left1">
+                <label>Tipo de Orgão <b class="fg-red">*</b></label>
+                <div class="input-control full-size" data-role="select" data-placeholder="Selecione um Orgao Pagador">
+                    <select name="tipoOrgao"
+                            id="tipoOrgao"
+                            data-validate-func="required"
+                            data-validate-hint-position="top"
+                            data-validate-hint="Por Favor, preencha esse campo.">
+                        <option></option>
+                        <?php foreach ($view_listTipoOrgao as $objTipoOrgao): ?>
+                            <option value="<?php echo $objTipoOrgao->getId(); ?>"><?php echo $objTipoOrgao->getNome(); ?></option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="row flex-just-end">
+            <div class="cell">
+                <button class="button mif-floppy-disk primary">&nbsp;Salvar</button>
+            </div>
+        </div>
+
+    </div>
+
+</form>

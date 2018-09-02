@@ -1,0 +1,478 @@
+<ul class="breadcrumbs">
+    <li><a href="<?php echo UrlRequestHelper::mountUrl('Principal'); ?>"><span class="icon mif-home"></span></a></li>
+    <li><a href="<?php echo UrlRequestHelper::mountUrl('Gestao'); ?>">Gestão</a></li>
+    <li><a href="<?php echo UrlRequestHelper::mountUrl('PessoaConsulta'); ?>">Consultas</a></li>
+    <li><a href="<?php echo UrlRequestHelper::mountUrl('Pessoa','informar',array('id'=>$view_objPessoaOrgao->getPessoa()->getId())); ?>"><?php echo $view_objPessoaOrgao->getPessoa()->getNome(); ?></a></li>
+    <li><a>Cadastro</a></li>
+</ul>
+
+<h1 class="text-light">
+    Consultas <small class="on-right"> <?php echo $view_objPessoaOrgao->getPessoa()->getNome(); ?></small>
+    <span class="mif-search place-right"></span>
+</h1>
+<hr class="thin bg-grayLighter">
+<small class="place-right tag info"><?php echo $view_objPessoaOrgao->getOrgao()->getNome(); ?></small>
+<br>
+<form action="<?php echo UrlRequestHelper::mountUrlPost('PessoaConsulta', 'cadastrar'); ?>" method="POST" data-role="validator">
+    <input type="hidden" name="pessoa" value="<?php echo $view_objPessoaOrgao->getPessoa()->getId(); ?>">
+    <input type="hidden" name="pessoaOrgao" value="<?php echo $view_objPessoaOrgao->getId(); ?>">
+    <input type="hidden" name="orgao" value="<?php echo $view_objPessoaOrgao->getOrgao()->getId(); ?>">
+    <div class="flex-grid">
+        <div class="row cell-auto-size toolbar_title no-margin">
+            <div class="cell colspan3">
+                <label>Número Benefício/Matricula <b class="fg-red">*</b></label>
+                <div class="input-control text full-size" data-role="input">
+                    <span class="mif-file-binary prepend-icon"></span>
+                    <input type="text" 
+                           value="<?php echo $view_objPessoaOrgao->getMatricula(); ?>"
+                           disabled="disabled"
+                           >
+                </div>
+            </div>
+            <div class="cell colspan3">
+                <label>Data de Nascimento</label>
+                <div class="input-control text full-size" data-role="input">
+                    <span class="mif-calendar prepend-icon"></span>
+                    <input type="text" 
+                           value="<?php echo $view_objPessoaOrgao->getPessoa()->getDataNascimento(); ?>"
+                           disabled="disabled"
+                           >
+                </div>
+            </div>
+            <div class="cell colspan3">
+                <label>Número CPF</label>
+                <div class="input-control text full-size" data-role="input">
+                    <span class="mif-credit-card prepend-icon"></span>
+                    <input type="text" 
+                           value="<?php echo $view_objPessoaOrgao->getPessoa()->getNumeroCPF(); ?>"
+                           disabled="disabled"
+                           >
+                </div>
+            </div>
+            <?php if($view_isCredencialPublica): ?>
+            <div class="cell colspan3">
+                <label>Credencial</label>
+                <div class="input-control text full-size" data-role="input">
+                    <span class="mif-key prepend-icon"></span>
+                    <input type="text" 
+                           value="<?php echo "Login:" . $view_objPessoaOrgao->getLogin() . " Senha:" . $view_objPessoaOrgao->getSenha(); ?>"
+                           disabled="disabled"
+                           >
+                </div>
+            </div>
+            <?php endif; ?>
+        </div>
+        <div class="row cell-auto-size toolbar_title no-margin">
+            <div class="cell colspan2">
+                <label>Competência <b class="fg-red">*</b></label>
+                <div class="input-control text full-size" data-role="input">
+                    <input type="text" 
+                           name="dataCompetencia"
+                           id="dataCompetencia"
+                           placeholder="Informações complementares do contato"
+                           data-validate-func="required"
+                           data-validate-hint-position="top"
+                           data-validate-hint="Por Favor, preencha esse campo."
+                           maxlength="100"
+                           autocomplete="off"
+                           >
+                    <button class="button helper-button clear"><span class="mif-cross"></span></button>
+                    <span class="input-state-error mif-warning"></span>
+                    <span class="input-state-success mif-checkmark"></span>
+                </div>
+            </div>
+            <?php if ($view_isMargemDisponivel): ?>
+                <div class="cell colspan3 padding-inputs-left1">
+                    <label>Margem Disponível <b class="fg-red">*</b></label>
+                    <div class="input-control text full-size" data-role="input">
+                        <input type="text" 
+                               name="vlrMargemDisponivel"
+                               id="vlrMargemDisponivel"
+                               placeholder="Margem Disponível de Crédito"
+                               data-validate-func="required"
+                               data-validate-hint-position="top"
+                               data-validate-hint="Por Favor, preencha esse campo."
+                               maxlength="100"
+                               autocomplete="off"
+                               >
+                        <button class="button helper-button clear"><span class="mif-cross"></span></button>
+                        <span class="input-state-error mif-warning"></span>
+                        <span class="input-state-success mif-checkmark"></span>
+                    </div>
+                    <label class="switch">
+                        <input type="checkbox" name="isMargemNegativa" value="1">
+                        <span class="check"></span>
+                        <span class="tag default">Margem Disponível Negativa</span>
+                    </label>
+                </div>
+            <?php endif; ?>
+            <div class="cell colspan7 padding-inputs-left1">
+                <label>Observações</label>
+                <div class="input-control text full-size" data-role="input">
+                    <input type="text" 
+                           name="observacao"
+                           id="observacao"
+                           placeholder="Informações complementares da consulta"
+                           maxlength="100"
+                           autocomplete="off"
+                           >
+                    <button class="button helper-button clear"><span class="mif-cross"></span></button>
+                    <span class="input-state-error mif-warning"></span>
+                    <span class="input-state-success mif-checkmark"></span>
+                </div>
+            </div>
+        </div>
+        <?php if ($view_isDetalhamento): ?>
+            <div class="row cell-auto-size toolbar_title no-margin">
+                <div class="cell colspan12">
+                    <h3>Detalhamento</h3>
+                    <hr class="thin bg-grayLighter">
+                </div>            
+            </div>        
+            <div class="row cell-auto-size no-margin">
+                <div class="cell colspan12">
+                    <div class="flex-grid">
+                        <div class="row cell-auto-size no-margin">
+                            <div class="cell colspan6 bg-grayLighter padding-inputs-left1">
+                                <h3><span class="mif-plus place-right fg-white" style="margin-right: 10px;"></span>Créditos</h3>
+                            </div>
+                            <div class="cell colspan6 bg-grayLight padding-inputs-left1">
+                                <h3><span class="mif-minus place-right fg-white" style="margin-right: 10px;"></span>Descontos</h3>
+                            </div>
+                        </div>
+                        <div class="row cell-auto-size no-margin">
+                            <div class="cell colspan6 bg-grayLighter" style="padding-right: 10px;">
+                                <div class="flex-grid">
+                                    <div class="row cell-auto-size no-margin">
+                                        <div class="cell colspan6 padding-inputs-left1">
+                                            <label>Mens. Reajustada <b class="fg-red">*</b></label>
+                                            <div class="input-control text full-size" data-role="input">
+                                                <input type="text" 
+                                                       name="vlrMensalidadeReajustada"
+                                                       id="vlrMensalidadeReajustada"
+                                                       data-validate-func="required"
+                                                       data-validate-hint-position="top"
+                                                       data-validate-hint="Por Favor, preencha esse campo."
+                                                       maxlength="100"
+                                                       autocomplete="off"
+                                                       >
+                                                <button class="button helper-button clear"><span class="mif-cross"></span></button>
+                                                <span class="input-state-error mif-warning"></span>
+                                                <span class="input-state-success mif-checkmark"></span>
+                                            </div>
+                                        </div>
+                                        <div class="cell colspan6 padding-inputs-left1">
+                                            <label>Compl. da M.R.</label>
+                                            <div class="input-control text full-size" data-role="input">
+                                                <input type="text" 
+                                                       name="vlrCompMr"
+                                                       id="vlrCompMr"
+                                                       maxlength="100"
+                                                       autocomplete="off"
+                                                       >
+                                                <button class="button helper-button clear"><span class="mif-cross"></span></button>
+                                                <span class="input-state-error mif-warning"></span>
+                                                <span class="input-state-success mif-checkmark"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row cell-auto-size no-margin">
+                                        <div class="cell colspan6 padding-inputs-left1">
+                                            <label>Salario família</label>
+                                            <div class="input-control text full-size" data-role="input">
+                                                <input type="text" 
+                                                       name="vlrSalarioFamilia"
+                                                       id="vlrSalarioFamilia"
+                                                       maxlength="100"
+                                                       autocomplete="off"
+                                                       >
+                                                <button class="button helper-button clear"><span class="mif-cross"></span></button>
+                                                <span class="input-state-error mif-warning"></span>
+                                                <span class="input-state-success mif-checkmark"></span>
+                                            </div>
+                                        </div>
+                                        <div class="cell colspan6 padding-inputs-left1">
+                                            <label>Grat. ex-Comb.</label>
+                                            <div class="input-control text full-size" data-role="input">
+                                                <input type="text" 
+                                                       name="vlrGratExcomb"
+                                                       id="vlrGratExcomb"
+                                                       maxlength="100"
+                                                       autocomplete="off"
+                                                       >
+                                                <button class="button helper-button clear"><span class="mif-cross"></span></button>
+                                                <span class="input-state-error mif-warning"></span>
+                                                <span class="input-state-success mif-checkmark"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row cell-auto-size no-margin">
+                                        <div class="cell colspan6 padding-inputs-left1">
+                                            <label>RFFSA nao trib.</label>
+                                            <div class="input-control text full-size" data-role="input">
+                                                <input type="text" 
+                                                       name="vlrRffsaNaoTrib"
+                                                       id="vlrRffsaNaoTrib"
+                                                       maxlength="100"
+                                                       autocomplete="off"
+                                                       >
+                                                <button class="button helper-button clear"><span class="mif-cross"></span></button>
+                                                <span class="input-state-error mif-warning"></span>
+                                                <span class="input-state-success mif-checkmark"></span>
+                                            </div>
+                                        </div>
+                                        <div class="cell colspan6 padding-inputs-left1">
+                                            <label>Compl. acompan.</label>
+                                            <div class="input-control text full-size" data-role="input">
+                                                <input type="text" 
+                                                       name="vlrComplAcompan"
+                                                       id="vlrComplAcompan"
+                                                       maxlength="100"
+                                                       autocomplete="off"
+                                                       >
+                                                <button class="button helper-button clear"><span class="mif-cross"></span></button>
+                                                <span class="input-state-error mif-warning"></span>
+                                                <span class="input-state-success mif-checkmark"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row cell-auto-size no-margin">
+                                        <div class="cell colspan6 padding-inputs-left1">
+                                            <label>Outras Vantagens</label>
+                                            <div class="input-control text full-size" data-role="input">
+                                                <input type="text" 
+                                                       name="vlrOutrasVantagens"
+                                                       id="vlrOutrasVantagens"
+                                                       maxlength="100"
+                                                       autocomplete="off"
+                                                       >
+                                                <button class="button helper-button clear"><span class="mif-cross"></span></button>
+                                                <span class="input-state-error mif-warning"></span>
+                                                <span class="input-state-success mif-checkmark"></span>
+                                            </div>
+                                        </div>
+                                        <div class="cell colspan6 padding-inputs-left1">
+                                            <label>Plansfer RFFSA</label>
+                                            <div class="input-control text full-size" data-role="input">
+                                                <input type="text" 
+                                                       name="vlrPlansferRffsa"
+                                                       id="vlrPlansferRffsa"
+                                                       maxlength="100"
+                                                       autocomplete="off"
+                                                       >
+                                                <button class="button helper-button clear"><span class="mif-cross"></span></button>
+                                                <span class="input-state-error mif-warning"></span>
+                                                <span class="input-state-success mif-checkmark"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row cell-auto-size no-margin">
+                                        <div class="cell colspan6 padding-inputs-left1">
+                                            <label>Dupla Atividade</label>
+                                            <div class="input-control text full-size" data-role="input">
+                                                <input type="text" 
+                                                       name="vlrDuplaAtividade"
+                                                       id="vlrDuplaAtividade"
+                                                       maxlength="100"
+                                                       autocomplete="off"
+                                                       >
+                                                <button class="button helper-button clear"><span class="mif-cross"></span></button>
+                                                <span class="input-state-error mif-warning"></span>
+                                                <span class="input-state-success mif-checkmark"></span>
+                                            </div>
+                                        </div>
+                                        <div class="cell colspan6 padding-inputs-left1">
+                                            <label>Grat.Produt. ECT</label>
+                                            <div class="input-control text full-size" data-role="input">
+                                                <input type="text" 
+                                                       name="vlrGratProdutEct"
+                                                       id="vlrGratProdutEct"
+                                                       maxlength="100"
+                                                       autocomplete="off"
+                                                       >
+                                                <button class="button helper-button clear"><span class="mif-cross"></span></button>
+                                                <span class="input-state-error mif-warning"></span>
+                                                <span class="input-state-success mif-checkmark"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row cell-auto-size no-margin">
+                                        <div class="cell colspan6 padding-inputs-left1">
+                                            <label>Adic. Talidomida</label>
+                                            <div class="input-control text full-size" data-role="input">
+                                                <input type="text" 
+                                                       name="vlrAdicTalidomida"
+                                                       id="vlrAdicTalidomida"
+                                                       maxlength="100"
+                                                       autocomplete="off"
+                                                       >
+                                                <button class="button helper-button clear"><span class="mif-cross"></span></button>
+                                                <span class="input-state-error mif-warning"></span>
+                                                <span class="input-state-success mif-checkmark"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="cell colspan6 bg-grayLight padding-inputs-left1" style="padding-right: 10px;">
+                                <div class="flex-grid">
+                                    <div class="row cell-auto-size no-margin">
+                                        <div class="cell colspan6">
+                                            <label>I.R. ret. Fonte</label>
+                                            <div class="input-control text full-size" data-role="input">
+                                                <input type="text" 
+                                                       name="vlrIrRetidoFonte"
+                                                       id="vlrIrRetidoFonte"
+                                                       maxlength="100"
+                                                       autocomplete="off"
+                                                       >
+                                                <button class="button helper-button clear"><span class="mif-cross"></span></button>
+                                                <span class="input-state-error mif-warning"></span>
+                                                <span class="input-state-success mif-checkmark"></span>
+                                            </div>
+                                        </div>
+                                        <div class="cell colspan6 padding-inputs-left1">
+                                            <label>Deb. pens. alim.</label>
+                                            <div class="input-control text full-size" data-role="input">
+                                                <input type="text" 
+                                                       name="vlrDebPensaoAlim"
+                                                       id="vlrDebPensaoAlim"
+                                                       maxlength="100"
+                                                       autocomplete="off"
+                                                       >
+                                                <button class="button helper-button clear"><span class="mif-cross"></span></button>
+                                                <span class="input-state-error mif-warning"></span>
+                                                <span class="input-state-success mif-checkmark"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row cell-auto-size no-margin">
+                                        <div class="cell colspan6">
+                                            <label>Consignacao</label>
+                                            <div class="input-control text full-size" data-role="input">
+                                                <input type="text" 
+                                                       name="vlrConsignacao"
+                                                       id="vlrConsignacao"
+                                                       maxlength="100"
+                                                       autocomplete="off"
+                                                       >
+                                                <button class="button helper-button clear"><span class="mif-cross"></span></button>
+                                                <span class="input-state-error mif-warning"></span>
+                                                <span class="input-state-success mif-checkmark"></span>
+                                            </div>
+                                        </div>
+                                        <div class="cell colspan6 padding-inputs-left1">
+                                            <label>I.R. no exterior</label>
+                                            <div class="input-control text full-size" data-role="input">
+                                                <input type="text" 
+                                                       name="vlrIrExterior"
+                                                       id="vlrIrExterior"
+                                                       maxlength="100"
+                                                       autocomplete="off"
+                                                       >
+                                                <button class="button helper-button clear"><span class="mif-cross"></span></button>
+                                                <span class="input-state-error mif-warning"></span>
+                                                <span class="input-state-success mif-checkmark"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row cell-auto-size no-margin">
+                                        <div class="cell colspan6">
+                                            <label>Debito dif. I.R.</label>
+                                            <div class="input-control text full-size" data-role="input">
+                                                <input type="text" 
+                                                       name="vlrDebitoDifIr"
+                                                       id="vlrDebitoDifIr"
+                                                       maxlength="100"
+                                                       autocomplete="off"
+                                                       >
+                                                <button class="button helper-button clear"><span class="mif-cross"></span></button>
+                                                <span class="input-state-error mif-warning"></span>
+                                                <span class="input-state-success mif-checkmark"></span>
+                                            </div>
+                                        </div>
+                                        <div class="cell colspan6 padding-inputs-left1">
+                                            <label>Desconto INSS</label>
+                                            <div class="input-control text full-size" data-role="input">
+                                                <input type="text" 
+                                                       name="vlrDescontoInss"
+                                                       id="vlrDescontoInss"
+                                                       maxlength="100"
+                                                       autocomplete="off"
+                                                       >
+                                                <button class="button helper-button clear"><span class="mif-cross"></span></button>
+                                                <span class="input-state-error mif-warning"></span>
+                                                <span class="input-state-success mif-checkmark"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row cell-auto-size no-margin">
+                                        <div class="cell colspan6">
+                                            <label>Total Contribuição</label>
+                                            <div class="input-control text full-size" data-role="input">
+                                                <input type="text" 
+                                                       name="vlrTotalContribuicao"
+                                                       id="vlrTotalContribuicao"
+                                                       maxlength="100"
+                                                       autocomplete="off"
+                                                       >
+                                                <button class="button helper-button clear"><span class="mif-cross"></span></button>
+                                                <span class="input-state-error mif-warning"></span>
+                                                <span class="input-state-success mif-checkmark"></span>
+                                            </div>
+                                            <div>
+                                                <span class="tag info">TIPOS:</span>
+                                                <span class="tag success">COBAP</span>
+                                                <span class="tag success">CONTAG</span>
+                                                <span class="tag success">STFERJ</span>
+                                                <span class="tag success">ASTRE</span>
+                                                <span class="tag success">FORCA SIND</span>
+                                                <span class="tag success">CUT</span>
+                                                <span class="tag success">UNIDAS</span>
+                                                <span class="tag success">CGT</span>
+                                                <span class="tag success">SINDAPB</span>
+                                                <span class="tag success">ASBAPI</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>                        
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <?php endif; ?>
+        <div class="row cell-auto-size toolbar_title no-margin">
+            <div class="cell colspan12">
+                <h3>Empréstimos&nbsp;<small id="totalEmprestimos" class="on-right"></small></h3>
+                <hr class="thin bg-grayLighter">
+            </div>            
+        </div> 
+        <div class="row cell-auto-size toolbar_title no-margin">
+            <div class="cell colspan8 no-margin-top" id="messageNoEmprestimo">
+                <span class="tag warning">Não existem empréstimos lançados nessa consulta.</span>
+            </div>
+            <div class="cell place-right colspan4 no-margin-top">
+                <a onclick="adicionarAlternativa()" id="addAlternativa" class="button place-right">
+                    Adicionar
+                    <span class="icon mif-plus"></span>
+                </a>
+                <a href="#" class="button place-right">
+                    Recuperar
+                    <span class="icon mif-cloud-download"></span>
+                </a>
+            </div>
+        </div>
+        <div class="row cell-auto-size toolbar_title no-margin">
+            <div class="cell colspan12" >
+                <div class="flex-grid" id="listEmprestimos"></div>
+            </div>
+        </div>
+    </div>
+    <br/>
+    <div class="row flex-just-end">
+        <div class="cell">
+            <button class="button mif-floppy-disk primary">&nbsp;Salvar</button>
+        </div>
+    </div>
+</form>

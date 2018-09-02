@@ -1,0 +1,172 @@
+<style>
+    body{
+        background-image: url("<?php echo PATH_TEMPLATE_IMAGE_URL; ?>background/bg_principal.png");
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-size: 100% 100%; /* A imagem ocupar todo o viewport */
+    }
+</style>
+<!-- Geral -->
+<div class="tile-group double">
+    <a href="<?php echo UrlRequestHelper::mountUrl('Gestao'); ?>"><span class="tile-group-title"><span class="mif-apps" style="margin-top: -5px;"></span> Gestão</span></a>
+    <div class="tile-container">
+        <a href="<?php echo UrlRequestHelper::mountUrl('Pessoa'); ?>" class="tile bg-lime fg-white" data-role="tile">
+            <div class="tile-content iconic">
+                <span class="icon mif-organization"></span>
+            </div>
+            <span class="tile-label">Pessoas</span>
+        </a>
+
+        <div class="tile bg-darkBlue fg-white" data-role="tile" onclick="document.location.href = 'http://gmail.com'">
+            <div class="tile-content iconic">
+                <span class="icon mif-mail-read"></span>
+            </div>
+            <span class="tile-label">Marketing</span>
+        </div>
+
+        <a href="<?php echo UrlRequestHelper::mountUrl('PessoaContrato'); ?>" class="tile-small bg-amber fg-white" data-role="tile">
+            <div class="tile-content iconic" data-role="hint" data-hint-background="bg-amber" data-hint-color="fg-white" data-hint-mode="2" data-hint="|Contratos" data-hint-position="top">
+                <span class="icon mif-cabinet"></span>
+            </div>
+        </a>
+        <a href="<?php echo UrlRequestHelper::mountUrl('PessoaConsulta'); ?>" class="tile-small bg-darkViolet fg-white" data-role="tile">
+            <div class="tile-content iconic" data-role="hint" data-hint-background="bg-darkViolet" data-hint-color="fg-white" data-hint-mode="2" data-hint="|Consultas" data-hint-position="top">
+                <span class="icon mif-search"></span>
+            </div>            
+        </a>        
+        <a href="<?php echo UrlRequestHelper::mountUrl('PessoaConsulta'); ?>" class="tile-small bg-lightBlue fg-white" data-role="tile">
+            <div class="tile-content iconic" data-role="hint" data-hint-background="bg-lightBlue" data-hint-color="fg-white" data-hint-mode="2" data-hint="|Faturamentos" data-hint-position="top">
+                <span class="icon mif-dollar2"></span>
+            </div>            
+        </a>
+        <a href="<?php echo UrlRequestHelper::mountUrl('PessoaConsulta'); ?>" class="tile-small bg-red fg-white" data-role="tile">
+            <div class="tile-content iconic" data-role="hint" data-hint-background="bg-red" data-hint-color="fg-white" data-hint-mode="2" data-hint="|Telemarketing" data-hint-position="top">
+                <span class="icon mif-ring-volume"></span>
+            </div>            
+        </a>
+        <a href="<?php echo UrlRequestHelper::mountUrl('Relatorio'); ?>" class="tile-small bg-brown fg-white" data-role="tile">
+            <div class="tile-content iconic" data-role="hint" data-hint-background="bg-brown" data-hint-color="fg-white" data-hint-mode="2" data-hint="|Relatórios" data-hint-position="top">
+                <span class="icon mif-file-pdf"></span>
+            </div>            
+        </a>
+        <!-- Metas -->
+        <a href="<?php echo UrlRequestHelper::mountUrl('Relatorio'); ?>" class="tile bg-darkCobalt fg-white slide-right-2" data-role="tile">
+            <div class="tile-content iconic">
+                <span class="icon mif-chart-line"></span>
+            </div>
+            <span class="tile-label">Metas</span>
+        </a>
+    </div>
+</div>
+
+<!-- Auxiliares -->
+<div class="tile-group double">
+    <a href="<?php echo UrlRequestHelper::mountUrl('Auxiliar'); ?>"><span class="tile-group-title"><span class="mif-apps" style="margin-top: -5px;"></span> Auxiliares</span></a>
+    <div class="tile-container">
+        <a href="<?php echo UrlRequestHelper::mountUrl('Banco'); ?>" class="tile bg-crimson fg-white" data-role="tile">
+            <div class="tile-content iconic">
+                <span class="icon mif-library"></span>
+            </div>
+            <span class="tile-label">Banco</span>
+        </a>
+        <a href="<?php echo UrlRequestHelper::mountUrl('Orgao'); ?>" class="tile bg-brown fg-white" data-role="tile">
+            <div class="tile-content iconic">
+                <span class="icon mif-windows"></span>
+            </div>
+            <span class="tile-label">Orgão</span>
+        </a>
+        <a href="<?php echo UrlRequestHelper::mountUrl('Convenio'); ?>" class="tile bg-violet fg-white" data-role="tile">
+            <div class="tile-content iconic">
+                <span class="icon mif-clipboard"></span>
+            </div>
+            <span class="tile-label">Convênio</span>
+        </a>
+        <a href="<?php echo UrlRequestHelper::mountUrl('Parceiro'); ?>" class="tile bg-orange fg-white" data-role="tile">
+            <div class="tile-content iconic">
+                <span class="icon mif-shop"></span>
+            </div>
+            <span class="tile-label">Parceiro</span>
+        </a>
+        <a href="<?php echo UrlRequestHelper::mountUrl('PessoaConsulta'); ?>" class="tile-small bg-cobalt fg-white" data-role="tile">
+            <div class="tile-content iconic" data-role="hint" data-hint-background="bg-cobalt" data-hint-color="fg-white" data-hint-mode="2" data-hint="|Comissão" data-hint-position="top">
+                <span class="icon mif-dollars"></span>
+            </div>            
+        </a>
+        <a href="<?php echo UrlRequestHelper::mountUrl('PessoaConsulta'); ?>" class="tile-small bg-darkEmerald fg-white" data-role="tile">
+            <div class="tile-content iconic" data-role="hint" data-hint-background="bg-darkEmerald" data-hint-color="fg-white" data-hint-mode="2" data-hint="|Simulador" data-hint-position="top">
+                <span class="icon mif-calculator2"></span>
+            </div>            
+        </a>
+        <a href="<?php echo UrlRequestHelper::mountUrl('Corretor'); ?>" class="tile-small bg-indigo fg-white" data-role="tile">
+            <div class="tile-content iconic" data-role="hint" data-hint-background="bg-indigo" data-hint-color="fg-white" data-hint-mode="2" data-hint="|Corretor" data-hint-position="top">
+                <span class="icon mif-suitcase"></span>
+            </div>            
+        </a>
+    </div>    
+</div>
+
+<!-- Tipologia -->
+<div class="tile-group one">
+    <span class="tile-group-title">Tipologia</span>
+    <div class="tile-container">
+        <!-- Tipo de Orgão -->
+        <a href="<?php echo UrlRequestHelper::mountUrl('TipoOrgao'); ?>" class="tile-small bg-orange fg-white" data-role="tile">
+            <div class="tile-content iconic" data-role="hint" data-hint-background="bg-orange" data-hint-color="fg-white" data-hint-mode="2" data-hint="|Tipos de Orgãos" data-hint-position="top">
+                <span class="icon mif-location-city"></span>
+            </div>
+        </a>
+        <!-- Tipo de Situação -->
+        <a href="<?php echo UrlRequestHelper::mountUrl('TipoSituacao'); ?>" class="tile-small bg-lightBlue fg-white" data-role="tile">
+            <div class="tile-content iconic" data-role="hint" data-hint-background="bg-lightBlue" data-hint-color="fg-white" data-hint-mode="2" data-hint="|Tipos de Situação" data-hint-position="top">
+                <span class="icon mif-tags"></span>
+            </div>
+        </a>
+        <!-- Tipo de Contato -->
+        <a href="<?php echo UrlRequestHelper::mountUrl('TipoContato'); ?>" class="tile-small bg-magenta fg-white" data-role="tile">
+            <div class="tile-content iconic" data-role="hint" data-hint-background="bg-magenta" data-hint-color="fg-white" data-hint-mode="2" data-hint="|Tipos de Contatos" data-hint-position="top">
+                <span class="icon mif-settings-phone"></span>
+            </div>
+        </a>
+
+        <!-- Tipo Especie Beneficio -->
+        <a href="<?php echo UrlRequestHelper::mountUrl('TipoEspecieBeneficio'); ?>" class="tile-small bg-yellow fg-white" data-role="tile">
+            <div class="tile-content iconic" data-role="hint" data-hint-background="bg-yellow" data-hint-color="fg-white" data-hint-mode="2" data-hint="|Espécie Benefício" data-hint-position="top">
+                <span class="icon mif-stack"></span>
+            </div>
+        </a>
+        <!-- Tipo Contrato -->
+        <a href="<?php echo UrlRequestHelper::mountUrl('TipoContrato'); ?>" class="tile-small bg-teal fg-white" data-role="tile">
+            <div class="tile-content iconic" data-role="hint" data-hint-background="bg-teal" data-hint-color="fg-white" data-hint-mode="2" data-hint="|Tipos de Contratos" data-hint-position="top">
+                <span class="icon mif-file-text"></span>
+            </div>
+        </a>
+    </div>    
+</div>
+
+<!-- Segurança -->
+<div class="tile-group one">
+    <span class="tile-group-title">Segurança</span>
+    <div class="tile-container">
+        <!-- Usuario -->
+        <a href="<?php echo UrlRequestHelper::mountUrl('Usuario'); ?>" class="tile-small bg-mauve fg-white" data-role="tile">
+            <div class="tile-content iconic" data-role="hint" data-hint-background="bg-mauve" data-hint-color="fg-white" data-hint-mode="2" data-hint="|Usuários" data-hint-position="top">
+                <span class="icon mif-user-check"></span>
+            </div>
+        </a>
+        <a href="<?php echo UrlRequestHelper::mountUrl('Usuario'); ?>" class="tile-small bg-emerald fg-white" data-role="tile">
+            <div class="tile-content iconic" data-role="hint" data-hint-background="bg-emerald" data-hint-color="fg-white" data-hint-mode="2" data-hint="|Perfil de Acesso" data-hint-position="top">
+                <span class="icon mif-users"></span>
+            </div>
+        </a>
+        <a href="<?php echo UrlRequestHelper::mountUrl('Usuario'); ?>" class="tile-small bg-grayLight fg-white" data-role="tile">
+            <div class="tile-content iconic" data-role="hint" data-hint-background="bg-grayLight" data-hint-color="fg-white" data-hint-mode="2" data-hint="|Funcionalidades" data-hint-position="top">
+                <span class="icon mif-cogs"></span>
+            </div>
+        </a>
+        <a href="<?php echo UrlRequestHelper::mountUrl('Usuario'); ?>" class="tile-small bg-black fg-white" data-role="tile">
+            <div class="tile-content iconic" data-role="hint" data-hint-background="bg-black" data-hint-color="fg-white" data-hint-mode="2" data-hint="|Painel de Controle" data-hint-position="top">
+                <span class="icon mif-equalizer-v"></span>
+            </div>
+        </a>
+    </div>    
+</div>

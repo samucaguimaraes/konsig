@@ -1,0 +1,483 @@
+<ul class="breadcrumbs">
+    <li><a href="<?php echo UrlRequestHelper::mountUrl('Principal'); ?>"><span class="icon mif-home"></span></a></li>
+    <li><a href="<?php echo UrlRequestHelper::mountUrl('Gestao'); ?>">Gestão</a></li>
+    <li><a href="<?php echo UrlRequestHelper::mountUrl('Pessoa'); ?>">Pessoas/Clientes [lista]</a></li>
+    <li><a>Pessoa/Cliente</a></li>
+</ul>
+<div class="flex-grid">
+    <div class="row cell-auto-size no-margin no-padding">
+        <div class="cell colspan10">
+            <h1 class="text-light">
+                <?php echo $view_objPessoa->getNome(); ?>    
+            </h1>
+        </div>
+        <div class="cell colspan2 no-tablet">
+            <span class="tag default">Progresso do Cadastro (76%)</span>
+            <div class="progress large block-shadow" data-role="progress" data-value="76" data-color="ribbed-blue"></div>
+        </div>
+    </div>
+</div>
+<hr class="thin bg-grayLighter">
+<div class="toolbar">
+    <div class="toolbar-section">
+        <button data-role="hint"
+                data-hint-background='bg-gray' 
+                data-hint-color='fg-white'
+                data-hint-mode='2'
+                data-hint="Editar|Clique para editar os dados pessoais" 
+                onclick="redirectUrl('<?php echo UrlRequestHelper::mountUrl('Pessoa', 'editar', array('id' => $view_objPessoa->getId())); ?>')" 
+                data-hint-position="top"
+                class="toolbar-button">
+            <span class="mif-pencil"></span>
+        </button>
+        <button data-role="hint"
+                data-hint-background='bg-gray' 
+                data-hint-color='fg-white'
+                data-hint-mode='2'
+                data-hint="Ficha|Clique para gerar a ficha da pessoa" 
+                onclick="redirectUrl('<?php echo UrlRequestHelper::mountUrl('Pessoa', 'fichar', array('id' => $view_objPessoa->getId())); ?>')" 
+                data-hint-position="top"
+                class="toolbar-button">
+            <span class="mif-profile"></span>
+        </button>
+        <button data-role="hint"
+                data-hint-background='bg-gray' 
+                data-hint-color='fg-white'
+                data-hint-mode='2'
+                data-hint="Etiqueta|Clique para gerar uma etiqueta de correspondência" 
+                onclick="redirectUrl('<?php echo UrlRequestHelper::mountUrl('Pessoa', 'etiquetar', array('id' => $view_objPessoa->getId())); ?>')" 
+                data-hint-position="top"
+                class="toolbar-button">
+            <span class="mif-contacts-mail"></span>
+        </button>
+        <button data-role="hint"
+                data-hint-background='bg-gray' 
+                data-hint-color='fg-white'
+                data-hint-mode='2'
+                data-hint="Declarar Falecimento|Clique para incluir pessoa na lista de falecidos" 
+                onclick="redirectUrl('<?php echo UrlRequestHelper::mountUrl('Pessoa', 'falecer', array('id' => $view_objPessoa->getId())); ?>')" 
+                data-hint-position="top"
+                class="toolbar-button">
+            <span class="mif-heartbeat"></span>
+        </button>
+        <button data-role="hint"
+                data-hint-background='bg-gray' 
+                data-hint-color='fg-white'
+                data-hint-mode='2'
+                data-hint="Agendar Ligação|Clique para incluir agendamento de ligação" 
+                onclick="redirectUrl('<?php //echo UrlRequestHelper::mountUrl('Pessoa', 'falecer', array('id' => $view_objPessoa->getId()));  ?>')" 
+                data-hint-position="top"
+                class="toolbar-button">
+            <span class="mif-settings-phone"></span>
+        </button>        
+        <button data-role="hint"
+                data-hint-background='bg-gray' 
+                data-hint-color='fg-white'
+                data-hint-mode='2'
+                data-hint="Excluir|ATENÇÃO! Todas as informações desse cliente serão excluídas!" 
+                onclick="redirectUrl('<?php echo UrlRequestHelper::mountUrl('Pessoa', 'excluir', array('id' => $view_objPessoa->getId())); ?>')" 
+                data-hint-position="top"
+                class="toolbar-button">
+            <span class="mif-bin"></span>
+        </button>
+        <button data-role="hint"
+                data-hint-background='bg-gray' 
+                data-hint-color='fg-white'
+                data-hint-mode='2'
+                data-hint="Favoritos|Clique para incluir essa pessoa nos favoritos" 
+                onclick="redirectUrl('<?php //echo UrlRequestHelper::mountUrl('Pessoa', 'falecer', array('id' => $view_objPessoa->getId()));  ?>')" 
+                data-hint-position="top"
+                class="toolbar-button">
+            <span class="mif-star-empty"></span>
+        </button>
+        <button data-role="hint"
+                data-hint-background='bg-gray' 
+                data-hint-color='fg-white'
+                data-hint-mode='2'
+                data-hint="Notificação|Clique para incluir uma notificação para esse elemento" 
+                onclick="redirectUrl('<?php echo UrlRequestHelper::mountUrl('Notificacao', 'cadastrar', array('id' => $view_objPessoa->getId(),'elemento'=>'Pessoa')); ?>')" 
+                data-hint-position="top"
+                class="toolbar-button">
+            <span class="mif-notification"></span>
+        </button>
+    </div>
+    <div class="rating place-right" data-role="rating" data-show-score="false" ></div>
+</div>
+<br>
+<div class="tabcontrol2" data-role="tabcontrol">
+    <ul class="tabs">
+        <li <?php echo $view_frameActive->active('frameA'); ?>><a href="#frameA">Dados Básicos</a></li>
+        <li <?php echo $view_frameActive->active('frameR'); ?>><a href="#frameR">Orgãos <span class='tag warning'><?php echo $view_tPessoaOrgao ?></span></a></li>
+        <li <?php echo $view_frameActive->active('frameC'); ?>><a href="#frameC">Contatos <span class='tag warning'><?php echo $view_tPessoaContato ?></span></a></li>
+        <li <?php echo $view_frameActive->active('frameO'); ?>><a href="#frameO">Consultas <span class='tag bg-darkViolet fg-white'><?php echo $view_tPessoaConsulta ?></span></a></li>
+        <li <?php echo $view_frameActive->active('frameN'); ?>><a href="#frameN">Contratos <span class='tag bg-amber fg-white'><?php echo $view_tPessoaContrato ?></span></a></li>
+        <li <?php echo $view_frameActive->active('frameE'); ?> class="place-right"><a href="#frameE"><span class="mif-attachment"></span></a></li>
+    </ul>
+    <div class="frames">
+        <div <?php echo $view_frameActive->frameActive('frameA'); ?> id="frameA">  
+            <div class="flex-grid">
+                <div class="row cell-auto-size no-margin">
+                    <div class="cell colspan2">
+                        <label>Apelido</label>
+                        <div class="input-control text full-size" data-role="input">
+                            <span class="mif-user prepend-icon"></span>
+                            <input type="text" 
+                                   value="<?php echo $view_objPessoa->getApelido(); ?>"
+                                   disabled="disabled"
+                                   >
+                        </div>
+                    </div>
+                    <div class="cell colspan3">
+                        <label>Número CPF</label>
+                        <div class="input-control text full-size" data-role="input">
+                            <span class="mif-credit-card prepend-icon"></span>
+                            <input type="text" 
+                                   value="<?php echo $view_objPessoa->getNumeroCPF(); ?>"
+                                   disabled="disabled"
+                                   >
+                        </div>
+                    </div>
+                    <div class="cell colspan2">
+                        <label>Data de Nasc<span class="no-tablet">imento</span></label>
+                        <div class="input-control text full-size" data-role="input">
+                            <span class="mif-calendar prepend-icon"></span>
+                            <input type="text" 
+                                   value="<?php echo $view_objPessoa->getDataNascimento(); ?>"
+                                   disabled="disabled"
+                                   data-role='hint' 
+                                   data-hint-background='bg-gray' 
+                                   data-hint-color='fg-white'
+                                   data-hint-mode='2'
+                                   data-hint='|<?php echo DataHelper::calcularIdade($view_objPessoa->getDataNascimento()); ?> anos' 
+                                   data-hint-position='top'
+                                   >
+                        </div>
+                    </div>
+                    <div class="cell colspan5">
+                        <label>e-mail</label>
+                        <div class="input-control text full-size" data-role="input">
+                            <span class="mif-ie prepend-icon"></span>
+                            <input type="text" 
+                                   value="<?php echo $view_objPessoa->getEmail(); ?>"
+                                   disabled="disabled"
+                                   >
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row cell-auto-size no-margin">
+                    <div class="cell colspan5">
+                        <label>Logradouro</label>
+                        <div class="input-control text full-size" data-role="input">
+                            <span class="mif-home prepend-icon"></span>
+                            <input type="text" 
+                                   value="<?php echo $view_objPessoa->getEndereco(); ?>"
+                                   disabled="disabled"
+                                   >
+                        </div>
+                    </div>
+                    <div class="cell colspan3">
+                        <label>Bairro</label>
+                        <div class="input-control text full-size" data-role="input">
+                            <input type="text" 
+                                   value="<?php echo $view_objPessoa->getBairro(); ?>"
+                                   disabled="disabled"
+                                   >
+                        </div>
+                    </div>
+                    <div class="cell colspan2">
+                        <label>Cidade</label>
+                        <div class="input-control text full-size" data-role="input">
+                            <input type="text" 
+                                   value="<?php echo $view_objPessoa->getCidade()->getNome(); ?>"
+                                   disabled="disabled"
+                                   >
+                        </div>
+                    </div>
+                    <div class="cell colspan2">
+                        <label>Estado</label>
+                        <div class="input-control text full-size" data-role="input">
+                            <input type="text" 
+                                   value="<?php echo $view_objEstado->getNome(); ?>"
+                                   disabled="disabled"
+                                   >
+                        </div>
+                    </div>
+                </div>
+                <div class="row cell-auto-size no-margin">
+                    <div class="cell colspan2">
+                        <label>Número CEP</label>
+                        <div class="input-control text full-size" data-role="input">
+                            <input type="text" 
+                                   value="<?php echo $view_objPessoa->getNumeroCEP(); ?>"
+                                   disabled="disabled"
+                                   >
+                        </div>
+                    </div>
+                    <div class="cell colspan6">
+                        <label>Complemento</label>
+                        <div class="input-control text full-size" data-role="input">
+                            <input type="text" 
+                                   value="<?php echo $view_objPessoa->getComplemento(); ?>"
+                                   disabled="disabled"
+                                   >
+                        </div>
+                    </div>
+                </div>
+                <div class="row cell-auto-size no-margin">
+                    <div class="cell colspan12">
+                        <label>Observações</label>
+                        <div class="input-control text full-size" data-role="input">
+                            <input type="text" 
+                                   value="<?php echo $view_objPessoa->getObservacao(); ?>"
+                                   disabled="disabled"
+                                   >
+                        </div>
+                    </div>
+                </div>
+                <hr class="thin bg-grayLighter">
+                <div class="row cell-auto-size toolbar_title cells2 no-margin">
+                    <div class="cell colspan8">
+                        <h3 class="fg-gray">Dados Bancários</h3>
+                    </div>
+                    <div class="cell colspan4 no-margin-top">
+                        <button onclick="redirectUrl('<?php echo UrlRequestHelper::mountUrl('PessoaBanco', 'cadastrar', array('id' => $view_objPessoa->getId())); ?>')" class="button square-button place-right" data-role='hint' data-hint-background='bg-gray' data-hint-color='fg-white' data-hint-mode='2' data-hint='|Nova Conta Bancária' data-hint-position='top'>
+                            <span class="icon mif-plus"></span>
+                        </button>
+                    </div>
+                </div>
+                <div class="row cell-auto-size toolbar_title no-margin">
+                    <?php if ($view_isPessoaBanco): ?>
+                        <div class="cell colspan12">
+                            <table id="main_table_demo" class="dataTable border bordered hovered no-footer">
+                                <thead>
+                                    <tr>
+                                        <th>Banco</th>
+                                        <th>Agência</th>
+                                        <th>Conta</th>
+                                        <th>Tipo de Conta</th>
+                                        <th>Detalhes</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php foreach ($view_listPessoaBanco as $objPessoaBanco): ?>
+                                        <tr><td><?php echo $objPessoaBanco->getBanco()->getNome(); ?></td>
+                                            <td><?php echo $objPessoaBanco->getNumeroAgencia(); ?></td>
+                                            <td><?php echo $objPessoaBanco->getNumeroConta(); ?></td>
+                                            <td><?php echo ($objPessoaBanco->getTipoConta() == 1) ? "Conta Corrente" : "Conta Poupança"; ?></td>
+                                            <td><?php echo ($objPessoaBanco->getObservacao() != null) ? $objPessoaBanco->getObservacao() : "<span class='tag default'>Não Informado</span>"; ?></td></tr>
+                                    <?php endforeach; ?>
+                                </tbody>
+                            </table>
+                        </div>
+                    <?php else: ?>
+                        <span class="tag warning">Não existem informações inseridas.</span>
+                    <?php endif; ?>
+                </div>
+            </div>
+        </div> 
+
+        <div <?php echo $view_frameActive->frameActive('frameR'); ?> id="frameR">
+            <?php if ($view_isPessoaOrgao): ?>
+                <div class="flex-grid">
+                    <div class="row cell-auto-size toolbar_title cells2 no-margin">
+                        <div class="cell colspan8">
+                            <h3 class="fg-gray">Orgãos Associados</h3>
+                        </div>
+                        <div class="cell colspan4 no-margin-top">
+                            <button onclick="redirectUrl('<?php echo UrlRequestHelper::mountUrl('PessoaOrgao', 'cadastrar', array('id' => $view_objPessoa->getId())); ?>')" class="button square-button place-right" data-role='hint' data-hint-background='bg-gray' data-hint-color='fg-white' data-hint-mode='2' data-hint='|Novo Orgão Pagador' data-hint-position='top'>
+                                <span class="icon mif-plus"></span>
+                            </button>
+                        </div>
+                    </div>
+                    <hr class="thin bg-grayLighter"/>
+                    <div class="row cell-auto-size">
+                        <div class="cell">
+                            <table class="dataTable border bordered hovered no-footer" id="listPessoaOrgao" style="width: 100%">
+                                <thead>
+                                    <tr>
+                                        <td class="sortable-column">Nome</td>
+                                        <td class="sortable-column">Situação</td>
+                                        <td class="sortable-column">Matrícula</td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            <?php else: ?>
+                <span class="tag warning">Não existem informações inseridas.</span>
+                <a href="<?php echo UrlRequestHelper::mountUrl('PessoaOrgao', 'cadastrar', array('id' => $view_objPessoa->getId())); ?>" class="button">
+                    Adicionar
+                    <span class="icon mif-plus" style="margin-top: -5px;"></span>
+                </a>
+            <?php endif; ?>
+        </div>
+        <div <?php echo $view_frameActive->frameActive('frameC'); ?> id="frameC">  
+            <?php if ($view_isPessoaContato): ?>
+                <div class="flex-grid">
+                    <div class="row cell-auto-size toolbar_title cells2 no-margin">
+                        <div class="cell colspan8">
+                            <h3 class="fg-gray">Contatos da Pessoa/Cliente</h3>
+                        </div>
+                        <div class="cell colspan4 no-margin-top">
+                            <button onclick="redirectUrl('<?php echo UrlRequestHelper::mountUrl('PessoaContato', 'cadastrar', array('id' => $view_objPessoa->getId())); ?>')" 
+                                    class="button square-button place-right" 
+                                    data-role='hint' 
+                                    data-hint-background='bg-gray' 
+                                    data-hint-color='fg-white' 
+                                    data-hint-mode='2' 
+                                    data-hint='|Novo Contato' 
+                                    data-hint-position='top'>
+                                <span class="icon mif-plus"></span>
+                            </button>
+                        </div>
+                    </div>
+                    <hr class="thin bg-grayLighter"/>
+                    <div class="row cell-auto-size">
+                        <div class="cell">
+                            <table class="dataTable border bordered hovered no-footer" id="listPessoaContato" style="width: 100%">
+                                <thead>
+                                    <tr>
+                                        <td class="sortable-column">Contato</td>
+                                        <td class="sortable-column">Tipo</td>
+                                        <td class="sortable-column">Detalhe</td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            <?php else: ?>
+                <span class="tag warning">Não existem informações inseridas.</span>
+                <a href="<?php echo UrlRequestHelper::mountUrl('PessoaContato', 'cadastrar', array('id' => $view_objPessoa->getId())); ?>" class="button">
+                    Adicionar
+                    <span class="icon mif-plus" style="margin-top: -5px;"></span>
+                </a>
+            <?php endif; ?>
+
+        </div>
+        <div <?php echo $view_frameActive->frameActive('frameO'); ?> id="frameO">  
+            <?php if ($view_isPessoaConsulta): ?>
+                <div class="flex-grid">
+                    <div class="row cell-auto-size toolbar_title cells2 no-margin">
+                        <div class="cell colspan6">
+                            <h3 class="fg-gray">Consultas <small class="on-right">(Apenas ativas)</small></h3>
+                        </div>
+                        <div class="cell colspan6 no-margin-top">
+
+                            <button onclick="redirectUrl('<?php echo UrlRequestHelper::mountUrl('PessoaConsulta', 'cadastrar', array('id' => $view_objPessoa->getId())); ?>')" 
+                                    class="button square-button place-right" 
+                                    data-role='hint' 
+                                    data-hint-background='bg-gray' 
+                                    data-hint-color='fg-white' 
+                                    data-hint-mode='2' 
+                                    data-hint='|Nova Consulta' 
+                                    data-hint-position='top'
+                                    <?php if (!$view_isPessoaOrgao) {
+                                        echo "disabled='disabled' data-role='hint' data-hint-background='bg-amber' data-hint-color='fg-white' data-hint-mode='2' data-hint='Atenção!|É necessário ter orgãos associados para incluir contratos' data-hint-position='top'";
+                                    }; ?>>
+                                <span class="icon mif-plus" style="margin-top: -5px;"></span>
+                            </button>
+                            <button onclick="redirectUrl('<?php echo UrlRequestHelper::mountUrl('PessoaConsulta', 'listar', array('id' => $view_objPessoa->getId())); ?>')" 
+                                    class="button square-button place-right" 
+                                    data-role='hint' 
+                                    data-hint-background='bg-gray' 
+                                    data-hint-color='fg-white' 
+                                    data-hint-mode='2' 
+                                    data-hint='|Arquivo de Consultas' 
+                                    data-hint-position='top'>
+                                <span class="icon mif-folder-upload" style="margin-top: -5px;"></span>
+                            </button>
+                        </div>
+                    </div>
+                    <hr class="thin bg-grayLighter"/>
+                    <div class="row cell-auto-size">
+                        <div class="cell">
+                            <table class="dataTable border bordered hovered no-footer" id="listPessoaConsulta" style="width: 100%">
+                                <thead>
+                                    <tr>
+                                        <td class="sortable-column">Orgão Consultado</td>
+                                        <td class="sortable-column">Matrícula</td>
+                                        <td class="sortable-column">Competência</td>
+                                        <td class="sortable-column">Data Consulta</td>
+                                        <td class="sortable-column">Margem Disponível</td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+<?php else: ?>
+                <span class="tag warning">Não existem informações inseridas.</span>
+                <button  onclick="redirectUrl('<?php echo UrlRequestHelper::mountUrl('PessoaConsulta', 'cadastrar', array('id' => $view_objPessoa->getId())); ?>')" 
+                         class="button"
+                <?php if (!$view_isPessoaOrgao) {
+                    echo "disabled='disabled' data-role='hint' data-hint-background='bg-amber' data-hint-color='fg-white' data-hint-mode='2' data-hint='Atenção!|É necessário ter orgãos associados para incluir contratos' data-hint-position='top'";
+                }; ?>>
+                    Adicionar
+                    <span class="icon mif-plus" style="margin-top: -5px;"></span></button>
+            <?php endif; ?>
+
+
+        </div>
+        <div <?php echo $view_frameActive->frameActive('frameN'); ?> id="frameN">  
+<?php if ($view_isPessoaContrato): ?>
+                <div class="flex-grid">
+                    <div class="row cell-auto-size toolbar_title cells2 no-margin">
+                        <div class="cell colspan8">
+                            <h3 class="fg-gray">Contratos</h3>
+                        </div>
+                        <div class="cell colspan4 no-margin-top">
+                            <button onclick="redirectUrl('<?php echo UrlRequestHelper::mountUrl('PessoaContrato', 'cadastrar', array('id' => $view_objPessoa->getId())); ?>')" class="button square-button place-right" data-role='hint' data-hint-background='bg-gray' data-hint-color='fg-white' data-hint-mode='2' data-hint='|Novo Contrato' data-hint-position='top'>
+                                <span class="icon mif-plus"></span>
+                            </button>
+                            <!-- <a class="button rounded place-right">
+                                <span class="icon mif-printer"></span>
+                            </a> -->
+                        </div>
+                    </div>
+                    <hr class="thin bg-grayLighter"/>
+                    <div class="row cell-auto-size">
+                        <div class="cell">
+                            <table class="dataTable border bordered hovered no-footer" id="listPessoaContrato" style="width: 100%">
+                                <thead>
+                                    <tr>
+                                        <td class="sortable-column">Número</td>
+                                        <td class="sortable-column">Tipo Contrato</td>
+                                        <td class="sortable-column">Valor Bruto</td>
+                                        <td class="sortable-column">Valor Líquido</td>
+                                        <td class="sortable-column">Valor Parcela</td>
+                                        <td class="sortable-column">Status</td>
+                                        <td class="sortable-column">Data Status</td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                    <?php else: ?>
+                <span class="tag warning">Não existem informações inseridas.</span>
+                <button onclick="redirectUrl('<?php echo UrlRequestHelper::mountUrl('PessoaContrato', 'cadastrar', array('id' => $view_objPessoa->getId())); ?>')" 
+                        class="button" 
+                <?php if (!$view_isPessoaOrgao) {
+                    echo "disabled='disabled' data-role='hint' data-hint-background='bg-amber' data-hint-color='fg-white' data-hint-mode='2' data-hint='Atenção!|É necessário ter orgãos associados para incluir contratos' data-hint-position='top'";
+                }; ?>>
+                    Adicionar
+                    <span class="icon mif-plus" style="margin-top: -5px;"></span>
+                </button>
+<?php endif; ?>
+        </div>
+        <div <?php echo $view_frameActive->frameActive('frameE'); ?> id="frameE">
+            Anexos
+        </div>
+    </div>
+</div>

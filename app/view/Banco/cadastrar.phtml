@@ -1,0 +1,51 @@
+<ul class="breadcrumbs">
+    <li><a href="<?php echo UrlRequestHelper::mountUrl('Principal'); ?>"><span class="icon mif-home"></span></a></li>
+    <li><a href="<?php echo UrlRequestHelper::mountUrl('Tipologia'); ?>">Tipologia</a></li>
+    <li><a href="<?php echo UrlRequestHelper::mountUrl('TipoContato'); ?>">Tipos de Contato</a></li>
+    <li><a>Cadastro</a></li>
+</ul>
+
+<h1 class="text-light">
+    Tipo de Contato <small class="on-right"> Cadastrar</small>
+    <span class="mif-perm-phone-msg place-right"></span>
+</h1>
+
+<hr class="thin bg-grayLighter">
+<br>
+
+<form action="<?php echo UrlRequestHelper::mountUrlPost('TipoContato', 'cadastrar'); ?>" method="POST" data-role="validator">
+
+    <div class="flex-grid">
+        
+        <div class="row cell-auto-size">
+            <div class="cell">
+                <label>Nome <b class="fg-red">*</b></label>
+                <div class="input-control text full-size" data-role="input">
+                    <input type="text" 
+                           id="nome"
+                           name="nome"
+                           placeholder="Informe o novo tipo de contato" 
+                           maxlength="100"
+                           data-validate-func="minlength" 
+                           data-validate-arg="4"
+                           data-validate-hint="Minimo de 4 caracteres"
+                           data-validate-hint-position="top"
+                           autocomplete="off"
+                           >
+
+                    <button class="button helper-button clear"><span class="mif-cross"></span></button>
+                    <span class="input-state-error mif-warning"></span>
+                    <span class="input-state-success mif-checkmark"></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row flex-just-end">
+            <div class="cell">
+                <button class="button mif-floppy-disk primary">&nbsp;Salvar</button>
+            </div>
+        </div>
+
+    </div>
+
+</form>

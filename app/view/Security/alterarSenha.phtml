@@ -1,0 +1,71 @@
+<ul class="breadcrumbs">
+    <li><a href="<?php echo UrlRequestHelper::mountUrl('Principal'); ?>"><span class="icon mif-home"></span></a></li>
+    <li><a>Usuário Logado</a></li>
+    <li><a>Alterar Senha</a></li>
+</ul>
+
+<h1 class="text-light">
+    Usuário <small class="on-right"> Alterar Senha</small>
+    <span class="mif-user-check place-right"></span>
+</h1>
+
+<hr class="thin bg-grayLighter">
+<br>
+
+<form action="<?php echo UrlRequestHelper::mountUrlPost('Security', 'alterarSenha'); ?>" method="POST" data-role="validator">
+
+    <input type="hidden" name="id" id="id" value="<?php echo $view_idUsuario; ?>" required=""/>
+    <div class="flex-grid">
+
+        <div class="row cell-auto-size">
+            <div class="cell size4">
+                <label>Nova Senha <b class="fg-red">*</b></label>
+                <div class="input-control password full-size" data-role="input">
+
+                    <input type="password" 
+                           id="senha"
+                           name="senha"
+                           placeholder="Nova senha para o usuário" 
+                           maxlength="18"
+                           data-validate-func="minlength" 
+                           data-validate-arg="8"
+                           data-validate-hint="Minimo de 8 caracteres"
+                           data-validate-hint-position="top"
+                           autocomplete="off"
+                           >
+
+                    <button class="button helper-button clear"><span class="mif-cross"></span></button>
+                    <span class="input-state-error mif-warning"></span>
+                    <span class="input-state-success mif-checkmark"></span>
+                </div>
+            </div>
+
+            <div class="cell size4 padding-inputs-left1">
+                <label>Confirme a Senha <b class="fg-red">*</b></label>
+                <div class="input-control password full-size" data-role="input">
+
+                    <input type="password" 
+                           id="des_senha_conf"
+                           name="des_senha_conf"
+                           placeholder="Confirme a nova senha para o usuário" 
+                           maxlength="18"
+                           data-validate-func="compararSenhas" 
+                           data-validate-hint="Senha deve ser igual a informada anteriomente!!!"
+                           data-validate-hint-position="top"
+                           autocomplete="off"
+                           >
+
+                    <button class="button helper-button clear"><span class="mif-cross"></span></button>
+                    <span class="input-state-error mif-warning"></span>
+                    <span class="input-state-success mif-checkmark"></span>
+                </div>
+            </div>
+            <div class="cell padding-inputs-left1">
+                <br>
+                <button class="button mif-floppy-disk primary">&nbsp;Salvar</button>
+            </div>
+        </div>
+
+    </div>
+</form>
+<br>

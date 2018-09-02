@@ -1,0 +1,79 @@
+<ul class="breadcrumbs">
+    <li><a href="<?php echo UrlRequestHelper::mountUrl('Principal'); ?>"><span class="icon mif-home"></span></a></li>
+    <li><a href="<?php echo UrlRequestHelper::mountUrl('Gestao'); ?>">Gestão</a></li>
+    <li><a href="<?php echo UrlRequestHelper::mountUrl('PessoaContrato'); ?>">Contratos</a></li>
+</ul>
+
+<h1 class="text-light">
+    Contratos <small class="on-right"></small>
+    <span class="mif-cabinet place-right"></span>
+</h1>
+
+<hr class="thin bg-grayLighter">
+
+<div class="toolbar">
+    <div class="toolbar-section">
+        <button data-role="hint"
+                data-hint-background='bg-olive' 
+                data-hint-color='fg-white'
+                data-hint-mode='2' 
+                data-hint="Novo|Clique para cadastrar um novo contrato" 
+                onclick="redirectUrl('<?php echo UrlRequestHelper::mountUrl('PessoaContrato', 'cadastrar'); ?>')" 
+                data-hint-position="top"
+                class="toolbar-button">
+            <span class="mif-plus"></span>
+        </button>
+        <button data-role="hint"
+                data-hint-background='bg-olive' 
+                data-hint-color='fg-white'
+                data-hint-mode='2' 
+                data-hint="Importar Físico|Clique para importar um arquivo excel com a relação de entrega de físicos" 
+                onclick="redirectUrl('<?php echo UrlRequestHelper::mountUrl('PessoaContrato', 'importar'); ?>')" 
+                data-hint-position="top"
+                class="toolbar-button">
+            <span class="mif-file-upload"></span>
+        </button>
+        <button data-role="hint"
+                data-hint-background='bg-olive' 
+                data-hint-color='fg-white'
+                data-hint-mode='2' 
+                data-hint="Físicos Malote|Clique para registrar a entrega de físicos em malote" 
+                onclick="redirectUrl('<?php echo UrlRequestHelper::mountUrl('PessoaContrato', 'incluirFisicoMalote'); ?>')" 
+                data-hint-position="top"
+                <?php echo (!$view_isFisico) ? "disabled='disabled'" : ""; ?>
+                class="toolbar-button">
+            <span class="mif-file-archive"></span>
+        </button>
+        <button data-role="hint"
+                data-hint-background='bg-olive' 
+                data-hint-color='fg-white'
+                data-hint-mode='2' 
+                data-hint="Alterar Status em Massa|Clique para alterar o status de contratos" 
+                onclick="redirectUrl('<?php echo UrlRequestHelper::mountUrl('PessoaContrato', 'atualizarStatusMassa'); ?>')" 
+                data-hint-position="top"
+                <?php echo (!$view_isFisico) ? "disabled='disabled'" : ""; ?>
+                class="toolbar-button">
+            <span class="mif-tab"></span>
+        </button>
+    </div>
+</div>
+<br />
+<div class="row cell-auto-size">
+    <div class="cell">
+        <table class="dataTable border bordered hovered no-footer" id="listContratos" style="width: 100%">
+            <thead>
+                <tr>
+                    <td class="sortable-column">Número</td>
+                    <td class="sortable-column">Pessoa/Cliente</td>
+                    <td class="sortable-column">Tipo Contrato</td>
+                    <td class="sortable-column">Valor Líquido</td>
+                    <td class="sortable-column">Valor Parcela</td>
+                    <td class="sortable-column">Status</td>
+                    <td class="sortable-column">Data Status</td>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+</div>

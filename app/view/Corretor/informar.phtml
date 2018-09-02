@@ -1,0 +1,220 @@
+<ul class="breadcrumbs">
+    <li><a href="<?php echo UrlRequestHelper::mountUrl('Principal'); ?>"><span class="icon mif-home"></span></a></li>
+    <li><a href="<?php echo UrlRequestHelper::mountUrl('Auxiliar'); ?>">Auxiliares</a></li>
+    <li><a href="<?php echo UrlRequestHelper::mountUrl('Corretor'); ?>">Corretores [lista]</a></li>
+    <li><a>Corretor</a></li>
+</ul>
+<h1 class="text-light">
+    <?php echo $view_objCorretor->getNome(); ?>    
+    <div class="rating place-right" data-role="rating" data-show-score="false" ></div>
+</h1>
+<hr class="thin bg-grayLighter">
+<!-- PROGRESSO DO CADASTRO -->
+<div class="flex-grid">
+    <div class="row cell-auto-size no-margin no-padding">
+        <div class="cell colspan2">
+
+
+            <span class="tag default">Progresso do Cadastro (76%)</span>
+        </div> 
+        <div class="cell colspan10">
+            <div class="progress small" data-role="progress" data-value="76" data-color="ribbed-green"></div>
+        </div>
+    </div>
+</div>
+<div class="toolbar">
+    <div class="toolbar-section">
+        <button data-role="hint" data-hint="Editar|Clique para editar os dados pessoais" 
+                onclick="redirectUrl('<?php echo UrlRequestHelper::mountUrl('Corretor', 'editar', array('id' => $view_objCorretor->getId())); ?>')" 
+                class="toolbar-button"><span class="mif-pencil"></span></button>
+        <button data-role="hint" data-hint="Ficha|Clique para gerar a ficha do corretor" 
+                onclick="redirectUrl('<?php echo UrlRequestHelper::mountUrl('Corretor', 'fichar', array('id' => $view_objCorretor->getId())); ?>')" 
+                class="toolbar-button"><span class="mif-profile"></span></button>
+        <button data-role="hint" data-hint="Excluir|ATENÃÃO! Todas as informaÃ§Ãµes desse cliente serÃ£o excluÃ­das!" 
+                onclick="redirectUrl('<?php echo UrlRequestHelper::mountUrl('Corretor', 'excluir', array('id' => $view_objCorretor->getId())); ?>')" 
+                class="toolbar-button"><span class="mif-bin fg-red"></span></button>
+    </div>
+</div>
+<br>
+<div class="tabcontrol2" data-role="tabcontrol">
+    <ul class="tabs">
+        <li <?php echo $view_frameActive->active('frameA'); ?>><a href="#frameA">Dados Básicos</a></li>
+        <li <?php echo $view_frameActive->active('frameC'); ?>><a href="#frameC">Contatos </a></li>
+        <li <?php echo $view_frameActive->active('frameE'); ?> class="place-right"><a href="#frameE"><span class="mif-attachment"></span></a></li>
+    </ul>
+    <div class="frames">
+        <div <?php echo $view_frameActive->frameActive('frameA'); ?> id="frameA">  
+            <div class="flex-grid">
+                <div class="row cell-auto-size toolbar_title no-margin">
+                    <div class="cell colspan12">
+                        <div class="flex-grid">
+                            <div class="row cell-auto-size no-margin">
+                                <div class="cell colspan2">
+                                    <label>Apelido</label>
+                                    <div class="input-control text full-size" data-role="input">
+                                        <span class="mif-user prepend-icon"></span>
+                                        <input type="text" 
+                                               value=""
+                                               disabled="disabled"
+                                               >
+                                    </div>
+                                </div>
+                                <div class="cell colspan3">
+                                    <label>Numero CPF</label>
+                                    <div class="input-control text full-size" data-role="input">
+                                        <span class="mif-credit-card prepend-icon"></span>
+                                        <input type="text" 
+                                               value="<?php echo $view_objCorretor->getNumeroCPF(); ?>"
+                                               disabled="disabled"
+                                               >
+                                    </div>
+                                </div>
+                                <div class="cell colspan2">
+                                    <label>Data de Nascimento</label>
+                                    <div class="input-control text full-size" data-role="input">
+                                        <span class="mif-calendar prepend-icon"></span>
+                                        <input type="text" 
+                                               value="<?php echo $view_objCorretor->getDataNascimento(); ?>"
+                                               disabled="disabled"
+                                               data-role='hint' 
+                                               data-hint-background='bg-lightBlue' 
+                                               data-hint-color='fg-white'
+                                               data-hint-mode='2'
+                                               data-hint='|<?php echo DataHelper::calcularIdade($view_objCorretor->getDataNascimento()); ?> anos' 
+                                               data-hint-position='bottom'
+                                               >
+                                    </div>
+                                </div>
+                                <div class="cell colspan5">
+                                    <label>e-mail</label>
+                                    <div class="input-control text full-size" data-role="input">
+                                        <span class="mif-ie prepend-icon"></span>
+                                        <input type="text" 
+                                               value="<?php echo $view_objCorretor->getEmail(); ?>"
+                                               disabled="disabled"
+                                               >
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row cell-auto-size no-margin">
+                                <div class="cell colspan5">
+                                    <label>Logradouro</label>
+                                    <div class="input-control text full-size" data-role="input">
+                                        <span class="mif-home prepend-icon"></span>
+                                        <input type="text" 
+                                               value="<?php echo $view_objCorretor->getEndereco(); ?>"
+                                               disabled="disabled"
+                                               >
+                                    </div>
+                                </div>
+                                <div class="cell colspan3">
+                                    <label>Bairro</label>
+                                    <div class="input-control text full-size" data-role="input">
+                                        <input type="text" 
+                                               value="<?php echo $view_objCorretor->getBairro(); ?>"
+                                               disabled="disabled"
+                                               >
+                                    </div>
+                                </div>
+                                <div class="cell colspan2">
+                                    <label>Cidade</label>
+                                    <div class="input-control text full-size" data-role="input">
+                                        <input type="text" 
+                                               value="<?php echo $view_objCorretor->getCidade()->getNome(); ?>"
+                                               disabled="disabled"
+                                               >
+                                    </div>
+                                </div>
+                                <div class="cell colspan2">
+                                    <label>Estado</label>
+                                    <div class="input-control text full-size" data-role="input">
+                                        <input type="text" 
+                                               value="<?php echo $view_objEstado->getNome(); ?>"
+                                               disabled="disabled"
+                                               >
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row cell-auto-size no-margin">
+                                <div class="cell colspan2">
+                                    <label>Número CEP</label>
+                                    <div class="input-control text full-size" data-role="input">
+                                        <input type="text" 
+                                               value="<?php echo $view_objCorretor->getNumeroCEP(); ?>"
+                                               disabled="disabled"
+                                               >
+                                    </div>
+                                </div>
+                                <div class="cell colspan6">
+                                    <label>Complemento</label>
+                                    <div class="input-control text full-size" data-role="input">
+                                        <input type="text" 
+                                               value="<?php echo $view_objCorretor->getComplemento(); ?>"
+                                               disabled="disabled"
+                                               >
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row cell-auto-size no-margin">
+                                <div class="cell colspan12">
+                                    <label>Observações</label>
+                                    <div class="input-control text full-size" data-role="input">
+                                        <input type="text" 
+                                               value="<?php $view_objCorretor->getObservacao(); ?>"
+                                               disabled="disabled"
+                                               >
+                                    </div>
+                                </div>
+                            </div>
+'
+
+                        </div>
+                    </div> 
+                    <div class="cell colspan2">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div <?php echo $view_frameActive->frameActive('frameC'); ?> id="frameC">  
+            <?php if ($view_isCorretorContato): ?>
+                <div class="flex-grid">
+                    <div class="row cell-auto-size toolbar_title cells2 no-margin">
+                        <div class="cell colspan8">
+                            <h3 class="fg-gray">Contatos da Corretor</h3>
+                        </div>
+                        <div class="cell colspan4 no-margin-top">
+                            <button onclick="redirectUrl('<?php echo UrlRequestHelper::mountUrl('CorretorContato', 'cadastrar', array('id' => $view_objCorretor->getId())); ?>')" class="button square-button place-right" data-role='hint' data-hint-background='bg-lightBlue' data-hint-color='fg-white' data-hint-mode='2' data-hint='|Novo Contato' data-hint-position='top'>
+                                <span class="icon mif-plus"></span>
+                            </button>
+                        </div>
+                    </div>
+                    <hr class="thin bg-grayLighter"/>
+                    <div class="row cell-auto-size">
+                        <div class="cell">
+                            <table class="dataTable border bordered hovered no-footer" id="listCorretorContato" style="width: 100%">
+                                <thead>
+                                    <tr>
+                                        <td class="sortable-column">Contato</td>
+                                        <td class="sortable-column">Tipo</td>
+                                        <td class="sortable-column">Detalhe</td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            <?php else: ?>
+                <span class="tag warning">Não existem informações inseridas.</span>
+                <a href="<?php //echo UrlRequestHelper::mountUrl('CorretorContato', 'cadastrar', array('id' => $view_objCorretor->getId())); ?>" class="button rounded">
+                    Adicionar
+                    <span class="icon mif-plus"></span>
+                </a>
+            <?php endif; ?>
+
+        </div>
+    </div>
+</div>

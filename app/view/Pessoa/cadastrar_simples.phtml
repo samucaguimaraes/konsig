@@ -1,0 +1,447 @@
+<ul class="breadcrumbs">
+    <li><a href="<?php echo UrlRequestHelper::mountUrl('Principal'); ?>"><span class="icon mif-home"></span></a></li>
+    <li><a href="<?php echo UrlRequestHelper::mountUrl('Gestao'); ?>">Gestão</a></li>
+    <li><a href="<?php echo UrlRequestHelper::mountUrl('Pessoa'); ?>">Pessoas</a></li>
+    <li><a>Cadastro</a></li>
+</ul>
+
+<h1 class="text-light">
+    Pessoa/Cliente <small class="on-right"> Cadastrar - Simplificado</small>
+    <span class="mif-user-plus place-right"></span>
+</h1>
+<hr class="thin bg-grayLighter">
+<div class="padding10 bg-grayLighter">
+    <span class="mif-notification mif-2x fg-gray"></span> Adicione 1 pessoa, 1 orgão e 1 contato. Tudo de uma só vez.
+    <span class="tag warning place-right" style="margin-top: 7px;">+ contato + orgão</span>
+</div>
+<br>
+<form action="<?php echo UrlRequestHelper::mountUrlPost('Pessoa', 'cadastrarSimples'); ?>" method="POST" data-role="validator">
+    <div class="flex-grid">
+        <div class="row cell-auto-size toolbar_title no-margin">
+            <div class="cell colspan12">
+                <h3>Dados Básicos<small class="on-right"> Contracheque</small></h3>
+                <hr class="thin bg-grayLighter">
+            </div>            
+        </div>
+
+        <div class="row cell-auto-size cells12">
+            <div class="cell colspan8">
+                <label>Nome <b class="fg-red">*</b></label>
+                <div class="input-control text full-size" data-role="input">
+                    <input type="text" 
+                           id="nome"
+                           name="nome"
+                           placeholder="Informe o nome completo sem abreveações" 
+                           maxlength="100"
+                           data-validate-func="minlength" 
+                           data-validate-arg="4"
+                           data-validate-hint="Minimo de 4 caracteres"
+                           data-validate-hint-position="top"
+                           autocomplete="off"
+                           >
+                    <button class="button helper-button clear"><span class="mif-cross"></span></button>
+                    <span class="input-state-error mif-warning"></span>
+                    <span class="input-state-success mif-checkmark"></span>
+                </div>
+            </div>
+            <div class="cell colspan4 padding-inputs-left1">
+                <label>Apelido</label>
+                <div class="input-control text full-size" data-role="input">
+                    <input type="text" 
+                           name="apelido"
+                           placeholder="Informe um apelido" 
+                           maxlength="100"
+                           autocomplete="off"
+                           >
+                    <button class="button helper-button clear"><span class="mif-cross"></span></button>
+                    <span class="input-state-error mif-warning"></span>
+                    <span class="input-state-success mif-checkmark"></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row cell-auto-size cells3">
+            <div class="cell colspan3">
+                <label>Número CPF <b class="fg-red">*</b></label>
+                <div class="input-control text full-size" data-role="input">
+                    <input type="text" 
+                           id="numeroCPF"
+                           name="numeroCPF"
+                           placeholder="Informe o número de CPF" 
+                           maxlength="15"
+                           data-validate-func="cpfPessoa" 
+                           data-validate-hint="CPF inválido ou já existe na base dados"
+                           data-validate-hint-position="top"
+                           autocomplete="off"
+                           >
+
+                    <button class="button helper-button clear"><span class="mif-cross"></span></button>
+                    <span class="input-state-error mif-warning"></span>
+                    <span class="input-state-success mif-checkmark"></span>
+                </div>
+            </div>
+            <div class="cell colspan3 padding-inputs-left1">
+                <label>Data de Nascimento <b class="fg-red">*</b></label>
+                <div class="input-control text full-size" data-role="input">
+                    <input type="text"
+                           id="dataNascimento"
+                           name="dataNascimento"
+                           data-validate-func="required"
+                           data-validate-hint-position="top"
+                           data-validate-hint="Informe uma data de nascimento válida"
+                           placeholder="Informe uma data de Nascimento" 
+                           maxlength="15"
+                           autocomplete="off"
+                           >
+
+                    <button class="button helper-button clear"><span class="mif-cross"></span></button>
+                    <span class="input-state-error mif-warning"></span>
+                    <span class="input-state-success mif-checkmark"></span>
+                </div>
+            </div>
+            <div class="cell padding-inputs-left1">
+                <label>Email <b class="fg-red">*</b></label>
+                <div class="input-control text full-size" data-role="input">
+                    <input type="text" 
+                           id="email"
+                           name="email"
+                           placeholder="Informe o email pessoal" 
+                           maxlength="115"
+                           autocomplete="off"
+                           >
+
+                    <button class="button helper-button clear"><span class="mif-cross"></span></button>
+                    <span class="input-state-error mif-warning"></span>
+                    <span class="input-state-success mif-checkmark"></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row cell-auto-size">
+            <div class="cell colspan12">
+                <label>Observações</label>
+                <div class="input-control text full-size" data-role="input">
+                    <input type="text" 
+                           name="observacao"
+                           placeholder="Observações adicionais" 
+                           maxlength="100"
+                           autocomplete="off"
+                           >
+
+                    <button class="button helper-button clear"><span class="mif-cross"></span></button>
+                    <span class="input-state-error mif-warning"></span>
+                    <span class="input-state-success mif-checkmark"></span>
+                </div>
+            </div>
+        </div>        
+        <div class="row cell-auto-size toolbar_title no-margin">
+            <div class="cell colspan12">
+                <h3>Domicílio<small class="on-right"> Logradouro</small></h3>
+                <hr class="thin bg-grayLighter">
+            </div>            
+        </div>
+
+        <hr class="thin bg-grayLighter"/>
+        <div class="row cell-auto-size">
+            <div class="cell colspan7">
+                <label>Endereço</label>
+                <div class="input-control text full-size" data-role="input">
+                    <input type="text" 
+                           name="endereco"
+                           placeholder="Informe o logradouro" 
+                           maxlength="100"
+                           autocomplete="off"
+                           >
+                    <button class="button helper-button clear"><span class="mif-cross"></span></button>
+                    <span class="input-state-error mif-warning"></span>
+                    <span class="input-state-success mif-checkmark"></span>
+                </div>
+            </div>
+            <div class="cell colspan1">
+                <label>Número</label>
+                <div class="input-control text full-size" data-role="input">
+                    <input type="text" 
+                           name="numeroEndereco"
+                           maxlength="100"
+                           autocomplete="off"
+                           >
+                    <button class="button helper-button clear"><span class="mif-cross"></span></button>
+                    <span class="input-state-error mif-warning"></span>
+                    <span class="input-state-success mif-checkmark"></span>
+                </div>
+            </div>
+            <div class="cell colspan4 padding-inputs-left1">
+                <label>Complemento</label>
+                <div class="input-control text full-size" data-role="input">
+                    <input type="text" 
+                           name="complemento"
+                           placeholder="Complementos Adicionais ao Endereço" 
+                           maxlength="100"
+                           autocomplete="off"
+                           >
+                    <button class="button helper-button clear"><span class="mif-cross"></span></button>
+                    <span class="input-state-error mif-warning"></span>
+                    <span class="input-state-success mif-checkmark"></span>
+                </div>
+            </div>
+        </div>
+        <div class="row cell-auto-size">
+            <div class="cell colspan5">
+                <label>Bairro</label>
+                <div class="input-control text full-size" data-role="input">
+                    <input type="text" 
+                           name="bairro"
+                           placeholder="Bairro de residência" 
+                           maxlength="100"
+                           autocomplete="off"
+                           >
+                    <button class="button helper-button clear"><span class="mif-cross"></span></button>
+                    <span class="input-state-error mif-warning"></span>
+                    <span class="input-state-success mif-checkmark"></span>
+                </div>
+            </div>
+            <div class="cell colspan2 padding-inputs-left1">
+                <label>Estado</label>
+                <div class="input-control full-size" data-role="select" data-placeholder="Selecione...">
+                    <select name="estado"
+                            id="estado"
+                            data-validate-func="required"
+                            data-validate-hint-position="top"
+                            data-validate-hint="Por Favor, preencha esse campo.">
+                        <option></option>
+                        <?php foreach ($view_listEstado as $objEstado): ?>
+                            <option value="<?php echo $objEstado->getId(); ?>"><?php echo $objEstado->getNome(); ?></option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
+            </div>
+            <div class="cell colspan3">
+                <label>Cidade</label>
+                <div class="input-control full-size" data-role="select" data-placeholder="Selecione um estado">
+                    <select name="cidade"
+                            id="cidade"
+                            data-validate-func="required"
+                            data-validate-hint-position="top"
+                            data-validate-hint="Por Favor, preencha esse campo.">
+                        <option value=""></option>
+                    </select>
+                </div>
+            </div>
+            <div class="cell colspan2 padding-inputs-left1">
+                <label>CEP</label>
+                <div class="input-control text full-size" data-role="input">
+                    <input type="text" 
+                           name="numeroCEP"
+                           id="numeroCEP"
+                           placeholder="Número do CEP" 
+                           maxlength="100"
+                           autocomplete="off"
+                           >
+                    <button class="button helper-button clear"><span class="mif-cross"></span></button>
+                    <span class="input-state-error mif-warning"></span>
+                    <span class="input-state-success mif-checkmark"></span>
+                </div>
+            </div>
+        </div>
+        <br/>
+        <div class="row cell-auto-size toolbar_title no-margin">
+            <div class="cell colspan12">
+                <h3>Orgão<small class="on-right"> Pagador</small></h3>
+                <hr class="thin bg-grayLighter">
+            </div>            
+        </div>
+        <div class="row cell-auto-size cells12">
+            <div class="cell colspan4">
+                <label>Matrícula <b class="fg-red">*</b></label>
+                <div class="input-control text full-size" data-role="input">
+                    <input type="text" 
+                           name="matricula"
+                           placeholder="Número do Benefício/Matrícula do Orgão"
+                           data-validate-func="required"
+                           data-validate-hint-position="top"
+                           data-validate-hint="Por Favor, preencha esse campo."
+                           maxlength="100"
+                           autocomplete="off"
+                           >
+                    <button class="button helper-button clear"><span class="mif-cross"></span></button>
+                    <span class="input-state-error mif-warning"></span>
+                    <span class="input-state-success mif-checkmark"></span>
+                </div>
+            </div>
+        </div>
+        <div class="row cell-auto-size cells12">
+            <div class="cell colspan4">
+                <label>Orgão <b class="fg-red">*</b></label>
+                <div class="input-control full-size" data-role="select" data-placeholder="Selecione um Orgao Pagador">
+                    <select name="orgao"
+                            id="orgao"
+                            data-validate-func="required"
+                            data-validate-hint-position="top"
+                            data-validate-hint="Por Favor, preencha esse campo.">
+                        <option></option>
+                        <?php foreach ($view_listOrgao as $objOrgao): ?>
+                            <option value="<?php echo $objOrgao->getId(); ?>"><?php echo $objOrgao->getNome(); ?></option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
+            </div>
+            <div class="cell colspan4 padding-inputs-left1">
+                <label>Tipo Situação <b class="fg-red">*</b></label>
+                <div class="input-control full-size" data-role="select" data-placeholder="Qual a situação do beneficiário">
+                    <select name="tipoSituacao"
+                            id="tipoSituacao"
+                            data-validate-func="required"
+                            data-validate-hint-position="top"
+                            data-validate-hint="Por Favor, preencha esse campo.">
+                        <option></option>
+                        <?php foreach ($view_listTipoSituacao as $objTipoSituacao): ?>
+                            <option value="<?php echo $objTipoSituacao->getId(); ?>"><?php echo $objTipoSituacao->getNome(); ?></option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
+            </div>
+            <div class="cell colspan4 padding-inputs-left1">
+                <label>Espécie Benefício / Código Interno <b class="fg-red">*</b></label>
+                <div class="input-control full-size" data-role="select" data-placeholder="Qual a espécie do beneficio">
+                    <select name="tipoEspecieBeneficio"
+                            id="tipoEspecieBeneficio"
+                            >
+                        <option></option>
+                        <?php foreach ($view_listTipoEspecieBeneficio as $objTipoEspecieBeneficio): ?>
+                            <option value="<?php echo $objTipoEspecieBeneficio->getId(); ?>"><?php echo $objTipoEspecieBeneficio->getCodigo() . " - " . $objTipoEspecieBeneficio->getNome(); ?></option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="row cell-auto-size toolbar_title no-margin">
+            <div class="cell colspan12">
+                <h3>Acesso Portal<small class="on-right"> Contracheque</small></h3>
+                <hr class="thin bg-grayLighter">
+            </div>            
+        </div>
+        <div class="row cell-auto-size">
+            <div class="cell colspan3">
+                <label>Login</label>
+                <div class="input-control text full-size" data-role="input">
+                    <input type="text" 
+                           name="login"
+                           id="login"
+                           placeholder="Usuário de Acesso" 
+                           maxlength="100"
+                           autocomplete="off"
+
+                           >
+                    <button class="button helper-button clear"><span class="mif-cross"></span></button>
+                    <span class="input-state-error mif-warning"></span>
+                    <span class="input-state-success mif-checkmark"></span>
+                </div>
+            </div>
+            <div class="cell colspan3 padding-inputs-left1">
+                <label>Senha</label>
+                <div class="input-control text full-size" data-role="input">
+                    <input type="text" 
+                           name="senha"
+                           id="senha"
+                           placeholder="Senha de Acesso" 
+                           maxlength="100"
+                           autocomplete="off"
+                           >
+                    <button class="button helper-button clear"><span class="mif-cross"></span></button>
+                    <span class="input-state-error mif-warning"></span>
+                    <span class="input-state-success mif-checkmark"></span>
+                </div>
+            </div>            
+        </div>
+        <div class="row cell-auto-size">
+            <div class="cell colspan12">
+                <label class="input-control checkbox">
+                    <input type="checkbox" name="isCredencialPublica" value="A" id="isCredencialPublica">
+                    <span class="check"></span>
+                    <span class="caption">Disponibilizar credenciais de acesso em tela de consulta. (Cadastradores e Consultores)</span>
+                </label>
+            </div>            
+        </div>
+
+        <br/>
+        <div class="row cell-auto-size toolbar_title no-margin">
+            <div class="cell colspan12">
+                <h3>Contato<small class="on-right"> Telefone</small></h3>
+                <hr class="thin bg-grayLighter">
+            </div>            
+        </div>
+        <div class="row cell-auto-size cells12">
+            <div class="cell colspan4">
+                <label>Número do Contato <b class="fg-red">*</b></label>
+                <div class="input-control text full-size" data-role="input">
+                    <input type="text" 
+                           id="numero"
+                           name="numero"
+                           placeholder="Número do Contato com DDD" 
+                           maxlength="100"
+                           data-validate-func="required"
+                           data-validate-hint-position="top"
+                           data-validate-hint="Por Favor, preencha esse campo."
+                           autocomplete="off"
+                           >
+                    <button class="button helper-button clear"><span class="mif-cross"></span></button>
+                    <span class="input-state-error mif-warning"></span>
+                    <span class="input-state-success mif-checkmark"></span>
+                </div>
+            </div>
+
+            <div class="cell colspan4 padding-inputs-left1">
+                <label>Tipo de Contato <b class="fg-red">*</b></label>
+                <div class="input-control full-size" data-role="select" data-placeholder="Selecione um tipo de Situação">
+                    <select name="tipoContato"
+                            id="tipoContato"
+                            data-validate-func="required"
+                            data-validate-hint="Por Favor, preencha esse campo."
+                            >
+                        <option></option>
+                        <?php foreach ($view_listTipoContato as $objTipoContato): ?>
+                            <option value="<?php echo $objTipoContato->getId(); ?>"><?php echo $objTipoContato->getNome(); ?></option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
+            </div>
+
+            <div class="cell colspan4 padding-inputs-left1">
+                <label>Operadora</label>
+                <div class="input-control full-size" data-role="select" data-placeholder="Selecione a operadora">
+                    <select name="operadora"
+                            id="operadora"                            
+                            >
+                        <option></option>
+                        <?php foreach ($view_listOperadora as $objOperadora): ?>
+                            <option value="<?php echo $objOperadora->getId(); ?>"><?php echo $objOperadora->getNome(); ?></option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="row cell-auto-size cells12">
+            <div class="cell">
+                <label>Descrição</label>
+                <div class="input-control text full-size" data-role="input">
+                    <input type="text" 
+                           name="descricao"
+                           placeholder="Informações complementares do contato" 
+                           maxlength="100"
+                           autocomplete="off"
+                           >
+                    <button class="button helper-button clear"><span class="mif-cross"></span></button>
+                    <span class="input-state-error mif-warning"></span>
+                    <span class="input-state-success mif-checkmark"></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row flex-just-end">
+            <div class="cell">
+                <button class="button mif-floppy-disk primary">&nbsp;Salvar</button>
+            </div>
+        </div>
+    </div>
+
+</form>

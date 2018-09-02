@@ -1,0 +1,53 @@
+<style>
+    body{
+        background-image: url("<?php echo PATH_TEMPLATE_IMAGE_URL; ?>background/bg_principal.png");
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-size: 100% 100%; /* A imagem ocupar todo o viewport */
+    }
+</style>
+
+<div class="login-form padding20 block-shadow">
+    <form action="<?php echo UrlRequestHelper::mountUrlPost('Security', 'logar'); ?>" method="POST" data-role="validator">
+        <!--Marca da Empresa-->
+        <div class="align-center">
+            <img  src="<?php echo PATH_IMAGE_URL; ?>logo.png" style="width: 82%;"> 
+        </div>
+        <hr class="thin"/>
+        <br />
+        <div class="input-control text full-size" data-role="input" >
+            <label for="email">Login:</label>
+            <input type="text" placeholder="Informe o Login de acesso" name="email" id="email"  autocomplete="off"
+                   data-validate-func="email"
+                   data-validate-hint="Login invalido"
+                   data-validate-hint-position="top">
+
+            <button class="button helper-button clear"><span class="mif-cross"></span></button>
+        </div>
+        <br />
+        <br />
+        <div class="input-control password full-size" data-role="input">
+            <label for="pass">Senha:</label>
+            <input type="password" 
+                   name="pwuser" 
+                   id="user_password" 
+                   placeholder="Digite sua senha" 
+                   autocomplete="off"
+                   data-role="input" 
+                   data-validate-func="minlength" 
+                   data-validate-arg="8"
+                   data-validate-hint="Senha Invalida"
+                   data-validate-hint-position="top"
+                   maxlength="16">
+            <button class="button helper-button reveal"><span class="mif-looks"></span></button>
+        </div>
+        <br />
+        <br />
+        <div class="form-actions">
+            <button type="submit" class="button primary">Entrar</button>
+            <button type="button" class="button link">Cancel</button>
+            <small class="place-right fg-olive">Versão <?php echo VERSAO; ?></small>
+        </div>
+        
+    </form>
+</div>

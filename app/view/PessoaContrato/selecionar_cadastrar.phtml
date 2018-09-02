@@ -1,0 +1,132 @@
+<ul class="breadcrumbs">
+    <li><a href="<?php echo UrlRequestHelper::mountUrl('Principal'); ?>"><span class="icon mif-home"></span></a></li>
+    <li><a href="<?php echo UrlRequestHelper::mountUrl('Gestao'); ?>">Gestão</a></li>
+    <li><a href="<?php echo UrlRequestHelper::mountUrl('Consulta'); ?>">Consultas</a></li>
+    <li><a>Cadastro</a></li>
+</ul>
+
+<h1 class="text-light">
+    Contrato <small class="on-right"> Selecionar</small>
+    <span class="mif-file-text place-right"></span>
+</h1>
+<hr class="thin bg-grayLighter">
+<div class="flex-grid">    
+    <div class="row cell-auto-size no-margin">
+        <div class="cell colspan6">
+            <label>Nome</label>
+            <div class="input-control text full-size" data-role="input">
+                <span class="mif-user prepend-icon"></span>
+                <input type="text" 
+                       value="<?php echo $view_objPessoa->getNome(); ?>"
+                       disabled="disabled"                     
+                       >
+            </div>
+        </div>
+        <div class="cell colspan3">
+            <label>Data de Nascimento</label>
+            <div class="input-control text full-size" data-role="input">
+                <span class="mif-calendar prepend-icon"></span>
+                <input type="text" 
+                       value="<?php echo $view_objPessoa->getDataNascimento(); ?>"
+                       disabled="disabled"
+                       data-role='hint' 
+                       data-hint-background='bg-lightBlue' 
+                       data-hint-color='fg-white'
+                       data-hint-mode='2'
+                       data-hint='|<?php echo DataHelper::calcularIdade($view_objPessoa->getDataNascimento());?> anos' 
+                       data-hint-position='bottom'
+                       >
+            </div>
+        </div>
+        <div class="cell colspan3">
+            <label>Número CPF</label>
+            <div class="input-control text full-size" data-role="input">
+                <span class="mif-credit-card prepend-icon"></span>
+                <input type="text" 
+                       value="<?php echo $view_objPessoa->getNumeroCPF(); ?>"
+                       disabled="disabled"
+                       >
+            </div>
+        </div>
+    </div>
+    <?php if(isset($view_objPessoaConsulta)): ?>
+    <div class="row cell-auto-size no-margin">
+        <div class="cell colspan6">
+            <label>Orgão</label>
+            <div class="input-control text full-size" data-role="input">
+                <span class="mif-location-city prepend-icon"></span>
+                <input type="text" 
+                       value="<?php echo $view_objOrgao->getNome(); ?>"
+                       disabled="disabled"
+                       
+                       >
+            </div>
+        </div>
+        <div class="cell colspan3">
+            <label>Benefício/Matrícula</label>
+            <div class="input-control text full-size" data-role="input">
+                <span class="mif-file-binary prepend-icon"></span>
+                <input type="text" 
+                       value="<?php echo $view_objPessoaConsulta->getPessoaOrgao()->getMatricula();  ?>"
+                       disabled="disabled"
+                       
+                       >
+            </div>
+        </div>        
+        <div class="cell colspan3">
+            <label>Margem Disponível</label>
+            <div class="input-control text full-size" data-role="input">
+                <span class="mif-dollar2 prepend-icon"></span>
+                <input type="text" 
+                       value="<?php echo $view_objPessoaConsulta->getVlrMargemDisponivel(); ?>"
+                       disabled="disabled"
+                       >
+            </div>
+        </div>
+    </div>
+    <?php endif; ?>
+    <div class="row cell-auto-size toolbar_title no-margin">
+        <div class="cell colspan10">
+            <h3 class="fg-gray">Empréstimos existentes</h3>
+        </div>
+    </div>
+    <hr class="thin bg-grayLighter" style="margin-top: -5px;"/>
+    <div class="row cell-auto-size">
+        <div class="cell colspan12">
+            <?php if($view_isEmprestimo): ?>
+            <table id="main_table_demo" class="dataTable border bordered hovered no-footer">
+                <thead>
+                    <tr>
+                        <th>Nº Contrato</th>
+                        <th>Convênio</th>
+                        <th>Data Contrato</th>
+                        <th>Parcelas</th>
+                        <th>Valor R$</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach ($view_listEmprestimos as $objPessoaConsultaEmprestimo): ?>
+                        <tr>
+                            <td><?php echo ($objPessoaConsultaEmprestimo->getNumeroContrato()!="")?$objPessoaConsultaEmprestimo->getNumeroContrato():"<span class='tag default'>Não Informado</span>"; ?></td>
+                            <td><?php echo ($objPessoaConsultaEmprestimo->getConvenio()!=null)?$objPessoaConsultaEmprestimo->getConvenio()->getNome():"<span class='tag default'>Não Informado</span>"; ?></td>
+                            <td><?php echo ($objPessoaConsultaEmprestimo->getDataInicioContrato()!=null)?$objPessoaConsultaEmprestimo->getDataInicioContrato():"<span class='tag default'>Não Informado</span>"; ?></td>
+                            <td><?php echo ($objPessoaConsultaEmprestimo->getTotalParcela()!=null)?$objPessoaConsultaEmprestimo->getTotalParcela():"<span class='tag default'>Não Informado</span>"; ?></td>
+                            <td><?php echo $objPessoaConsultaEmprestimo->getVlrParcela(); ?></td>
+                            <td>
+                                <button onclick="redirectUrl('<?php echo UrlRequestHelper::mountUrl('PessoaContrato', 'cadastrar', array('id' => $view_objPessoa->getId(),'idEmp'=>$objPessoaConsultaEmprestimo->getId(),'op'=>2)); ?>')" class="button small-button place-right" style="margin-bottom: -5px; margin-top: -5px;"><span class="mif-checkmark fg-emerald"></span> Selecionar</button>
+                        </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+            <?php else: ?>
+                <span class="tag warning">Não existem empréstimos lançados para esse cliente</span>
+            <?php endif; ?>
+        </div>
+    </div>
+    <div class="row cell-auto-size">
+        <div class="cell colspan12">
+            <button onclick="redirectUrl('<?php echo UrlRequestHelper::mountUrl('PessoaContrato', 'cadastrar', array('id' => $view_objPessoa->getId(),'op'=>1)); ?>')" class="button success place-right">Contrato Novo</button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,163 @@
+<ul class="breadcrumbs">
+    <li><a href="<?php echo UrlRequestHelper::mountUrl('Principal'); ?>"><span class="icon mif-home"></span></a></li>
+    <li><a href="<?php echo UrlRequestHelper::mountUrl('Gestão'); ?>">Gestão</a></li>
+    <li><a href="<?php echo UrlRequestHelper::mountUrl('PessoaConsulta'); ?>">Consultas</a></li>
+    <li><a href="<?php echo UrlRequestHelper::mountUrl('PessoaConsulta', 'informar', array('id' => $view_objPessoaConsultaEmprestimo->getPessoaConsulta()->getId())); ?>">Consulta Realizada</a></li>
+    <li><a>Empréstimo Pessoal</a></li>
+</ul>
+
+<h1 class="text-light">
+    Empréstimo <small class="on-right"> Informações</small>
+    <span class="mif-phone place-right"></span>
+</h1>
+<hr class="thin bg-grayLighter">
+<div class="toolbar">
+    <div class="toolbar-section">
+        <button data-role="hint"
+                data-hint-background='bg-olive' 
+                data-hint-color='fg-white'
+                data-hint-mode='2'
+                data-hint="Editar|Clique para editar o contato" 
+                onclick="redirectUrl('<?php //echo UrlRequestHelper::mountUrl('PessoaContato', 'editar', array('id' => $view_objPessoaConsultaEmprestimo->getId()));              ?>')" 
+                data-hint-position="top"
+                class="toolbar-button">
+            <span class="mif-pencil"></span>
+        </button>
+        <button data-role="hint"
+                data-hint-background='bg-olive' 
+                data-hint-color='fg-white'
+                data-hint-mode='2'
+                data-hint="Notificar|Clique para incluir uma notificação sobre esse elemento" 
+                onclick="redirectUrl('<?php echo UrlRequestHelper::mountUrl('Notificacao', 'cadastrar', array('id' => $view_objPessoaConsultaEmprestimo->getId(), 'elemento' => 'PessoaConsultaEmprestimo')); ?>')" 
+                data-hint-position="top"
+                class="toolbar-button">
+            <span class="mif-notification"></span>
+        </button>
+        <button data-role="hint"
+                data-hint-background='bg-olive' 
+                data-hint-color='fg-white'
+                data-hint-mode='2'
+                data-hint="Excluir|ATENÇÃO! Todos os dados serão excluídos permanentemente" 
+                onclick="excluir('<?php //echo UrlRequestHelper::mountUrlGet('PessoaContato', 'deletar', array('id' => $view_objPessoaConsultaEmprestimo->getId(), 'idPessoa'=> $view_objPessoaConsultaEmprestimo->getPessoa()->getId()));              ?>')" 
+                data-hint-position="top"
+                class="toolbar-button">
+            <span class="mif-bin"></span>
+        </button>
+        <button data-role="hint"
+                data-hint-background='bg-olive' 
+                data-hint-color='fg-white'
+                data-hint-mode='2'
+                data-hint="Congelar|Clique para congelar o emprestimo. Emprestimos congelados não aparecem na bússola" 
+                onclick="redirectUrl('<?php echo UrlRequestHelper::mountUrl('PessoaConsultaEmprestimo', 'congelar', array('id' => $view_objPessoaConsultaEmprestimo->getId())); ?>')" 
+                data-hint-position="top"
+                class="toolbar-button">
+            <span class="mif-snowy"></span>
+        </button>
+    </div>
+    <div class="place-right">
+        <span class="tag ribbed-cobalt fg-white">Bússola Congelada</span>
+        <span class="tag info">Não vinculado a contrato</span>
+        <span class="tag warning">HISCON</span>
+    </div>
+</div>
+<br>
+<div class="tabcontrol2" data-role="tabcontrol">
+    <ul class="tabs">
+        <li <?php echo $view_frameActive->active('frameA'); ?>><a href="#frameA">Dados Básicos</a></li>
+        <li <?php echo $view_frameActive->active('frameH'); ?>><a href="#frameH">Histórico <span class='tag warning'><?php echo $view_tHistorico ?></span></a></li>
+        <li <?php echo $view_frameActive->active('frameE'); ?> class="place-right"><a href="#frameE">Notas <span class='tag warning'><?php echo $view_tHistorico ?></span></a></li>
+    </ul>
+    <div class="frames">
+        <div <?php echo $view_frameActive->frameActive('frameA'); ?> id="frameA">
+            <div class="flex-grid">
+                <div class="row cell-auto-size no-margin">
+                    <div class="cell colspan4">
+                        <label>Convênio</label>
+                        <div class="input-control text full-size" data-role="input">
+                            <input type="text" 
+                                   value="<?php echo ($view_objConvenio != null) ? $view_objConvenio->getNome() : ""; ?>"
+                                   disabled="disabled"
+                                   >
+                        </div>
+                    </div>
+
+                    <div class="cell colspan2">
+                        <label>Nº Contrato
+                            <?php if ($view_objPessoaConsultaEmprestimo->getPessoaContrato() != null): ?>
+                                <a href="#"><span class="mif-eye" style="margin-top: -5px;"></span></a>
+                            <?php endif; ?>
+                        </label>
+                        <div class="input-control text full-size" data-role="input">
+                            <input type="text" 
+                                   value="<?php echo $view_objPessoaConsultaEmprestimo->getNumeroContrato(); ?>"
+                                   disabled="disabled"
+                                   >
+                        </div>
+                    </div>
+                    <div class="cell colspan2">
+                        <label>Data Inicio</label>
+                        <div class="input-control text full-size" data-role="input">
+                            <input type="text" 
+                                   value="<?php echo $view_objPessoaConsultaEmprestimo->getDataInicioContrato(); ?>"
+                                   disabled="disabled"
+                                   >
+                        </div>
+                    </div>
+                    <div class="cell colspan2">
+                        <label>Posição Atual</label>
+                        <div class="input-control text full-size" data-role="input">
+                            <input type="text" 
+                                   value="10/5"
+                                   disabled="disabled"
+                                   >
+                        </div>
+                    </div>
+                    <div class="cell colspan2">
+                        <label>Valor Parcela</label>
+                        <div class="input-control text full-size" data-role="input">
+                            <input type="text" 
+
+                                   value="<?php echo $view_objPessoaConsultaEmprestimo->getVlrParcela(); ?>"
+                                   disabled="disabled"
+                                   >
+                        </div>
+                    </div>
+                </div>
+                <div class="row cell-auto-size no-margin">
+                    <div class="cell colspan12">
+                        <label>Descrição/Observação</label>
+                        <div class="input-control text full-size" data-role="input">
+                            <input type="text" 
+                                   value="<?php echo $view_objPessoaConsultaEmprestimo->getObservacao(); ?>"
+                                   disabled="disabled"
+                                   >
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div <?php echo $view_frameActive->frameActive('frameH'); ?> id="frameH">
+            <ul class="step-list">
+                <li>a</li>
+                <li><span class="mif-arrow-up"></span></li>
+            </ul>
+        </div>
+        <div <?php echo $view_frameActive->frameActive('frameE'); ?> id="frameE">
+            <?php if ($view_isNotificacao): ?>
+                <div class="cell colspan3 no-phone no-tablet">
+                    <div style="padding: 7.5px;">
+                        <span><strong>Notificações (<?php echo count($view_listNotificacao); ?>)</strong></span>
+                    </div>
+                    <?php foreach ($view_listNotificacao as $objNotificacao): ?>
+                        <div class="notify <?php echo $tipo = ($objNotificacao->getTipoNotificacao() == 1) ? "warning" : ""; ?>">
+                            <span class="notify-closer"></span>
+                            <span class="notify-text"><?php echo $objNotificacao->getNotificacao(); ?><br/><small class="fg-grayLight">18/01/2017 12:00</small></span>
+                        </div>
+                    <?php endforeach; ?>
+                </div>
+            <?php endif; ?>
+        </div>
+    </div>
+</div>
+
+

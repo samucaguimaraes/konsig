@@ -1,0 +1,126 @@
+<ul class="breadcrumbs">
+    <li><a href="<?php echo UrlRequestHelper::mountUrl('Principal'); ?>"><span class="icon mif-home"></span></a></li>
+    <li><a href="<?php echo UrlRequestHelper::mountUrl('Gestão'); ?>">Gestão</a></li>
+    <li><a href="<?php echo UrlRequestHelper::mountUrl('PessoaConsulta'); ?>">Consultas</a></li>
+    <li><a href="<?php echo UrlRequestHelper::mountUrl('PessoaConsulta', 'informar', array('id' => $view_objPessoaConsultaEmprestimo->getPessoaConsulta()->getId())); ?>">Consulta Realizada</a></li>
+    <li><a href="<?php echo UrlRequestHelper::mountUrl('PessoaConsultaEmprestimo', 'informar', array('id' => $view_objPessoaConsultaEmprestimo->getId())); ?>">Empréstimo Pessoal</a></li>
+    <li><a>Congelamento</a></li>
+</ul>
+
+<h1 class="text-light">
+    Empréstimo <small class="on-right"> Congelar</small>
+    <span class="mif-snowy place-right"></span>
+</h1>
+
+<hr class="thin bg-grayLighter">
+<div class="padding10 bg-grayLighter">
+    <span class="mif-notification mif-2x fg-gray"></span>&nbsp;Congele empréstimos para que eles não apareçam mais na bússola. Se preferir, agende o descongelamento.
+    <span class="tag warning place-right" style="margin-top: 7px;">- bússola</span>
+</div>
+<br/>
+<form action="<?php echo UrlRequestHelper::mountUrlPost('PessoaConsultaEmprestimo', 'congelar'); ?>" method="POST" data-role="validator">
+    <input type="hidden" name="descricaoElemento" value="<?php echo $view_elemento; ?>">
+    <input type="hidden" name="elemento" value="<?php //echo $view_objClass->getId();    ?>">
+    <div class="flex-grid">
+        <div class="row cell-auto-size no-margin">
+            <div class="cell colspan4">
+                <label>Convênio</label>
+                <div class="input-control text full-size" data-role="input">
+                    <input type="text" 
+                           value="<?php echo ($view_objPessoaConsultaEmprestimo->getConvenio() != null) ? $view_objPessoaConsultaEmprestimo->getConvenio()->getNome() : ""; ?>"
+                           disabled="disabled"
+                           >
+                </div>
+            </div>
+
+            <div class="cell colspan2">
+                <label>Nº Contrato
+                    <?php if ($view_objPessoaConsultaEmprestimo->getPessoaContrato() != null): ?>
+                        <a href="#"><span class="mif-eye" style="margin-top: -5px;"></span></a>
+                    <?php endif; ?>
+                </label>
+                <div class="input-control text full-size" data-role="input">
+                    <input type="text" 
+                           value="<?php echo $view_objPessoaConsultaEmprestimo->getNumeroContrato(); ?>"
+                           disabled="disabled"
+                           >
+                </div>
+            </div>
+            <div class="cell colspan2">
+                <label>Data Inicio</label>
+                <div class="input-control text full-size" data-role="input">
+                    <input type="text" 
+                           value="<?php //echo $view_objPessoaConsultaEmprestimo->getTipoContato()->getNome();              ?>"
+                           disabled="disabled"
+                           >
+                </div>
+            </div>
+            <div class="cell colspan2">
+                <label>Posição Atual</label>
+                <div class="input-control text full-size" data-role="input">
+                    <input type="text" 
+                           value="10/5"
+                           disabled="disabled"
+                           >
+                </div>
+            </div>
+            <div class="cell colspan2">
+                <label>Valor Parcela</label>
+                <div class="input-control text full-size" data-role="input">
+                    <input type="text" 
+
+                           value="<?php echo $view_objPessoaConsultaEmprestimo->getVlrParcela(); ?>"
+                           disabled="disabled"
+                           >
+                </div>
+            </div>
+        </div>
+        <div class="row cell-auto-size no-margin">
+            <div class="cell colspan12">
+                <label>Descrição/Observação</label>
+                <div class="input-control text full-size" data-role="input">
+                    <input type="text" 
+                           value="<?php echo $view_objPessoaConsultaEmprestimo->getObservacao(); ?>"
+                           disabled="disabled"
+                           >
+                </div>
+            </div>
+        </div>
+        <hr class="thin bg-grayLighter">
+        <div class="row cell-auto-size cells12">
+            <div class="cell colspan9">
+                <label>Nota</label>
+                <div class="input-control text full-size" data-role="input">
+                    <input type="text" 
+                           id="nota"
+                           name="nota"
+                           placeholder="Caso necessário, adicione uma nota explicativa." 
+                           maxlength="500"
+                           >
+                    <button class="button helper-button clear"><span class="mif-cross"></span></button>
+                    <span class="input-state-error mif-warning"></span>
+                    <span class="input-state-success mif-checkmark"></span>
+                </div>
+            </div>
+            <div class="cell colspan3">
+                <label>Descongelamento Automático</label>
+                <div data-format="dd/mm/yyyy" data-date="1972-12-21" data-role="datepicker" class="input-control full-size text">
+                    <input type="text"
+                           id="dataDescongelamento"
+                           name="dataDescongelamento"
+                           readonly="readonly" 
+                           >
+                    <button class="button" type="button"><span class="mif-alarm"></span></button>
+                </div>
+            </div>
+        </div>
+
+        <div class="row flex-just-end">
+            <div class="cell">
+                <button class="button mif-floppy-disk primary">&nbsp;Salvar</button>
+            </div>
+        </div>
+
+    </div>
+
+</form>

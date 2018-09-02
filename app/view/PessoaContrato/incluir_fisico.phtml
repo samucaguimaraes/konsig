@@ -1,0 +1,61 @@
+<ul class="breadcrumbs">
+    <li><a href="<?php echo UrlRequestHelper::mountUrl('Principal'); ?>"><span class="icon mif-home"></span></a></li>
+    <li><a href="<?php echo UrlRequestHelper::mountUrl('Gestao'); ?>">Gestão</a></li>
+    <li><a href="<?php echo UrlRequestHelper::mountUrl('PessoaContrato'); ?>">Contratos</a></li>
+    <li><a href="<?php echo UrlRequestHelper::mountUrl('PessoaContrato', 'informar', array('id' => $view_objPessoaContrato->getId())); ?>">CTO <?php echo $view_objPessoaContrato->getNumeroContrato(); ?></a></li>
+    <li><a>Incluir Físico</a></li>
+</ul>
+
+<h1 class="text-light">
+    Contrato <small class="on-right"> Inclusão de Físico</small>
+    <span class="mif-files-empty place-right"></span>
+</h1>
+
+<hr class="thin bg-grayLighter">
+<br/>
+
+<form action="<?php echo UrlRequestHelper::mountUrlPost('PessoaContrato', 'incluirFisico'); ?>" method="POST" data-role="validator">
+    <input type="hidden" name="id" value="<?php echo $view_objPessoaContrato->getId(); ?>">
+    <div class="flex-grid">        
+        <div class="row cell-auto-size">
+            <div class="cell colspan4">
+                <label>Número Protocolo <b class="fg-red">*</b></label>
+                <div class="input-control text full-size" data-role="input">
+                    <input type="text" 
+                           id="numeroProtocoloEntrega"
+                           name="numeroProtocoloEntrega"
+                           placeholder="Número do Protocolo de entrega" 
+                           maxlength="100"
+                           data-validate-func="required"
+                           data-validate-hint-position="top"
+                           data-validate-hint="Por Favor, preencha esse campo."
+                           autocomplete="off"
+                           >
+                    <button class="button helper-button clear"><span class="mif-cross"></span></button>
+                    <span class="input-state-error mif-warning"></span>
+                    <span class="input-state-success mif-checkmark"></span>
+                </div>
+            </div>
+            <div class="cell colspan3 padding-inputs-left1">
+                <label>Data Entrega <b class="fg-red">*</b></label>
+                <div data-format="dd/mm/yyyy" data-date="1972-12-21" data-role="datepicker" class="input-control full-size text">
+                    <input type="text"
+                           id="dataEntregaFisico"
+                           name="dataEntregaFisico"
+                           readonly="readonly" 
+                           data-validate-func="required"
+                           data-validate-hint-position="top"
+                           data-validate-hint="Por Favor, preencha esse campo.">
+                    <button class="button" type="button"><span class="mif-calendar"></span></button>
+                </div>
+            </div>
+        </div>
+        <div class="row flex-just-end">
+            <div class="cell">
+                <button class="button mif-floppy-disk primary">&nbsp;Salvar</button>
+            </div>
+        </div>
+
+    </div>
+
+</form>

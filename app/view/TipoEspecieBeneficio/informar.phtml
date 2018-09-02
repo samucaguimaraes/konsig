@@ -1,0 +1,34 @@
+<ul class="breadcrumbs">
+    <li><a href="<?php echo UrlRequestHelper::mountUrl('Principal'); ?>"><span class="icon mif-home"></span></a></li>
+    <li><a href="<?php echo UrlRequestHelper::mountUrl('Seguranca'); ?>">Tipologia</a></li>
+    <li><a href="<?php echo UrlRequestHelper::mountUrl('TipoEspecieBeneficio'); ?>">Tipos de Espécie Beneficio [lista]</a></li>
+    <li><a><?php echo $view_objTipoEspecieBeneficio->getNome(); ?></a></li>
+</ul>
+
+<h1 class="text-light">
+    <?php echo $view_objTipoEspecieBeneficio->getNome(); ?> <small class="on-right"> Informações</small>
+    <span class="mif-stack place-right"></span>
+</h1>
+
+<hr class="thin bg-grayLighter">
+
+<!--<div class="toolbar">
+    <div class="toolbar-section">
+        <button data-role="hint" data-hint="Editar|Clique para editar o usuário" 
+                onclick="redirectUrl('<?php //echo UrlRequestHelper::mountUrl('TipoEspecieBeneficio', 'editar', array('id' => $view_objTipoEspecieBeneficio->getId())); ?>')" 
+                class="toolbar-button"><span class="mif-pencil"></span></button>
+    </div>
+</div>-->
+<br>
+
+<div class="tabcontrol2" data-role="tabcontrol">
+    <ul class="tabs">
+        <li><a href="#frameA">Dados Básicos</a></li>
+    </ul>
+    <div class="frames">
+        <div class="frame" id="frameA">           
+            <h4>Nome</h4>
+            <?php echo $view_objTipoEspecieBeneficio->getNome(); ?>   
+        </div>
+    </div>
+</div>

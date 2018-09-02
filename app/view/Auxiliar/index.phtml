@@ -1,0 +1,89 @@
+<ul class="breadcrumbs">
+    <li><a href="<?php echo UrlRequestHelper::mountUrl('Principal'); ?>"><span class="icon mif-home"></span></a></li>
+    <li><a href="<?php echo UrlRequestHelper::mountUrl('Gestao'); ?>">Gestão</a></li>
+</ul>
+<div class="tile-container">
+    <a href="#bussola" class="tile-small bg-grayLighter fg-gray" data-role="tile">
+        <div class="tile-content iconic" data-role="hint" data-hint-background="bg-gray" data-hint-color="fg-white" data-hint-mode="2" data-hint="Bússola|Clientes Para Revenda" data-hint-position="top">
+            <span class="icon mif-compass2"></span>
+            <span class="tile-badge bg-gray fg-white"><?php //echo $view_totalEmprestimosDisponiveis; ?></span>
+        </div>
+    </a>
+    <a href="#aniversario" class="tile-small bg-grayLighter fg-gray" data-role="tile">
+        <div class="tile-content iconic" data-role="hint" data-hint-background="bg-gray" data-hint-color="fg-white" data-hint-mode="2" data-hint="Aniversários|Aniversariantes do Mês" data-hint-position="top">
+            <span class="icon mif-gift"></span>
+            <span class="tile-badge bg-gray fg-white"><?php //echo $view_totalAniversario; ?></span>
+        </div>        
+    </a>    
+</div>
+<h1 class="text-light">
+    Gestão <small class="on-right"> <?php echo date("F, Y"); ?></small>
+    <span class="mif-money place-right"></span>
+</h1>
+<hr class="thin bg-grayLighter">
+<!--<div class="toolbar">
+    <div class="toolbar-section">
+        <button data-role="hint" data-hint="Novo|Clique para cadastrar uma novo tipo de orgao" 
+                onclick="redirectUrl('<?php //echo UrlRequestHelper::mountUrl('TipoOrgao', 'cadastrar');    ?>')" 
+                class="toolbar-button"><span class="mif-plus"></span></button>
+    </div>
+</div>-->
+<br/>
+<!-- PAINEIS -->
+
+<br/>
+<div class="row cell-auto-size cells12">
+    <div class="cell colspan6">
+        <div class="padding10 bg-grayLighter"><span class="mif-home" style="margin-top: -7px;"></span> <strong>Principal Parceiro: </strong>Bevicred Filial Salvador<span class="place-right">R$ 1.000,99</span></div>
+    </div>
+    <div class="cell colspan6 padding-inputs-left1">
+        <div class="padding10 bg-grayLighter"><span class="mif-suitcase" style="margin-top: -7px;"></span> <strong>Principal Corretor: </strong>Nenhum contrato teve origem de corretores<span class="place-right"></span></div>
+    </div>
+</div>
+<br/>
+<a name="bussola"></a>
+<h2 class="text-light">
+    Bússola <small class="on-right">Clientes para revenda</small>
+    <span class="mif-compass2 place-right"></span>
+</h2>
+<hr class="thin bg-grayLighter">
+<div class="row cell-auto-size">
+    <div class="cell">
+        <table class="dataTable border bordered no-footer" id="listEmprestimosDisponiveis" style="width: 100%">
+            <thead>
+                <tr>
+                    <td class="sortable-column">Nome</td>
+                    <td class="sortable-column">Número CPF</td>
+                    <td class="sortable-column">Empréstimos</td>
+                    <td class="sortable-column">Valor R$</td>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+</div>
+<br/>
+<a name="aniversario"></a>
+<h2 class="text-light">
+    Aniversariantes <small class="on-right">do mês</small>
+    <span class="mif-gift place-right"></span>
+</h2>
+<hr class="thin bg-grayLighter">
+<div class="row cell-auto-size">
+    <div class="cell">
+        <table class="dataTable border bordered no-footer" id="listAniversario" style="width: 100%">
+            <thead>
+                <tr>
+                    <td class="sortable-column">Nome</td>
+                    <td class="sortable-column">Data</td>
+                    <td class="sortable-column">Idade</td>
+                    <td class="sortable-column">Contatos</td>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+</div>
+

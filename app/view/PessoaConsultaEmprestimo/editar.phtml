@@ -1,0 +1,146 @@
+<ul class="breadcrumbs">
+    <li><a href="<?php echo UrlRequestHelper::mountUrl('Principal'); ?>"><span class="icon mif-home"></span></a></li>
+    <li><a href="<?php echo UrlRequestHelper::mountUrl('Gestao'); ?>">Gestão</a></li>
+    <li><a href="<?php echo UrlRequestHelper::mountUrl('Consulta'); ?>">Consultas</a></li>
+    <li><a href="<?php echo UrlRequestHelper::mountUrl('PessoaConsulta', 'informar', array('id' => $view_objPessoaConsulta->getId())); ?>"><?php echo $view_objPessoaConsulta->getPessoa()->getNome(); ?></a></li>
+    <li><a>Edição de Empréstimos</a></li>
+</ul>
+
+<h1 class="text-light">
+    Emprestimos <small class="on-right"> Atualização</small>
+    <span class="mif-more-vert place-right"></span>
+</h1>
+<hr class="thin bg-grayLighter">
+<small class="place-right tag info"><?php echo $view_objOrgao->getNome(); ?></small>
+<br>
+
+<form action="<?php echo UrlRequestHelper::mountUrlPost('PessoaConsultaEmprestimo', 'editar'); ?>" method="POST" data-role="validator">
+    <input type="hidden" name="pessoaConsulta" value="<?php echo $view_objPessoaConsulta->getId(); ?>">
+    <ul class="step-list">
+        <?php foreach ($view_listEmprestimo AS $objEmprestimo): ?>
+            <li>
+                <div class="flex-grid no-margin">
+                    <div class="row cell-auto-size colspan12">
+                        <div class="cell colspan2">
+                            <label>Convênio</label>
+                            <div class="input-control full-size" data-role="select" data-placeholder="Selecione um convênio">
+                                <select name="emprestimos[<?php echo $objEmprestimo->getId(); ?>][convenio]"
+                                        data-validate-func="required"
+                                        data-validate-hint="Por Favor, preencha esse campo."
+                                        data-validate-hint-position="top"
+                                        class="convenio"
+                                        >
+                                    <option></option>
+                                    <?php
+                                    foreach ($view_listConvenios as $objConvenio) {
+                                        echo ($objEmprestimo->getConvenio() == $objConvenio->getId()) ? "<option value='{$objConvenio->getId()}' selected='selected'>{$objConvenio->getNome()}</option>" : "<option value=\"{$objConvenio->getId()}\">{$objConvenio->getNome()}</option>";
+                                    }
+                                    ?>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="cell colspan2">
+                            <label>Nº <span class="no-tablet">do Contrato</span></label>
+                            <div class="input-control text full-size" data-role="input">
+                                <input type="text"
+                                       name="emprestimos[<?php echo $objEmprestimo->getId(); ?>][numeroContrato]"
+                                       data-validate-func="required"
+                                       data-validate-hint-position="top"
+                                       data-validate-hint="Informe uma data"
+                                       placeholder="Número"
+                                       value="<?php echo $objEmprestimo->getNumeroContrato(); ?>"
+                                       maxlength="25"
+                                       autocomplete="off"
+                                       >
+                                <button class="button helper-button clear"><span class="mif-cross"></span></button>
+                                <span class="input-state-error mif-warning"></span>
+                                <span class="input-state-success mif-checkmark"></span>
+                            </div>
+                        </div>
+                        <div class="cell colspan2">
+                            <label>Data <span class="no-tablet">do Contrato</span></label>
+                            <div class="input-control text full-size" data-role="input">
+                                <input type="text"
+                                       name="emprestimos[<?php echo $objEmprestimo->getId(); ?>][dataInicioContrato]"
+                                       data-validate-func="required"
+                                       data-validate-hint-position="top"
+                                       data-validate-hint="Informe uma data"
+                                       placeholder="Data de Início"
+                                       value="<?php echo $objEmprestimo->getDataInicioContrato(); ?>"
+                                       maxlength="10"
+                                       autocomplete="off"
+                                       class="dataContrato"
+                                       >
+                                <button class="button helper-button clear"><span class="mif-cross"></span></button>
+                                <span class="input-state-error mif-warning"></span>
+                                <span class="input-state-success mif-checkmark"></span>
+                            </div>
+                        </div>
+                        <div class="cell colspan2">
+                            <label>Parcelas</label>
+                            <div class="input-control text full-size" data-role="input">
+                                <input type="text"
+                                       name="emprestimos[<?php echo $objEmprestimo->getId(); ?>][totalParcela]"
+                                       data-validate-func="digits"
+                                       data-validate-hint-position="top"
+                                       data-validate-hint="Apenas Números"
+                                       value="<?php echo $objEmprestimo->getTotalParcela(); ?>"
+                                       placeholder="QTD" 
+                                       maxlength="2"
+                                       autocomplete="off"
+                                       >
+                                <button class="button helper-button clear"><span class="mif-cross"></span></button>
+                                <span class="input-state-error mif-warning"></span>
+                                <span class="input-state-success mif-checkmark"></span>
+                            </div>
+                        </div>
+                        <div class="cell colspan2">
+                            <label>Valor</label>
+                            <div class="input-control text full-size" data-role="input">
+                                <span class="mif-money prepend-icon"></span>
+                                <input type="text"
+                                       disabled="disabled"
+                                       name="emprestimos[<?php echo $objEmprestimo->getId(); ?>][vlrParcela]"
+                                       value="<?php echo $objEmprestimo->getVlrParcela(); ?>"
+                                       readonly
+                                       data-role='hint' 
+                                       data-hint-background='bg-gray' 
+                                       data-hint-color='fg-white'
+                                       data-hint-mode='2'
+                                       data-hint='|O valor da parcela informado na consulta não pode ser alterado.' 
+                                       data-hint-position='top'
+                                       >
+                                <button class="button helper-button clear"><span class="mif-cross"></span></button>
+                                <span class="input-state-error mif-warning"></span>
+                                <span class="input-state-success mif-checkmark"></span>
+                            </div>
+                        </div>
+                        <div class="cell colspan2">
+                            <label>Observações</label>
+                            <div class="input-control text full-size" data-role="input">
+                                <input type="text"
+                                       name="emprestimos[<?php echo $objEmprestimo->getId(); ?>][observacao]"
+                                       placeholder="Observações adicionais" 
+                                       maxlength="115"
+                                       autocomplete="off"
+                                       value="<?php echo $objEmprestimo->getObservacao(); ?>"
+                                       >
+                                <button class="button helper-button clear"><span class="mif-cross"></span></button>
+                                <span class="input-state-error mif-warning"></span>
+                                <span class="input-state-success mif-checkmark"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+        <?php endforeach; ?>
+    </ul>
+    <br/>
+    <div class="flex-grid no-margin">
+        <div class="row flex-just-end">
+            <div class="cell">
+                <button class="button mif-floppy-disk primary">&nbsp;Salvar</button>
+            </div>
+        </div>
+    </div>
+</form>

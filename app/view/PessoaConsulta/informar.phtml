@@ -1,0 +1,285 @@
+<ul class="breadcrumbs">
+    <li><a href="<?php echo UrlRequestHelper::mountUrl('Principal'); ?>"><span class="icon mif-home"></span></a></li>
+    <li><a href="<?php echo UrlRequestHelper::mountUrl('Gestao'); ?>">Gestão</a></li>
+    <li><a href="<?php echo UrlRequestHelper::mountUrl('PessoaConsulta'); ?>">Consultas</a></li>
+    <li><a href="<?php echo UrlRequestHelper::mountUrl('Pessoa', 'informar', array('id' => $view_objPessoaConsulta->getPessoa()->getId())); ?>" style="cursor:hand"><?php echo $view_objPessoaConsulta->getPessoa()->getNome(); ?></a></li>
+</ul>
+<h1 class="text-light">
+    Consultas <small class="on-right"> Informações</small>
+    <span class="mif-search place-right"></span>
+</h1>
+<hr class="thin bg-grayLighter">
+<div class="toolbar">
+    <div class="toolbar-section">
+        <button data-role="hint"
+                data-hint-background='bg-gray' 
+                data-hint-color='fg-white'
+                data-hint-mode='2'
+                data-hint="Editar|Clique para editar a consulta e possibilitar o recalculo de margem"
+                data-hint-position="top"
+                onclick="redirectUrl('<?php echo UrlRequestHelper::mountUrl('PessoaConsulta', 'editar', array('id' => $view_objPessoaConsulta->getId())); ?>')" 
+                class="toolbar-button">
+            <span class="mif-pencil"></span>
+        </button>
+        <button data-role="hint" data-hint="Desativar|Clique para excluir a consulta e possibilitar a inserção de uma nova" 
+                onclick="redirectUrl('<?php //echo UrlRequestHelper::mountUrl('Orgao', 'editar', array('id' => $view_objOrgao->getId()));                    ?>')" 
+                class="toolbar-button"><span class="mif-cross"></span></button>
+        <button data-role="hint"
+                data-hint-background='bg-gray' 
+                data-hint-color='fg-white'
+                data-hint-mode='2'
+                data-hint="Gerar Contrato|Clique para gerar contrato a partir dessa consulta" 
+                data-hint-position="top"
+                onclick="redirectUrl('<?php echo UrlRequestHelper::mountUrl('PessoaContrato', 'cadastrar', array('id' => $view_objPessoaConsulta->getPessoa()->getId(), 'consulta' => $view_objPessoaConsulta->getId())); ?>')" 
+                class="toolbar-button">
+            <span class="mif-folder-plus"></span>
+        </button>
+        <button data-role="hint"
+                data-hint-background='bg-olive' 
+                data-hint-color='fg-white'
+                data-hint-mode='2'
+                data-hint="Notificar|Clique para incluir uma notificação sobre esse elemento" 
+                onclick="redirectUrl('<?php echo UrlRequestHelper::mountUrl('Notificacao', 'cadastrar', array('id' => $view_objPessoaConsulta->getId(),'elemento'=>'PessoaConsulta'));  ?>')" 
+                data-hint-position="top"
+                class="toolbar-button">
+            <span class="mif-notification"></span>
+        </button>
+        <button data-role="hint" data-hint="Mala Direta|Incluir essa consulta em mala direta" 
+                onclick="redirectUrl('<?php //echo UrlRequestHelper::mountUrl('Orgao', 'editar', array('id' => $view_objOrgao->getId()));                    ?>')" 
+                class="toolbar-button"><span class="mif-mail-read"></span></button>
+        <button data-role="hint" data-hint="Telemarketing|Solicitar telemarketing para essa consulta" 
+                onclick="redirectUrl('<?php //echo UrlRequestHelper::mountUrl('Orgao', 'editar', array('id' => $view_objOrgao->getId()));                    ?>')" 
+                class="toolbar-button"><span class="mif-phone-forwarded"></span></button>
+        <button data-role="hint" data-hint="Arquivar|Arquivar Consulta" 
+                onclick="redirectUrl('<?php //echo UrlRequestHelper::mountUrl('Orgao', 'editar', array('id' => $view_objOrgao->getId()));                    ?>')" 
+                class="toolbar-button"><span class="mif-folder-download"></span></button>
+    </div>
+</div>
+<br>
+<div class="flex-grid">
+    <div class="row cell-auto-size toolbar_title no-margin">
+        <div class="cell colspan12">
+            <h3>
+                Dados Pessoa/Cliente
+                <span class="mif-arrow-right"></span>
+                <small class="on-right"> <?php echo $view_objPessoaConsulta->getPessoa()->getNome(); ?></small><span class="tag default place-right"><?php echo $view_tEmprestimos; ?> Empréstimo<?php echo ($view_tEmprestimos > 1) ? "s" : ""; ?></span>
+            </h3>
+
+            <hr class="thin bg-grayLighter">
+        </div>
+    </div>
+    <div class="row cell-auto-size toolbar_title no-margin">
+        <div class="cell colspan2">
+            <label>Competência</label>
+            <div class="input-control text full-size" data-role="input">
+                <span class="mif-event-available prepend-icon"></span>
+                <input type="text" 
+                       value="<?php echo substr($view_objPessoaConsulta->getDataCompetencia(), 4, 2) . "/" . substr($view_objPessoaConsulta->getDataCompetencia(), 0, 4); ?>"
+                       disabled="disabled"
+
+                       >
+            </div>
+        </div>
+        <div class="cell colspan2">
+            <label>Data de Nasc<span class="no-tablet">imento</span></label>
+            <div class="input-control text full-size" data-role="input">
+                <span class="mif-calendar prepend-icon"></span>
+                <input type="text" 
+                       value="<?php echo $view_objPessoaConsulta->getPessoa()->getDataNascimento(); ?>"
+                       disabled="disabled"
+                       data-role='hint' 
+                       data-hint-background='bg-gray' 
+                       data-hint-color='fg-white'
+                       data-hint-mode='2'
+                       data-hint='|<?php echo DataHelper::calcularIdade($view_objPessoaConsulta->getPessoa()->getDataNascimento()); ?> anos' 
+                       data-hint-position='top'
+                       >
+            </div>
+        </div>
+        <div class="cell colspan2">
+            <label>Número CPF</label>
+            <div class="input-control text full-size" data-role="input">
+                <span class="mif-credit-card prepend-icon"></span>
+                <input type="text" 
+                       value="<?php echo $view_objPessoaConsulta->getPessoa()->getNumeroCPF(); ?>"
+                       disabled="disabled"
+                       >
+            </div>
+        </div>
+        <div class="cell colspan2">
+            <label>Créditos</label>
+            <div class="input-control text full-size" data-role="input">
+                <span class="mif-plus prepend-icon"></span>
+                <input type="text" 
+                       value="<?php echo $view_objPessoaConsulta->getVlrMensalidadeReajustada(); ?>"
+                       disabled="disabled"
+                       >
+            </div>
+        </div>
+        <div class="cell colspan2">
+            <label>Descontos</label>
+            <div class="input-control text full-size" data-role="input">
+                <span class="mif-minus prepend-icon"></span>
+                <input type="text" 
+                       value="<?php echo $view_objPessoaConsulta->getVlrMensalidadeReajustada(); ?>"
+                       disabled="disabled"
+                       >
+            </div>
+        </div>
+        <div class="cell colspan2">
+            <label>Margem Disponível</label>
+            <div class="input-control text full-size" data-role="input">
+                <span class="mif-medium prepend-icon"></span>
+                <input type="text" 
+                       value="<?php echo $view_objPessoaConsulta->getVlrMargemDisponivel(); ?>"
+                       disabled="disabled"
+                       >
+            </div>
+        </div>
+    </div>
+    <div class="row cell-auto-size no-margin">
+        <div class="cell colspan4">
+            <label>Orgão</span></label>
+            <div class="input-control text full-size" data-role="input">
+                <input type="text" 
+                       value="<?php echo $view_objOrgao->getNome(); ?>"
+                       disabled="disabled"
+
+                       >
+            </div>
+        </div>
+        <div class="cell colspan3">
+            <label>Situação</span></label>
+            <div class="input-control text full-size" data-role="input">
+                <input type="text" 
+                       value="<?php echo $view_objPessoaConsulta->getPessoaOrgao()->getMatricula(); ?>"
+                       disabled="disabled"
+
+                       >
+            </div>
+        </div>
+        <div class="cell colspan3">
+            <label>Número Benef<span class="no-tablet">ício/Matricula</span></label>
+            <div class="input-control text full-size" data-role="input">
+                <span class="mif-file-binary prepend-icon"></span>
+                <input type="text" 
+                       value="<?php echo $view_objPessoaConsulta->getPessoaOrgao()->getMatricula(); ?>"
+                       disabled="disabled"
+
+                       >
+            </div>
+        </div>
+        <div class="cell colspan2">
+            <label>Status Consulta</label>
+            <div class="input-control text full-size" data-role="input">
+                <input type="text" 
+                       value="<?php echo $view_statusConsulta; ?>"
+                       disabled="disabled"
+                       <?php echo ($view_objPessoaConsulta->getStatus() == 'A') ? "class='success'" : "class='error'"; ?>
+                       >
+            </div>
+        </div>
+    </div>
+    <div class="row cell-auto-size no-margin">       
+        <div class="cell colspan8">
+            <label>Observações</label>
+            <div class="input-control text full-size" data-role="input">
+                <input type="text" 
+                       value="<?php echo $view_objPessoaConsulta->getObservacao(); ?>"
+                       disabled="disabled"
+                       >
+            </div>
+        </div>
+    </div>
+    <div class="row cell-auto-size toolbar_title no-margin">
+        <div class="cell colspan12">
+            <h3 class="fg-gray">Contatos</h3>
+        </div>
+    </div>
+    <hr class="thin bg-grayLighter"/>
+    <?php if ($view_isPessoaContato): ?>
+        <div class="row cell-auto-size">
+            <div class="cell">
+                <table class="dataTable hovered border bordered no-footer" id="listPessoaContato" style="width: 100%">
+                    <thead>
+                        <tr>
+                            <td class="sortable-column">Contato</td>
+                            <td class="sortable-column">Tipo</td>
+                            <td class="sortable-column">Detalhe</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    <?php else: ?>
+        <span class="tag warning">Não existem informações inseridas.</span>
+    <?php endif; ?>
+    <br/>
+    <div class="row cell-auto-size toolbar_title no-margin">
+        <div class="cell colspan8">
+            <h3>Empréstimos<small class="fg-gray"> Apenas Vigentes</small></h3>
+        </div>
+        <?php //if ($view_isEmprestimo): ?>
+        <div class="cell colspan4">
+            <button <?php echo ($view_tEmprestimos == 0) ? "disabled" : ""; ?> onclick="redirectUrl('<?php echo UrlRequestHelper::mountUrl('PessoaConsultaEmprestimo', 'editar', array('id' => $view_objPessoaConsulta->getId())); ?>')" class="button place-right">
+                HISCON
+            </button>
+        </div>
+        <?php //endif; ?>
+    </div>
+    <hr class="thin bg-grayLighter">
+    <div class="row">
+        <div class="cell colspan12">
+            <?php if ($view_isEmprestimo): ?>
+                <table class="dataTable hovered border bordered no-footer" id="listPessoaConsultaEmprestimo" style="width: 100%">
+                    <thead>
+                        <tr>
+                            <td class="sortable-column">Convênio</td>
+                            <td class="sortable-column">Contrato</td>
+                            <td class="sortable-column">Data Contrato</td>
+                            <td class="sortable-column">Parcelas</td>
+                            <td class="sortable-column">Posição</td>
+                            <td class="sortable-column">Valor Parcela</td>
+                            <td class="sortable-column">Observação</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            <?php else: ?>
+                <span class="tag warning">Não foram informados empréstimos nessa consulta.</span>
+            <?php endif; ?>
+        </div>
+    </div>
+    <br/>
+    <div class="row cell-auto-size toolbar_title no-margin">
+        <div class="cell colspan8">
+            <h3>Histórico de Negociações</h3>
+            <hr class="thin bg-grayLighter">
+        </div>
+    </div>
+    <div class="row">
+        <div class="cell colspan12">
+            <?php if ($view_isEmprestimoNegociado): ?>
+                <table class="dataTable hovered border bordered no-footer" id="listPessoaConsultaEmprestimoNegociado" style="width: 100%">
+                    <thead>
+                        <tr>
+                            <td class="sortable-column">Convênio Anterior</td>
+                            <td class="sortable-column">Contrato Anterior</td>
+                            <td class="sortable-column">Parcela Anterior</td>
+                            <td class="sortable-column">Negociação</td>
+                            <td class="sortable-column">Convênio Atual</td>
+                            <td class="sortable-column">Contrato Atual</td>                            
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            <?php else: ?>
+                <span class="tag warning">Nenhum empréstimo dessa consulta foi negociado.</span>
+            <?php endif; ?>
+        </div>
+    </div>
+</div>

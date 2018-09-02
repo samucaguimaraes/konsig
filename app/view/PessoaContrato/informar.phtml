@@ -1,0 +1,408 @@
+<ul class="breadcrumbs">
+    <li><a href="<?php echo UrlRequestHelper::mountUrl('Principal'); ?>"><span class="icon mif-home"></span></a></li>
+    <li><a href="<?php echo UrlRequestHelper::mountUrl('Gestao'); ?>">Gestão</a></li>
+    <li><a href="<?php echo UrlRequestHelper::mountUrl('PessoaContrato'); ?>">Contratos</a></li>
+    <li><a href="<?php echo UrlRequestHelper::mountUrl('Pessoa', 'informar', array('id' => $view_objPessoaContrato->getPessoa()->getId())); ?>" style="cursor: url"><?php echo $view_objPessoaContrato->getPessoa()->getNome(); ?></a></li>
+</ul>
+<h1 class="text-light">
+    Contrato <small class="on-right"> Informações</small>
+    <span class="mif-file-text place-right"></span>
+</h1>
+<hr class="thin bg-grayLighter">
+<div class="toolbar">
+    <div class="toolbar-section">
+        <button data-role="hint"
+                data-hint-background='bg-olive' 
+                data-hint-color='fg-white'
+                data-hint-mode='2'
+                data-hint="Editar|Clique para excluir a consulta e possibilitar a inserção de uma nova" 
+                data-hint-position="top"
+                onclick="redirectUrl('<?php //echo UrlRequestHelper::mountUrl('Orgao', 'editar', array('id' => $view_objOrgao->getId()));                   ?>')" 
+                class="toolbar-button">
+            <span class="mif-pencil"></span>
+        </button>
+        <button data-role="hint"
+                data-hint-background='bg-olive' 
+                data-hint-color='fg-white'
+                data-hint-mode='2'
+                data-hint="Entregar Físico|Clique para registrar a entrega do físico do contrato" 
+                data-hint-position="top"
+                onclick="redirectUrl('<?php echo UrlRequestHelper::mountUrl('PessoaContrato', 'incluirFisico', array('id' => $view_objPessoaContrato->getId())); ?>')" 
+                class="toolbar-button">
+            <span class="mif-files-empty"></span>
+        </button>
+        <button data-role="hint"
+                data-hint-background='bg-olive' 
+                data-hint-color='fg-white'
+                data-hint-mode='2'
+                data-hint="Alterar Status|Clique para alterar a situação do contrato" 
+                data-hint-position="top"
+                onclick="redirectUrl('<?php echo UrlRequestHelper::mountUrl('PessoaContrato', 'alterarStatus', array('id' => $view_objPessoaContrato->getId())); ?>')" 
+                <?php echo (!$view_isIntegrado) ? "disabled='disabled'" : ""; ?>
+                class="toolbar-button">
+            <span class="mif-event-available"></span>
+        </button>
+        <button data-role="hint"
+                data-hint-background='bg-olive' 
+                data-hint-color='fg-white'
+                data-hint-mode='2'
+                data-hint="Receber Comissão|Clique para registrar o recebimento da comissão" 
+                data-hint-position="top"
+                onclick="redirectUrl('<?php echo UrlRequestHelper::mountUrl('PessoaContrato', 'incluirComissao', array('id' => $view_objPessoaContrato->getId())); ?>')" 
+                <?php echo (!$view_isComissionado) ? "disabled='disabled'" : ""; ?>
+                class="toolbar-button">
+            <span class="mif-coins"></span>
+        </button>
+        <button data-role="hint"
+                data-hint-background='bg-olive' 
+                data-hint-color='fg-white'
+                data-hint-mode='2'
+                data-hint="Pagar Corretor|Clique para registrar o pagamento de comissão a corretor" 
+                data-hint-position="top"
+                onclick="redirectUrl('<?php //echo UrlRequestHelper::mountUrl('Orgao', 'editar', array('id' => $view_objOrgao->getId()));                   ?>')" 
+                <?php echo (!$view_isCorretagem) ? "disabled='disabled'" : ""; ?>
+                class="toolbar-button">
+            <span class="mif-coins"></span>
+        </button>
+        <button data-role="hint"
+                data-hint-background='bg-olive' 
+                data-hint-color='fg-white'
+                data-hint-mode='2'
+                data-hint="Notificar|Clique para incluir uma notificação sobre esse elemento" 
+                onclick="redirectUrl('<?php echo UrlRequestHelper::mountUrl('Notificacao', 'cadastrar', array('id' => $view_objPessoaContrato->getId(),'elemento'=>'PessoaContrato'));  ?>')" 
+                data-hint-position="top"
+                class="toolbar-button">
+            <span class="mif-notification"></span>
+        </button>
+        <button data-role="hint"
+                data-hint-background='bg-olive' 
+                data-hint-color='fg-white'
+                data-hint-mode='2'
+                data-hint="Excluir|Clique para gerar contrato a partir dessa consulta" 
+                data-hint-position="top"
+                onclick="redirectUrl('<?php echo UrlRequestHelper::mountUrl('PessoaContrato', 'cadastrar', array('id' => $view_objPessoaContrato->getPessoa()->getId(), 'consulta' => $view_objPessoaContrato->getId())); ?>')" 
+                class="toolbar-button">
+            <span class="mif-bin"></span>
+        </button>
+    </div>
+</div>
+<br>
+<div class="flex-grid">
+    <div class="row cell-auto-size toolbar_title no-margin">
+        <div class="cell colspan12">
+            <h3>
+                Dados Pessoa/Cliente
+                <span class="mif-arrow-right"></span>
+                <small class="on-right"> <?php echo $view_objPessoaContrato->getPessoa()->getNome(); ?></small><span class="tag <?php echo $view_tag; ?> place-right"><?php echo $view_objPessoaContrato->getTipoSituacao()->getNome(); ?> </span>
+            </h3>
+            <hr class="thin bg-grayLighter">
+        </div>
+    </div>
+    <div class="row cell-auto-size toolbar_title no-margin">
+        <div class="cell colspan5">
+            <label>Orgão Pagador</label>
+            <div class="input-control text full-size" data-role="input">
+                <span class="mif-windows prepend-icon"></span>
+                <input type="text" 
+                       value="<?php echo $view_objPessoaOrgao->getOrgao()->getNome(); ?>"
+                       disabled="disabled"
+
+                       >
+            </div>
+        </div>
+        <div class="cell colspan3">
+            <label>Número Benef<span class="no-tablet">ício/Matricula</span></label>
+            <div class="input-control text full-size" data-role="input">
+                <span class="mif-file-binary prepend-icon"></span>
+                <input type="text" 
+                       value="<?php echo $view_objPessoaOrgao->getMatricula(); ?>"
+                       disabled="disabled"
+
+                       >
+            </div>
+        </div>
+        <div class="cell colspan2">
+            <label>Data de Nasc<span class="no-tablet">imento</span></label>
+            <div class="input-control text full-size" data-role="input">
+                <span class="mif-calendar prepend-icon"></span>
+                <input type="text" 
+                       value="<?php echo $view_objPessoaContrato->getPessoa()->getDataNascimento(); ?>"
+                       disabled="disabled"
+                       data-role='hint' 
+                       data-hint-background='bg-lightBlue' 
+                       data-hint-color='fg-white'
+                       data-hint-mode='2'
+                       data-hint='|<?php //echo DataHelper::calcularIdade($view_objPessoaContrato->getPessoa()->getDataNascimento());    ?> anos' 
+                       data-hint-position='bottom'
+                       >
+            </div>
+        </div>
+        <div class="cell colspan2">
+            <label>Número CPF</label>
+            <div class="input-control text full-size" data-role="input">
+                <span class="mif-credit-card prepend-icon"></span>
+                <input type="text" 
+                       value="<?php echo $view_objPessoaContrato->getPessoa()->getNumeroCPF(); ?>"
+                       disabled="disabled"
+                       >
+            </div>
+        </div>        
+    </div>
+    <div class="row cell-auto-size toolbar_title no-margin">
+        <div class="cell colspan12">
+            <h3>Dados Contrato</h3>
+            <hr class="thin bg-grayLighter">
+        </div>
+    </div>
+    <div class="row cell-auto-size no-margin">
+        <div class="cell colspan2">
+            <label>Número da Proposta</label>
+            <div class="input-control text full-size" data-role="input">
+                <input type="text" 
+                       value="<?php echo $view_objPessoaContrato->getNumeroProposta(); ?>"
+                       disabled="disabled"
+                       >
+            </div>
+        </div>
+        <div class="cell colspan2">
+            <label>Número do Contrato</label>
+            <div class="input-control text full-size" data-role="input">
+                <input type="text" 
+                       value="<?php echo $view_objPessoaContrato->getNumeroContrato(); ?>"
+                       disabled="disabled"
+                       >
+            </div>
+        </div>
+        <div class="cell colspan4"></div>
+        <div class="cell colspan2">
+            <label>Entrega Físico</label>
+            <div class="input-control text full-size" data-role="input">
+                <input type="text" 
+                       value="<?php echo $view_objPessoaContrato->getDataEntregaFisico(); ?>"
+                       disabled="disabled"
+                       <?php echo ($view_objPessoaContrato->getDataEntregaFisico() != null) ? "class='success'" : "class='error'"; ?>
+                       >
+            </div>
+        </div>
+        <div class="cell colspan2">
+            <label>Protocolo</label>
+            <div class="input-control text full-size" data-role="input">
+                <input type="text" 
+                       value="<?php echo $view_objPessoaContrato->getNumeroProtocoloEntrega(); ?>"
+                       disabled="disabled"
+                       <?php echo ($view_objPessoaContrato->getNumeroProtocoloEntrega() != null) ? "class='success'" : "class='error'"; ?>
+                       >
+            </div>
+        </div>
+    </div>
+    <div class="row cell-auto-size no-margin">
+        <div class="cell colspan3">
+            <label>Tipo de Contrato</label>
+            <div class="input-control text full-size" data-role="input">
+                <input type="text" 
+                       value="<?php echo $view_objPessoaContrato->getTipoContrato()->getNome(); ?>"
+                       disabled="disabled"
+                       >
+            </div>
+        </div>        
+        <div class="cell colspan2">
+            <label>Data Cadastro</label>
+            <div class="input-control text full-size" data-role="input">
+                <span class="mif-calendar prepend-icon"></span>
+                <input type="text" 
+                       value="<?php echo $view_objPessoaContrato->getDataCadastroContrato(); ?>"
+                       disabled="disabled"
+                       >
+            </div>
+        </div>
+        <div class="cell colspan2">
+            <label>Data do Contrato</label>
+            <div class="input-control text full-size" data-role="input">
+                <span class="mif-calendar prepend-icon"></span>
+                <input type="text" 
+                       value="<?php echo $view_objPessoaContrato->getDataInicioContrato(); ?>"
+                       disabled="disabled"
+                       data-role='hint' 
+                       data-hint-background='bg-gray' 
+                       data-hint-color='fg-white'
+                       data-hint-mode='2'
+                       data-hint='|Data em que foi iniciado os descontos do contrato para o cliente' 
+                       data-hint-position='top'
+                       >
+            </div>
+        </div>
+        <div class="cell colspan2">
+            <label>Data do Status</label>
+            <div class="input-control text full-size" data-role="input">
+                <span class="mif-calendar prepend-icon"></span>
+                <input type="text" 
+                       value="<?php echo $view_objPessoaContrato->getDataTipoSituacao(); ?>"
+                       disabled="disabled"
+                       >
+            </div>
+        </div>
+    </div>
+    <div class="row cell-auto-size no-margin">
+        <div class="cell colspan12">
+            <label>Observações Adicionais</label>
+            <div class="input-control text full-size" data-role="input">
+                <input type="text" 
+                       value="<?php echo $view_objPessoaContrato->getObservacao(); ?>"
+                       disabled="disabled"
+                       >
+            </div>
+        </div>
+    </div>
+    <div class="row cell-auto-size no-margin">
+        <div class="cell colspan8">
+            <label>Parceiro</label>
+            <div class="input-control text full-size" data-role="input">
+                <input type="text" 
+                       value="<?php echo $view_objPessoaContrato->getParceiro()->getNome(); ?>"
+                       disabled="disabled"
+                       >
+            </div>
+        </div>
+    </div>
+    <div class="row cell-auto-size no-margin">
+        <div class="cell colspan2">
+            <label>Valor Bruto</label>
+            <div class="input-control text full-size" data-role="input">
+                <span class="mif-dollar prepend-icon"></span>
+                <input type="text" 
+                       value="<?php echo $view_objPessoaContrato->getVlrBruto(); ?>"
+                       disabled="disabled"
+                       >
+            </div>
+        </div>
+        <div class="cell colspan2">
+            <label>Valor Líquido</label>
+            <div class="input-control text full-size" data-role="input">
+                <span class="mif-dollar prepend-icon"></span>
+                <input type="text" 
+                       value="<?php echo $view_objPessoaContrato->getVlrLiquido(); ?>"
+                       disabled="disabled"
+                       >
+            </div>
+        </div>
+        <div class="cell colspan2">
+            <label>Valor Parcela</label>
+            <div class="input-control text full-size" data-role="input">
+                <span class="mif-coins prepend-icon"></span>
+                <input type="text" 
+                       value="<?php echo $view_objPessoaContrato->getVlrParcela(); ?>"
+                       disabled="disabled"
+                       >
+            </div>
+        </div>
+        <div class="cell colspan2">
+            <label>Taxa</label>
+            <div class="input-control text full-size" data-role="input">
+                <input type="text" 
+                       value="<?php echo $view_objPessoaContrato->getVlrTaxaJuros(); ?>"
+                       disabled="disabled"
+                       >
+            </div>
+        </div>
+        <div class="cell colspan2"></div>
+        <div class="cell colspan2">
+            <label>Margem Adicionada</label>
+            <div class="input-control text full-size" data-role="input">
+                <span class="mif-medium prepend-icon"></span>
+                <input type="text" 
+                       value="<?php //echo $view_objPessoaContrato->getVlrTaxaJuros();     ?>"
+                       disabled="disabled"
+                       >
+            </div>
+        </div>
+    </div>
+    <div class="row cell-auto-size toolbar_title no-margin">
+        <div class="cell colspan12">
+            <h3>Corretagem</h3>
+            <hr class="thin bg-grayLighter">
+        </div>
+    </div>
+    <?php if ($view_isCorretagem): ?>
+        <div class="row cell-auto-size no-margin">
+            <div class="cell colspan6">
+                <label>Corretor</label>
+                <div class="input-control text full-size" data-role="input">
+                    <input type="text" 
+                           value="<?php echo $view_objPessoaContrato->getCorretor()->getNome(); ?>"
+                           disabled="disabled"
+                           >
+                </div>
+            </div>
+        </div>
+    <?php else: ?>
+        <span class="tag warning">Não existem informações inseridas.</span>
+    <?php endif; ?>
+    <div class="row cell-auto-size toolbar_title no-margin">
+        <div class="cell colspan12">
+            <h3>Comissionamento</h3>
+            <hr class="thin bg-grayLighter">
+        </div>
+    </div>
+    <?php if ($view_isComissionado): ?>
+        <div class="row cell-auto-size no-margin">
+            <div class="cell colspan2">
+                <label>Comissão Contrato</label>
+                <div class="input-control text full-size" data-role="input">
+                    <span class="mif-money prepend-icon"></span>
+                    <input type="text" 
+                           value="<?php echo $view_objPessoaContrato->getVlrComissaoContrato(); ?>"
+                           disabled="disabled"
+                           data-role='hint' 
+                           data-hint-background='bg-gray' 
+                           data-hint-color='fg-white'
+                           data-hint-mode='2'
+                           data-hint='Taxa|<?php echo FormatHelper::formatNumeroMonetario($view_objPessoaContrato->getVlrTaxaComissao()) . "%"; ?>' 
+                           data-hint-position='top'
+                           >
+                </div>
+            </div>
+            <div class="cell colspan2">
+                <label>Comissão à Pagar</label>
+                <div class="input-control text full-size" data-role="input">
+                    <span class="mif-money prepend-icon"></span>
+                    <input type="text" 
+                           value="<?php echo $view_objPessoaContrato->getVlrComissaoPagar(); ?>"
+                           disabled="disabled"
+                           class='fg-red'
+                           data-role='hint' 
+                           data-hint-background='bg-gray' 
+                           data-hint-color='fg-white'
+                           data-hint-mode='2'
+                           data-hint='Taxa|<?php echo ($view_objPessoaContrato->getVlrTaxaCorretor() != "") ? $view_objPessoaContrato->getVlrTaxaCorretor() . "%" : "Sem Corretagem"; ?>' 
+                           data-hint-position='top'
+                           >
+                </div>
+            </div>
+            <div class="cell colspan2">
+                <label>Comissão à Receber</label>
+                <div class="input-control text full-size" data-role="input">
+                    <span class="mif-money prepend-icon"></span>
+                    <input type="text" 
+                           value="<?php echo $view_objPessoaContrato->getVlrComissaoReceber(); ?>"
+                           disabled="disabled"
+                           class='fg-cobalt'
+                           >
+                </div>
+            </div>
+            <div class="cell colspan4"></div>
+            <div class="cell colspan2">
+                <label>Data Pagamento</label>
+                <div class="input-control text full-size" data-role="input">
+                    <span class="mif-coins prepend-icon"></span>
+                    <input type="text" 
+                           value="<?php echo $view_objPessoaContrato->getDataPagamentoComissao(); ?>"
+                           disabled="disabled"
+                           <?php echo ($view_objPessoaContrato->getDataPagamentoComissao() != null) ? "class='success fg-cobalt'" : "class='error'"; ?>
+                           >
+                </div>
+            </div>
+        </div>
+    <?php else: ?>
+        <span class="tag warning">Não existem informações inseridas.</span>
+    <?php endif; ?>
+</div>

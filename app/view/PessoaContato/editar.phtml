@@ -1,0 +1,109 @@
+<script type="text/javascript">
+    $(function() {
+        $('#fCadastro').populate(<?php echo $view_json_objeto; ?>);
+    });
+</script>
+<ul class="breadcrumbs">
+    <li><a href="<?php echo UrlRequestHelper::mountUrl('Principal'); ?>"><span class="icon mif-home"></span></a></li>
+    <li><a href="<?php echo UrlRequestHelper::mountUrl('Gestao'); ?>">Gestão</a></li>
+    <li><a href="<?php echo UrlRequestHelper::mountUrl('Pessoa'); ?>">Pessoas</a></li>
+    <li><a href="<?php echo UrlRequestHelper::mountUrl('Pessoa', 'informar', array('id' => $view_objPessoa->getId())); ?>"><?php echo $view_objPessoa->getNome(); ?></a></li>
+    <li><a href="<?php echo UrlRequestHelper::mountUrl('PessoaContato', 'informar', array('id' => $view_objPessoaContato->getId())); ?>"><?php echo $view_objPessoaContato->getNumero(); ?></a></li>
+    <li><a>Edição de Contato</a></li>
+</ul>
+
+<h1 class="text-light">
+    Contato Pessoal <small class="on-right"> Editar</small>
+    <span class="mif-perm-phone-msg place-right"></span>
+</h1>
+
+<hr class="thin bg-grayLighter">
+<br/>
+
+<form id="fCadastro" action="<?php echo UrlRequestHelper::mountUrlPost('PessoaContato', 'atualizar'); ?>" method="POST" data-role="validator">
+    <input type="hidden" name="id" id="id" >
+    <input type="hidden" name="pessoa" value="<?php echo $view_objPessoa->getId(); ?>">
+    <div class="flex-grid">        
+        <div class="row cell-auto-size cells12">
+            <div class="cell colspan4">
+                <label>Número do Contato <b class="fg-red">*</b></label>
+                <div class="input-control text full-size" data-role="input">
+                    <input type="text" 
+                           id="numero"
+                           name="numero"
+                           placeholder="Número do Contato com DDD" 
+                           maxlength="100"
+                           data-validate-func="required"
+                           data-validate-hint-position="top"
+                           data-validate-hint="Por Favor, preencha esse campo."
+                           autocomplete="off"
+                           >
+                    <button class="button helper-button clear"><span class="mif-cross"></span></button>
+                    <span class="input-state-error mif-warning"></span>
+                    <span class="input-state-success mif-checkmark"></span>
+                </div>
+            </div>
+
+            <div class="cell colspan4 padding-inputs-left1">
+                <label>Tipo de Contato <b class="fg-red">*</b></label>
+                <div class="input-control full-size" data-role="select" data-placeholder="Selecione um tipo de Situação">
+                    <select name="tipoContato"
+                            id="tipoContato"
+                            data-validate-func="required"
+                            data-validate-hint="Por Favor, preencha esse campo."
+                            >
+                        <option></option>
+                        <?php foreach ($view_listTipoContato as $objTipoContato): ?>
+                            <option value="<?php echo $objTipoContato->getId(); ?>"><?php echo $objTipoContato->getNome(); ?></option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
+            </div>
+
+            <div class="cell colspan4 padding-inputs-left1">
+                <label>Operadora</label>
+                <div class="input-control full-size" data-role="select" data-placeholder="Selecione a operadora">
+                    <select name="operadora"
+                            id="operadora"                            
+                            >
+                        <option></option>
+                        <?php foreach ($view_listOperadora as $objOperadora): ?>
+                            <option value="<?php echo $objOperadora->getId(); ?>"><?php echo $objOperadora->getNome(); ?></option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="row cell-auto-size cells12">
+            <div class="cell">
+                <label>Descrição</label>
+                <div class="input-control text full-size" data-role="input">
+                    <input type="text" 
+                           name="descricao"
+                           placeholder="Informações complementares do contato" 
+                           maxlength="100"
+                           autocomplete="off"
+                           >
+                    <button class="button helper-button clear"><span class="mif-cross"></span></button>
+                    <span class="input-state-error mif-warning"></span>
+                    <span class="input-state-success mif-checkmark"></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row flex-just-end">
+            <div class="cell">
+                <button class="button mif-floppy-disk primary">&nbsp;Salvar</button>
+            </div>
+        </div>
+        <br/>
+        <div class="row cell-auto-size cells12">
+            <div class="cell colspan12">
+                <div data-text="logs" class="example">
+                    <?php echo $view_logCriacao; echo $view_logAtualizacao; ?>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</form>

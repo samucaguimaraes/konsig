@@ -1,0 +1,53 @@
+<ul class="breadcrumbs">
+    <li><a href="<?php echo UrlRequestHelper::mountUrl('Principal'); ?>"><span class="icon mif-home"></span></a></li>
+    <li><a href="<?php echo UrlRequestHelper::mountUrl('Gestao'); ?>">Gestão</a></li>
+    <li><a href="<?php echo UrlRequestHelper::mountUrl('PessoaContrato'); ?>">Contratos</a></li>
+    <li><a>Cadastro</a></li>
+</ul>
+
+<h1 class="text-light">
+    Contratos <small class="on-right"> Cadastrar</small>
+    <span class="mif-search place-right"></span>
+</h1>
+<hr class="thin bg-grayLighter">
+<br>
+<div class="flex-grid">
+    <div class="row cell-auto-size">
+        <div class="cell colspan4">
+            <div class="input-control text full-size" data-role="input">
+                <input type="text"
+                       id="numeroCPF"
+                       name="numeroCPF"
+                       placeholder="CPF da Pessoa/Cliente" 
+                       maxlength="100"
+                       data-validate-func="cpf" 
+                       data-validate-hint="CPF Inválido."
+                       data-validate-hint-position="top"
+                       autocomplete="off"
+                       data-popover-color="fg-white" 
+                       data-popover-background="bg-darkRed" 
+                       data-popover-text="O CPF informado não pertence a uma pessoa cadastrada." 
+                       data-popover-position="right" 
+                       data-role="popover">
+            </div>
+        </div>
+    </div>
+    <div class="row cell-auto-size" style="display: none;" id="cellTable">
+        <div class="cell">
+            <h2 id='nomePessoa'></h2>
+            <table class="dataTable hovered striped" id="listPessoaConsulta" style="width: 100%">
+                <thead>
+                    <tr>
+                        <td class="sortable-column">Nome</td>
+                        <td class="sortable-column">Matrícula</td>
+                        <td class="sortable-column">Competência</td>
+                        <td class="sortable-column">Empréstimos</td>
+                        <td class="sortable-column">Margem Disponível</td>                        
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

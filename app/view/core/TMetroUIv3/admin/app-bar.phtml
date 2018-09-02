@@ -1,0 +1,88 @@
+<div class="app-bar fixed-top darcula" data-role="appbar">
+    <a href="<?php echo UrlRequestHelper::mountUrl('Principal'); ?>" class="app-bar-element branding">
+        <div class="align-center">
+            <img  src="<?php echo PATH_IMAGE_URL; ?>logo.png" style="width: 8.4em;">
+        </div>
+    </a>   
+    <ul class="app-bar-menu">
+        <li>
+            <a href="" class="dropdown-toggle">Gestão</a>
+            <ul class="d-menu" data-role="dropdown">
+                <li><a href="<?php echo UrlRequestHelper::mountUrl('Gestao'); ?>"><span class="mif-apps icon fg-grayLight"></span>Gestão</a></li>
+                <li>
+                    <a href="#" class="dropdown-toggle"><span class="mif-more-vert icon fg-grayLight"></span>Pessoas</a>
+                    <ul class="d-menu" data-role="dropdown">
+                        <li><a href="<?php echo UrlRequestHelper::mountUrl('Pessoa'); ?>"><span class="mif-organization icon fg-grayLight"></span>Pessoas/Clientes</a></li>
+                        <li><a href="<?php echo UrlRequestHelper::mountUrl('Pessoa','cadastrar'); ?>"><span class="mif-plus icon fg-grayLight"></span>Novo</a></li>
+                        <li><a href="<?php echo UrlRequestHelper::mountUrl('Pessoa','cadastrar',array('simples'=>true)); ?>"><span class="mif-fire icon fg-grayLight"></span>Novo - Simplificado</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#" class="dropdown-toggle"><span class="mif-more-vert icon fg-grayLight"></span>Contratos</a>
+                    <ul class="d-menu" data-role="dropdown">
+                        <li><a href="<?php echo UrlRequestHelper::mountUrl('PessoaContrato'); ?>"><span class="mif-cabinet icon fg-grayLight"></span>Contrato</a></li>
+                        <li><a href="<?php echo UrlRequestHelper::mountUrl('PessoaContrato','cadastrar'); ?>"><span class="mif-plus icon fg-grayLight"></span>Novo</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#" class="dropdown-toggle"><span class="mif-more-vert icon fg-grayLight"></span>Consultas</a>
+                    <ul class="d-menu" data-role="dropdown">
+                        <li><a href="<?php echo UrlRequestHelper::mountUrl('PessoaConsulta'); ?>"><span class="mif-search icon fg-grayLight"></span>Consulta</a></li>
+                        <li><a href="<?php echo UrlRequestHelper::mountUrl('PessoaConsulta','cadastrar'); ?>"><span class="mif-plus icon fg-grayLight"></span>Novo</a></li>
+                    </ul>
+                </li>                
+                <li><a href="<?php echo UrlRequestHelper::mountUrl('Marketing'); ?>"><span class="mif-mail-read icon fg-grayLight"></span>Marketing</a></li>
+                <li><a href="<?php echo UrlRequestHelper::mountUrl('Telemarketing'); ?>"><span class="mif-ring-volume icon fg-grayLight"></span>Telemarketing</a></li>
+            </ul>
+        </li>
+        <li>
+            <a href="" class="dropdown-toggle">Auxiliares</a>
+            <ul class="d-menu" data-role="dropdown">
+                <li><a href="<?php echo UrlRequestHelper::mountUrl('Auxiliar'); ?>"><span class="mif-apps icon fg-grayLight"></span>Auxiliares</a></li>
+                <li><a href="<?php echo UrlRequestHelper::mountUrl('Banco'); ?>"><span class="mif-library icon fg-grayLight"></span>Banco</a></li>
+                <li><a href="<?php echo UrlRequestHelper::mountUrl('Parceiro'); ?>"><span class="mif-shop icon fg-grayLight"></span>Parceiro</a></li>
+                <li><a href="<?php echo UrlRequestHelper::mountUrl('Orgao'); ?>"><span class="mif-windows icon fg-grayLight"></span>Orgão</a></li>
+                <li><a href="<?php echo UrlRequestHelper::mountUrl('Convenio'); ?>"><span class="mif-clipboard icon fg-grayLight"></span>Convênio</a></li>
+                <li><a href="<?php echo UrlRequestHelper::mountUrl('Comissao'); ?>"><span class="mif-dollars icon fg-grayLight"></span>Comissão</a></li>
+                <li><a href="<?php echo UrlRequestHelper::mountUrl('Simulador'); ?>"><span class="mif-calculator2 icon fg-grayLight"></span>Simulador</a></li>
+                <li><a href="<?php echo UrlRequestHelper::mountUrl('Corretor'); ?>"><span class="mif-suitcase icon fg-grayLight"></span>Corretor</a></li>
+            </ul>
+        </li>
+        <li>
+            <a href="" class="dropdown-toggle">Tipologia</a>
+            <ul class="d-menu" data-role="dropdown">
+                <li><a href="<?php echo UrlRequestHelper::mountUrl('Tipologia'); ?>"><span class="mif-apps icon fg-grayLight"></span>Tipologias</a></li>
+                <li><a href="<?php echo UrlRequestHelper::mountUrl('TipoSituacao'); ?>"><span class="mif-tags icon fg-grayLight"></span>Situação</a></li>
+                <li><a href="<?php echo UrlRequestHelper::mountUrl('TipoOrgao'); ?>"><span class="mif-location-city icon fg-grayLight"></span>Orgão</a></li>
+                <li><a href="<?php echo UrlRequestHelper::mountUrl('TipoContato'); ?>"><span class="mif-perm-phone-msg icon fg-grayLight"></span>Contato</a></li>
+                <li><a href="<?php echo UrlRequestHelper::mountUrl('TipoEspecieBeneficio'); ?>"><span class="mif-stack icon fg-grayLight"></span>Espécie Benefício</a></li>
+                <li><a href="<?php echo UrlRequestHelper::mountUrl('TipoContrato'); ?>"><span class="mif-file-text icon fg-grayLight"></span>Contrato</a></li>
+            </ul>
+        </li>
+        <li>
+            <a href="" class="dropdown-toggle">Segurança</a>
+            <ul class="d-menu" data-role="dropdown">
+                <li><a href="<?php echo UrlRequestHelper::mountUrl('Seguranca'); ?>"><span class="mif-apps icon fg-grayLight"></span>Segurança</a></li>
+                <li><a href="<?php echo UrlRequestHelper::mountUrl('Usuario'); ?>"><span class="mif-user-check icon fg-grayLight"></span>Usuário</a></li>
+                <li><a href="<?php echo UrlRequestHelper::mountUrl('Perfil'); ?>"><span class="mif-users icon fg-grayLight"></span>Perfil</a></li>
+                <li><a href="<?php echo UrlRequestHelper::mountUrl('Funcionalidade'); ?>"><span class="mif-cogs icon fg-grayLight"></span>Funcionalidade</a></li>
+                <li><a href="<?php echo UrlRequestHelper::mountUrl('PainelControle'); ?>"><span class="mif-equalizer-v icon fg-grayLight"></span>Painel de Controle</a></li>
+            </ul>
+        </li>        
+    </ul>
+    
+    <div class="app-bar-element place-right">
+        <span class="dropdown-toggle"><span class="mif-cog"></span> <span class="no-tablet no-phone"><?php echo $tView_nomeUsuario; ?></span></span>
+        <div class="app-bar-drop-container padding10 place-right no-margin-top block-shadow fg-dark" data-role="dropdown" data-no-close="true" style="width: 220px">
+            <h2 class="text-light">Configurações</h2>
+            <ul class="unstyled-list fg-dark">
+                <li><a href="<?php echo UrlRequestHelper::mountUrl('Security', 'alterarSenha'); ?>" class="fg-white1 fg-hover-yellow">Alterar Senha</a></li>
+                <li><a href="<?php echo UrlRequestHelper::mountUrlGet('Security', 'deslogar'); ?>" class="fg-white3 fg-hover-yellow">Sair</a></li>
+            </ul>
+        </div>
+    </div>
+    <a href="<?php echo UrlRequestHelper::mountUrl('Notificacao'); ?>" class="fg-white"><div class="app-bar-element place-right">
+        <span class="mif-bell mif-ani-ring"></span>
+        <span class="tag default">187</span>
+    </div></a>
+</div>

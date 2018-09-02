@@ -1,0 +1,144 @@
+<ul class="breadcrumbs">
+    <li><a href="<?php echo UrlRequestHelper::mountUrl('Principal'); ?>"><span class="icon mif-home"></span></a></li>
+    <li><a href="<?php echo UrlRequestHelper::mountUrl('Gestão'); ?>">Gestão</a></li>
+    <li><a href="<?php echo UrlRequestHelper::mountUrl('Pessoa'); ?>">Pessoas/Clientes</a></li>
+    <li><a href="<?php echo UrlRequestHelper::mountUrl('Pessoa', 'informar', array('id' => $view_objPessoaOrgao->getPessoa()->getId())); ?>"><?php echo $view_objPessoaOrgao->getPessoa()->getNome(); ?></a></li>
+    <li><a>MT <?php echo $view_objPessoaOrgao->getMatricula(); ?></a></li>
+</ul>
+<h1 class="text-light">
+    Orgão Associado <small class="on-right"> Informações</small>
+    <span class="mif-windows place-right"></span>
+</h1>
+<hr class="thin bg-grayLighter">
+<div class="toolbar">
+    <div class="toolbar-section">
+        <button data-role="hint"
+                data-hint-background='bg-olive' 
+                data-hint-color='fg-white'
+                data-hint-mode='2'
+                data-hint="Editar|Clique para editar os dados pessoais" 
+                onclick="redirectUrl('<?php echo UrlRequestHelper::mountUrl('PessoaOrgao', 'editar', array('id' => $view_objPessoaOrgao->getId())); ?>')" 
+                data-hint-position="top"
+                class="toolbar-button">
+            <span class="mif-pencil"></span>
+        </button>
+        <button data-role="hint"
+                data-hint-background='bg-olive' 
+                data-hint-color='fg-white'
+                data-hint-mode='2'
+                data-hint="Gerar Consulta|Clique para gerar consulta para esse orgão" 
+                onclick="redirectUrl('<?php //echo UrlRequestHelper::mountUrl('Pessoa', 'editar', array('id' => $view_objPessoa->getId()));     ?>')" 
+                data-hint-position="top"
+                class="toolbar-button">
+            <span class="mif-search"></span>
+        </button>
+        <button data-role="hint"
+                data-hint-background='bg-olive' 
+                data-hint-color='fg-white'
+                data-hint-mode='2'
+                data-hint="Notificar|Clique para incluir uma notificação sobre esse elemento" 
+                onclick="redirectUrl('<?php echo UrlRequestHelper::mountUrl('Notificacao', 'cadastrar', array('id' => $view_objPessoaOrgao->getId(), 'elemento' => 'PessoaOrgao')); ?>')" 
+                data-hint-position="top"
+                class="toolbar-button">
+            <span class="mif-notification"></span>
+        </button>
+        <button data-role="hint"
+                data-hint-background='bg-olive' 
+                data-hint-color='fg-white'
+                data-hint-mode='2'
+                data-hint="Excluir|ATENÇÃO! Todos os dados desse orgão será excluído" 
+                onclick="redirectUrl('<?php //echo UrlRequestHelper::mountUrl('Pessoa', 'editar', array('id' => $view_objPessoa->getId()));     ?>')" 
+                data-hint-position="top"
+                class="toolbar-button">
+            <span class="mif-bin"></span>
+        </button>
+    </div>
+</div>
+<br>
+<div class="flex-grid">
+    <div class="row cell-auto-size no-margin">
+        <div class="cell <?php echo $colspan = ($view_tNotificacao>0)?'colspan9':'colspan12'; ?>">
+            <div class="flex-grid">
+                <div class="row cell-auto-size no-margin">
+                    <div class="cell colspan2">
+                        <label>Matricula</label>
+                        <div class="input-control text full-size" data-role="input">
+                            <span class="mif-file-binary prepend-icon"></span>
+                            <input type="text" 
+                                   value="<?php echo $view_objPessoaOrgao->getMatricula(); ?>"
+                                   disabled="disabled"
+                                   >
+                        </div>
+                    </div>
+                    <div class="cell colspan4">
+                        <label>Orgão</label>
+                        <div class="input-control text full-size" data-role="input">
+                            <span class="mif-windows prepend-icon"></span>
+                            <input type="text" 
+                                   value="<?php echo $view_objPessoaOrgao->getOrgao()->getNome(); ?>"
+                                   disabled="disabled"
+                                   >
+                        </div>
+                    </div>
+                    <div class="cell colspan3">
+                        <label>Situação</label>
+                        <div class="input-control text full-size" data-role="input">
+                            <input type="text" 
+                                   value="<?php echo $view_objPessoaOrgao->getTipoSituacao()->getNome(); ?>"
+                                   disabled="disabled"
+                                   >
+                        </div>
+                    </div>
+                    <div class="cell colspan3">
+                        <label>E. Benefício</label>
+                        <div class="input-control text full-size" data-role="input">
+                            <input type="text" 
+                                   value="<?php echo ($view_objPessoaOrgao->getTipoEspecieBeneficio() != null) ? $view_objPessoaOrgao->getTipoEspecieBeneficio()->getNome() : ""; ?>"
+                                   disabled="disabled"
+                                   >
+                        </div>
+                    </div>
+                </div>
+                <div class="row cell-auto-size no-margin">
+                    <div class="cell colspan2">
+                        <label>Login</label>
+                        <div class="input-control text full-size" data-role="input">
+                            <span class="mif-user-check prepend-icon"></span>
+                            <input type="text" 
+                                   value="<?php echo $view_objPessoaOrgao->getLogin(); ?>"
+                                   disabled="disabled"
+                                   >
+                        </div>
+                    </div>
+                    <div class="cell colspan2">
+                        <label>Senha</label>
+                        <div class="input-control text full-size" data-role="input">
+                            <span class="mif-key prepend-icon"></span>
+                            <input type="text" 
+                                   value="<?php echo $view_objPessoaOrgao->getSenha(); ?>"
+                                   disabled="disabled"
+
+                                   >
+                        </div>
+                    </div>
+                    <div class="cell colspan2">
+                        <?php echo ($view_objPessoaOrgao->getIsCredencialPublica() == 'A') ? "<span class='tag success'>Credencial Pública</span>" : "<span class='tag alert'>Credencial Restrita</span>"; ?>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <?php if($view_tNotificacao>0): ?>
+        <div class="cell colspan3 no-phone no-tablet">
+            <div style="padding: 0.5px;">
+                <span style="margin-left: 5px;"><strong>Notificações (<?php echo $view_tNotificacao; ?>)</strong></span>
+            </div>
+            <?php foreach ($view_listNotificacao as $objNotificacao): ?>
+                <div class="notify warning">
+                    <span class="notify-closer"></span>
+                    <span class="notify-text"><?php echo $objNotificacao->getNotificacao(); ?><br/><small class="fg-grayLight"><?php echo $objNotificacao->getUsuarioCriador()->getNome() . " em " . $objNotificacao->getDataCriacao(); ?></small></span>
+                </div>
+            <?php endforeach; ?>
+        </div>
+        <?php endif; ?>
+    </div>
+</div>

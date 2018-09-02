@@ -1,0 +1,153 @@
+<script type="text/javascript">
+    $(function() {
+        $('#fCadastro').populate(<?php echo $view_json_objeto; ?>);
+    });
+</script>
+<ul class="breadcrumbs">
+    <li><a href="<?php echo UrlRequestHelper::mountUrl('Principal'); ?>"><span class="icon mif-home"></span></a></li>
+    <li><a href="<?php echo UrlRequestHelper::mountUrl('Gestao'); ?>">Gestão</a></li>
+    <li><a href="<?php echo UrlRequestHelper::mountUrl('Pessoa'); ?>">Pessoas</a></li>
+    <li><a href="<?php echo UrlRequestHelper::mountUrl('Pessoa', 'informar', array('id' => $view_objPessoa->getId())); ?>"><?php echo $view_objPessoa->getNome(); ?></a></li>
+    <li><a>Edição</a></li>
+</ul>
+<h1 class="text-light">
+    Orgão Pagador <small class="on-right"> Editar</small>
+    <span class="mif-location-city place-right"></span>
+</h1>
+<hr class="thin bg-grayLighter">
+<br/>
+<form id="fCadastro" action="<?php echo UrlRequestHelper::mountUrlPost('PessoaOrgao', 'atualizar'); ?>" method="POST" data-role="validator">
+    <input type="hidden" name="id" id="id" >
+    <input type="hidden" name="pessoa" value="<?php echo $view_objPessoa->getId(); ?>">    
+    <div class="flex-grid">
+
+        <div class="row cell-auto-size cells12">
+            <div class="cell colspan4">
+                <label>Matrícula <b class="fg-red">*</b></label>
+                <div class="input-control text full-size" data-role="input">
+                    <input type="text" 
+                           name="matricula"
+                           placeholder="Número do Benefício/Matrícula do Orgão"
+                           data-validate-func="required"
+                           data-validate-hint-position="top"
+                           data-validate-hint="Por Favor, preencha esse campo."
+                           maxlength="100"
+                           autocomplete="off"
+                           >
+                    <button class="button helper-button clear"><span class="mif-cross"></span></button>
+                    <span class="input-state-error mif-warning"></span>
+                    <span class="input-state-success mif-checkmark"></span>
+                </div>
+            </div>
+        </div>
+        <div class="row cell-auto-size cells12">
+            <div class="cell colspan4">
+                <label>Orgão <b class="fg-red">*</b></label>
+                <div class="input-control full-size" data-role="select" data-placeholder="Selecione um Orgao Pagador">
+                    <select name="orgao"
+                            id="orgao"
+                            data-validate-func="required"
+                            data-validate-hint-position="top"
+                            data-validate-hint="Por Favor, preencha esse campo.">
+                        <option></option>
+                        <?php foreach ($view_listOrgao as $objOrgao): ?>
+                            <option value="<?php echo $objOrgao->getId(); ?>"><?php echo $objOrgao->getNome(); ?></option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
+            </div>
+            <div class="cell colspan4 padding-inputs-left1">
+                <label>Tipo Situação <b class="fg-red">*</b></label>
+                <div class="input-control full-size" data-role="select" data-placeholder="Qual a situação do beneficiário">
+                    <select name="tipoSituacao"
+                            id="tipoSituacao"
+                            data-validate-func="required"
+                            data-validate-hint-position="top"
+                            data-validate-hint="Por Favor, preencha esse campo.">
+                        <option></option>
+                        <?php foreach ($view_listTipoSituacao as $objTipoSituacao): ?>
+                            <option value="<?php echo $objTipoSituacao->getId(); ?>"><?php echo $objTipoSituacao->getNome(); ?></option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
+            </div>
+            <div class="cell colspan4 padding-inputs-left1">
+                <label>Espécie Benefício / Código Interno <b class="fg-red">*</b></label>
+                <div class="input-control full-size" data-role="select" data-placeholder="Qual a espécie do beneficio">
+                    <select name="tipoEspecieBeneficio"
+                            id="tipoEspecieBeneficio"
+                            >
+                        <option></option>
+                        <?php foreach ($view_listTipoEspecieBeneficio as $objTipoEspecieBeneficio): ?>
+                            <option value="<?php echo $objTipoEspecieBeneficio->getId(); ?>"><?php echo $objTipoEspecieBeneficio->getCodigo() . " - " . $objTipoEspecieBeneficio->getNome(); ?></option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="row cell-auto-size toolbar_title no-margin">
+            <div class="cell colspan12">
+                <h3>Acesso Portal<small class="on-right"> Contracheque</small></h3>
+                <hr class="thin bg-grayLighter">
+            </div>            
+        </div>
+        <div class="row cell-auto-size">
+            <div class="cell colspan3">
+                <label>Login</label>
+                <div class="input-control text full-size" data-role="input">
+                    <input type="text" 
+                           name="login"
+                           id="login"
+                           placeholder="Usuário de Acesso" 
+                           maxlength="100"
+                           autocomplete="off"
+
+                           >
+                    <button class="button helper-button clear"><span class="mif-cross"></span></button>
+                    <span class="input-state-error mif-warning"></span>
+                    <span class="input-state-success mif-checkmark"></span>
+                </div>
+            </div>
+            <div class="cell colspan3 padding-inputs-left1">
+                <label>Senha</label>
+                <div class="input-control text full-size" data-role="input">
+                    <input type="text" 
+                           name="senha"
+                           id="senha"
+                           placeholder="Senha de Acesso" 
+                           maxlength="100"
+                           autocomplete="off"
+                           >
+                    <button class="button helper-button clear"><span class="mif-cross"></span></button>
+                    <span class="input-state-error mif-warning"></span>
+                    <span class="input-state-success mif-checkmark"></span>
+                </div>
+            </div>            
+        </div>
+        <div class="row cell-auto-size">
+            <div class="cell colspan12">
+                <label class="input-control checkbox">
+                    <input type="checkbox" name="isCredencialPublica" value="A" id="isCredencialPublica">
+                    <span class="check"></span>
+                    <span class="caption">Disponibilizar credenciais de acesso em tela de consulta. (Cadastradores e Consultores)</span>
+                </label>
+            </div>            
+        </div>
+        <br/>
+        <div class="row flex-just-end">
+            <div class="cell">
+                <button class="button mif-floppy-disk primary">&nbsp;Salvar</button>
+            </div>
+        </div>
+        <br/>
+        <div class="row cell-auto-size cells12">
+            <div class="cell colspan12">
+                <div data-text="logs" class="example">
+                    <?php echo $view_logCriacao; echo $view_logAtualizacao; ?>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</form>

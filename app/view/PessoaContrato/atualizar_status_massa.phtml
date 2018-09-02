@@ -1,0 +1,104 @@
+<ul class="breadcrumbs">
+    <li><a href="<?php echo UrlRequestHelper::mountUrl('Principal'); ?>"><span class="icon mif-home"></span></a></li>
+    <li><a href="<?php echo UrlRequestHelper::mountUrl('Gestao'); ?>">Gestão</a></li>
+    <li><a href="<?php echo UrlRequestHelper::mountUrl('PessoaContrato'); ?>">Contratos</a></li>
+    <li><a>Incluir Físico - Malote</a></li>
+</ul>
+<h1 class="text-light">
+    Contrato <small class="on-right"> Entrega de Físicos - Malote</small>
+    <span class="mif-files-empty place-right"></span>
+</h1>
+<hr class="thin bg-grayLighter">
+<br/>
+<?php if ($view_isFisico): ?> 
+    <form action="<?php echo UrlRequestHelper::mountUrlPost('PessoaContrato', 'atualizarStatusMassa'); ?>" method="POST" data-role="validator">
+        <div class="flex-grid">        
+            <div class="row cell-auto-size">
+                <div class="cell colspan4">
+                    <label>Status <b class="fg-red">*</b></label>
+                    <div class="input-control full-size" data-role="select" data-placeholder="Selecione...">
+                        <select name="tipoSituacao"
+                                id="tipoSituacao"
+                                data-validate-func="required"
+                                data-validate-hint-position="top"
+                                data-validate-hint="Por Favor, preencha esse campo.">
+                            <option></option>
+                            <?php foreach ($view_listTipoSituacao as $objTipoSituacao): ?>
+                                <option value="<?php echo $objTipoSituacao->getId(); ?>"><?php echo $objTipoSituacao->getNome(); ?></option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
+                </div>
+                <div class="cell colspan3 padding-inputs-left1">
+                    <label>Data Status <b class="fg-red">*</b></label>
+                    <div data-format="dd/mm/yyyy" data-date="1972-12-21" data-role="datepicker" class="input-control full-size text">
+                        <input type="text"
+                               id="dataTipoSituacao"
+                               name="dataTipoSituacao"
+                               readonly="readonly" 
+                               data-validate-func="required"
+                               data-validate-hint-position="top"
+                               data-validate-hint="Por Favor, preencha esse campo.">
+                        <button class="button" type="button"><span class="mif-calendar"></span></button>
+                    </div>
+                </div>
+                <div class="cell colspan3"></div>
+                <div class="cell colspan2">
+                    <label>Total Contratos</label>
+                    <div class="input-control text full-size" data-role="input">
+                        <span class="mif-stack prepend-icon"></span>
+                        <input type="text" 
+                               value="<?php echo $view_tContrato; ?>"
+                               disabled="disabled"
+                               >
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="cell colspan12">
+                    <table class="table border bordered">
+                        <thead>
+                            <tr>
+                                <th class="sortable-column" style="width: 20px; text-align: center;">
+                                    <label class="input-control checkbox small-check no-margin">
+                                        <input type="checkbox" id="selectAll" title="Selecionar Todos" alt="Selecionar Todos">
+                                        <span class="check"></span>
+                                    </label>
+                                </th>
+                                <th class="sortable-column">Contrato</th>
+                                <th class="sortable-column">Pessoa/Cliente</th>
+                                <th class="sortable-column">Valor Bruto</th>
+                                <th class="sortable-column">Valor Parcela</th>
+                                <th class="sortable-column">Data Cadastro</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php foreach ($view_listContratos as $objPessoaContrato): ?>
+                                <tr>                            
+                                    <td>
+                                        <label class="input-control checkbox small-check no-margin">
+                                            <input type="checkbox" class="checkboxM" name="contratos[]" value="<?php echo $objPessoaContrato->getId(); ?>">
+                                            <span class="check"></span>
+                                        </label>
+                                    </td>
+                                    <td><?php echo $objPessoaContrato->getNumeroContrato(); ?></td>
+                                    <td><?php echo $objPessoaContrato->getPessoa()->getNome(); ?></td>
+                                    <td><?php echo $objPessoaContrato->getVlrBruto(); ?></td>
+                                    <td><?php echo $objPessoaContrato->getVlrParcela(); ?></td>
+                                    <td><?php echo $objPessoaContrato->getDataCadastroContrato(); ?></td>
+                                </tr>
+                            <?php endforeach; ?>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="row flex-just-end">
+                <div class="cell">
+                    <button class="button mif-floppy-disk primary">&nbsp;Salvar</button>
+                </div>
+            </div>
+        </div>
+    </form>
+<?php else: ?>
+    <span class="tag warning">Não existem contratos com pendência de entrega físicos.</span>
+<?php endif; ?>

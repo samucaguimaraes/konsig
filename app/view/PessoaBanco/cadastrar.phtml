@@ -1,0 +1,114 @@
+<ul class="breadcrumbs">
+    <li><a href="<?php echo UrlRequestHelper::mountUrl('Principal'); ?>"><span class="icon mif-home"></span></a></li>
+    <li><a href="<?php echo UrlRequestHelper::mountUrl('Gestao'); ?>">Gestão</a></li>
+    <li><a href="<?php echo UrlRequestHelper::mountUrl('Pessoa'); ?>">Pessoas</a></li>
+    <li><a href="<?php echo UrlRequestHelper::mountUrl('Pessoa', 'informar', array('id' => $view_objPessoa->getId())); ?>"><?php echo $view_objPessoa->getNome(); ?></a></li>
+    <li><a>Nova Conta</a></li>
+</ul>
+
+<h1 class="text-light">
+    Conta Bancária <small class="on-right"> Cadastrar</small>
+    <span class="mif-library place-right"></span>
+</h1>
+
+<hr class="thin bg-grayLighter">
+<br/>
+
+<form action="<?php echo UrlRequestHelper::mountUrlPost('PessoaBanco', 'cadastrar'); ?>" method="POST" data-role="validator">
+    <input type="hidden" name="pessoa" value="<?php echo $view_objPessoa->getId(); ?>">
+    <div class="flex-grid">        
+        <div class="row cell-auto-size cells12">            
+            <div class="cell colspan4">
+                <label>Banco <b class="fg-red">*</b></label>
+                <div class="input-control full-size" data-role="select" data-placeholder="Selecione...">
+                    <select name="banco"
+                            id="banco"
+                            data-validate-func="required"
+                            data-validate-hint="Por Favor, preencha esse campo."
+                            data-validate-hint-position="top"
+                            >
+                        <option></option>
+                        <?php foreach ($view_listBanco as $objBanco): ?>
+                            <option value="<?php echo $objBanco->getId(); ?>"><?php echo $objBanco->getCodigo() . " - " . $objBanco->getNome(); ?></option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="row cell-auto-size cells12">            
+            <div class="cell colspan4">
+                <label>Agência</label>
+                <div class="input-control text full-size" data-role="input">
+                    <input type="text" 
+                           name="numeroAgencia"
+                           placeholder="Número da Agência"
+                           data-validate-func="required"
+                           data-validate-hint="Por Favor, preencha esse campo."
+                           data-validate-hint-position="top"
+                           maxlength="10"
+                           autocomplete="off"
+                           >
+                    <button class="button helper-button clear"><span class="mif-cross"></span></button>
+                    <span class="input-state-error mif-warning"></span>
+                    <span class="input-state-success mif-checkmark"></span>
+                </div>
+            </div>
+            <div class="cell colspan4 padding-inputs-left1">
+                <label>Número Conta</label>
+                <div class="input-control text full-size" data-role="input">
+                    <input type="text" 
+                           name="numeroConta"
+                           placeholder="Número da Conta"
+                           data-validate-func="required"
+                           data-validate-hint="Por Favor, preencha esse campo."
+                           data-validate-hint-position="top"
+                           maxlength="15"
+                           autocomplete="off"
+                           >
+                    <button class="button helper-button clear"><span class="mif-cross"></span></button>
+                    <span class="input-state-error mif-warning"></span>
+                    <span class="input-state-success mif-checkmark"></span>
+                </div>
+            </div>
+            <div class="cell colspan4 padding-inputs-left1">
+                <label>Tipo de Conta <b class="fg-red">*</b></label>
+                <div class="input-control full-size" data-role="select" data-placeholder="Selecione...">
+                    <select name="tipoConta"
+                            id="tipoConta"
+                            data-validate-func="required"
+                            data-validate-hint="Por Favor, preencha esse campo."
+                            data-validate-hint-position="top"
+                            >
+                        <option></option>                        
+                        <option value="1">Conta Corrente</option>
+                        <option value="2">Conta Poupança</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="row cell-auto-size">
+            <div class="cell colspan12">
+                <label>Observações</label>
+                <div class="input-control text full-size" data-role="input">
+                    <input type="text" 
+                           name="observacao"
+                           placeholder="Observações adicionais" 
+                           maxlength="100"
+                           autocomplete="off"
+                           >
+                    <button class="button helper-button clear"><span class="mif-cross"></span></button>
+                    <span class="input-state-error mif-warning"></span>
+                    <span class="input-state-success mif-checkmark"></span>
+                </div>
+            </div>
+        </div> 
+
+        <div class="row flex-just-end">
+            <div class="cell">
+                <button class="button mif-floppy-disk primary">&nbsp;Salvar</button>
+            </div>
+        </div>
+
+    </div>
+
+</form>

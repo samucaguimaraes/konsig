@@ -1,0 +1,77 @@
+<ul class="breadcrumbs">
+    <li><a href="<?php echo UrlRequestHelper::mountUrl('Principal'); ?>"><span class="icon mif-home"></span></a></li>
+    <li><a href="<?php echo UrlRequestHelper::mountUrl('Gestao'); ?>">Gestão</a></li>
+    <li><a href="<?php echo UrlRequestHelper::mountUrl('Pessoa'); ?>">Pessoas/Clientes</a></li>
+    <li><a href="<?php echo UrlRequestHelper::mountUrl($view_elemento, 'informar', array('id' => $view_objClass->getId())); ?>">Informação do Elemento</a></li>
+    <li><a>Nova Notificação</a></li>
+</ul>
+
+<h1 class="text-light">
+    Notificação <small class="on-right"> Cadastrar</small>
+    <span class="mif-notification place-right"></span>
+</h1>
+
+<hr class="thin bg-grayLighter">
+<br/>
+
+<form action="<?php echo UrlRequestHelper::mountUrlPost('Notificacao', 'cadastrar'); ?>" method="POST" data-role="validator">
+    <input type="hidden" name="descricaoElemento" value="<?php echo $view_elemento; ?>">
+    <input type="hidden" name="elemento" value="<?php echo $view_objClass->getId(); ?>">
+    <div class="flex-grid">        
+        <div class="row cell-auto-size cells12">
+            <div class="cell colspan12">
+                <label>Descrição <b class="fg-red">*</b></label>
+                <div class="input-control text full-size" data-role="input">
+                    <input type="text" 
+                           id="notificacao"
+                           name="notificacao"
+                           placeholder="Informe a Notificação" 
+                           maxlength="500"
+                           data-validate-func="required"
+                           data-validate-hint-position="top"
+                           data-validate-hint="Por Favor, preencha esse campo."
+                           autocomplete="off"
+                           >
+                    <button class="button helper-button clear"><span class="mif-cross"></span></button>
+                    <span class="input-state-error mif-warning"></span>
+                    <span class="input-state-success mif-checkmark"></span>
+                </div>
+            </div>            
+        </div>
+        <div class="row cell-auto-size cells12">
+            <div class="cell colspan4">
+                <label>Tipo de Notificação <b class="fg-red">*</b></label>
+                <div class="input-control full-size" data-role="select" data-placeholder="Selecione um tipo de Situação">
+                    <select name="tipoNotificacao"
+                            id="tipoNotificacao"
+                            data-validate-func="required"
+                            data-validate-hint="Por Favor, preencha esse campo."
+                            >
+                        <option></option>
+                        <option value="1">Notificação</option>
+                        <option value="2">Notas</option>                        
+                    </select>
+                </div>
+            </div>
+            <div class="cell colspan3 padding-inputs-left1">
+                <label>Alarme</label>
+                <div data-format="dd/mm/yyyy" data-date="1972-12-21" data-role="datepicker" class="input-control full-size text">
+                    <input type="text"
+                           id="dataAlarme"
+                           name="dataAlarme"
+                           readonly="readonly" 
+                           >
+                    <button class="button" type="button"><span class="mif-alarm"></span></button>
+                </div>
+            </div>
+        </div>
+
+        <div class="row flex-just-end">
+            <div class="cell">
+                <button class="button mif-floppy-disk primary">&nbsp;Salvar</button>
+            </div>
+        </div>
+
+    </div>
+
+</form>

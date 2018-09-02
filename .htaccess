@@ -1,0 +1,9 @@
+RewriteEngine On
+RewriteCond %{SCRIPT_FILENAME} !-f
+RewriteCond %{SCRIPT_FILENAME} !-d
+RewriteRule ^(.*)$ index.php?url=$1
+
+ErrorDocument 401 /template/index.php?Warning/HTTP_401
+ErrorDocument 403 /template/index.php?Warning/HTTP_403
+ErrorDocument 404 /template/index.php?Warning/HTTP_404
+ErrorDocument 500 /template/index.php?Warning/HTTP_500

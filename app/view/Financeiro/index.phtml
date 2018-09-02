@@ -1,0 +1,160 @@
+<ul class="breadcrumbs">
+    <li><a href="<?php echo UrlRequestHelper::mountUrl('Principal'); ?>"><span class="icon mif-home"></span></a></li>
+    <li><a href="<?php echo UrlRequestHelper::mountUrl('Financeiro'); ?>">Financeiro</a></li>
+</ul>
+<h1 class="text-light">
+    Financeiro <small class="on-right"> <?php echo date("F, Y"); ?></small>
+    <span class="mif-money place-right"></span>
+</h1>
+<hr class="thin bg-grayLighter">
+<!--<div class="toolbar">
+    <div class="toolbar-section">
+        <button data-role="hint" data-hint="Novo|Clique para cadastrar uma novo tipo de orgao" 
+                onclick="redirectUrl('<?php //echo UrlRequestHelper::mountUrl('TipoOrgao', 'cadastrar'); ?>')" 
+                class="toolbar-button"><span class="mif-plus"></span></button>
+    </div>
+</div>
+<br/>-->
+<!-- PAINEIS -->
+<div class="flex-grid">
+    <div class="row cell-auto-size cells12">
+        <div class="cell colspan3">
+            <div class="panel">
+                <div class="heading bg-teal">
+                    <span class="icon mif-organization bg-darkTeal"></span>
+                    <span class="title">Faturamento</span>
+                </div>
+                <div class="content padding5" style="margin-top: -10px;">
+                    <div class="grid">
+                        <div class="row">
+                            <div class="cell align-center"><strong>Hoje</strong></div>
+                            <div class="cell align-center"><strong>Mês</strong></div>
+                            <div class="cell align-center"><strong>Ano</strong></div>
+                        </div>
+                        <div class="row">
+                            <div class="cell align-center">100.000,00<?php //echo $view_tPessoaCadastradasHoje; ?></div>
+                            <div class="cell align-center">111.222,00<?php// echo $view_tPessoaCadastradasMes; ?></div>
+                            <div class="cell align-center">1.000.000,00<?php //echo $view_tPessoaCadastradasAno; ?></div>
+                        </div>
+                        <div class="row">
+                            <div class="cell align-center">1,99%<?php //echo $view_indicadorPessoaDIA; ?></div>
+                            <div class="cell align-center">2,99%<?php ///echo $view_indicadorPessoaMES; ?></div>
+                            <div class="cell align-center">199,00%<?php ///echo $view_indicadorPessoaANO; ?></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="cell colspan3 padding-inputs-left1">
+            <div class="panel">
+                <div class="heading bg-teal">
+                    <span class="icon mif-cabinet bg-darkTeal"></span>
+                    <span class="title">Contratos</span>
+                </div>
+                <div class="content padding5" style="margin-top: -10px;">
+                    <div class="grid">
+                        <div class="row">
+                            <div class="cell align-center"><strong>Hoje</strong></div>
+                            <div class="cell align-center no-tablet"><strong>Mês</strong></div>
+                            <div class="cell align-center no-tablet"><strong>Ano</strong></div>
+                        </div>
+                        <div class="row">
+                            <div class="cell align-center"><?php echo $view_tContratoCadastradosHoje; ?></div>
+                            <div class="cell align-center no-tablet"><?php echo $view_tContratoCadastradosMes; ?></div>
+                            <div class="cell align-center no-tablet"><?php echo $view_tContratoCadastradosAno; ?></div>
+                        </div>
+                        <div class="row">
+                            <div class="cell align-center"><?php echo $view_indicadorContratoDIA; ?></div>
+                            <div class="cell align-center no-tablet"><?php echo $view_indicadorContratoMES; ?></div>
+                            <div class="cell align-center no-tablet"><?php echo $view_indicadorContratoANO; ?></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="cell colspan3 padding-inputs-left1">
+            <div class="panel">
+                <div class="heading bg-teal">
+                    <span class="icon mif-search bg-darkTeal"></span>
+                    <span class="title">Negocial</span></span>
+                </div>
+                <div class="content padding5" style="margin-top: -10px;">
+                    <div class="grid">
+                        <div class="row">
+                            <div class="cell align-center"><strong>Novo</strong></div>
+                            <div class="cell align-center"><strong>Refin.</strong></div>
+                            <div class="cell align-center"><strong>Portab.</strong></div>
+                        </div>
+                        <div class="row">
+                            <div class="cell align-center">199<?php //echo $view_tConsultaCadastradasHoje; ?></div>
+                            <div class="cell align-center">22<?php //echo $view_tConsultaCadastradasMes; ?></div>
+                            <div class="cell align-center">17<?php //echo $view_tConsultaCadastradasAno; ?></div>
+                        </div>
+                        <div class="row">
+                            <div class="cell align-center">10.900,00<?php// echo $view_indicadorConsultaDIA; ?></div>
+                            <div class="cell align-center">10.900,00<?php //echo $view_indicadorConsultaMES; ?></div>
+                            <div class="cell align-center">101.900,00<?php //echo $view_indicadorConsultaANO; ?></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="cell colspan3 padding-inputs-left1">
+            <div class="panel">
+                <div class="heading bg-teal">
+                    <span class="icon mif-dollar2 bg-darkTeal"></span>
+                    <span class="title">Comissão</span>
+                </div>
+                <div class="content padding5" style="margin-top: -10px;">
+                    <div class="grid">
+                        <div class="row">
+                            <div class="cell align-center"><strong>Previsão</strong></div>
+                            <div class="cell align-center"><strong>Confirmada</strong></div>
+                        </div>
+                        <div class="row">
+                            <div class="cell align-center"><span class="mif-dollar2 fg-dark">100.000,00</span></div>
+                            <div class="cell align-center"><span class="mif-dollar2 fg-dark">200.000,00</span></div>
+                        </div>   
+                        <div class="row">
+                            <div class="cell align-center">10 Comissões</div>
+                            <div class="cell align-center">3%</div>
+                        </div>   
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<br/>
+<div class="flex-grid">
+    <div class="row cell-auto-size cells12">
+        <div class="cell colspan6">
+            <div class="padding10 bg-grayLighter"><strong>Principal Parceiro: </strong>Bevicred Filial Salvador<span class="place-right">R$ 1.000,99</span></div>
+        </div>
+        <div class="cell colspan6 padding-inputs-left1">
+            <div class="padding10 bg-grayLighter"><strong>Principal Corretor: </strong>Nenhum contrato teve origem de corretores<span class="place-right"></span></div>
+        </div>
+    </div>
+</div>
+<br/>
+<h2 class="text-light">
+    Contratos do Mês <small class="on-right">Clientes para revenda</small>
+    <span class="mif-compass2 place-right"></span>
+</h2>
+<hr class="thin bg-grayLighter">
+<div class="row cell-auto-size">
+    <div class="cell">
+        <table class="dataTable border bordered no-footer" id="listEmprestimosDisponiveis" style="width: 100%">
+            <thead>
+                <tr>
+                    <td class="sortable-column">Nome</td>
+                    <td class="sortable-column">Número CPF</td>
+                    <td class="sortable-column">Empréstimos</td>
+                    <td class="sortable-column">Valor R$</td>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+</div>

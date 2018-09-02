@@ -1,0 +1,51 @@
+<ul class="breadcrumbs">
+    <li><a href="<?php echo UrlRequestHelper::mountUrl('Principal'); ?>"><span class="icon mif-home"></span></a></li>
+    <li><a href="<?php echo UrlRequestHelper::mountUrl('Gestao'); ?>">Gestão</a></li>
+    <li><a href="<?php echo UrlRequestHelper::mountUrl('Consulta'); ?>">Consultas</a></li>
+    <li><a>Cadastro</a></li>
+</ul>
+
+<h1 class="text-light">
+    Consultas <small class="on-right"> Cadastrar</small>
+    <span class="mif-search place-right"></span>
+</h1>
+<hr class="thin bg-grayLighter">
+<div class="flex-grid">
+    <div class="row cell-auto-size">
+        <div class="cell colspan4">
+            <label>Número CPF <b class="fg-red">*</b></label>
+            <div class="input-control text full-size" data-role="input">
+                <input type="text"
+                       id="numeroCPF"
+                       name="numeroCPF"
+                       placeholder="Informe para localizar..." 
+                       maxlength="14"
+                       data-validate-func="cpfPessoa" 
+                       data-validate-hint="CPF Inválido."
+                       data-validate-hint-position="top"
+                       autocomplete="off"
+                       data-popover-color="fg-white" 
+                       data-popover-background="bg-darkRed" 
+                       data-popover-text="O CPF informado não pertence a uma pessoa cadastrada." 
+                       data-popover-position="right" 
+                       data-role="popover">
+            </div>
+        </div>
+    </div>
+    <div class="row cell-auto-size" style="display: none;" id="cellTable">
+        <div class="cell">
+            <h2 id='nomePessoa'></h2>
+            <table class="dataTable border bordered no-footer" id="listPessoaOrgao" style="width: 100%">
+                <thead>
+                    <tr>
+                        <td class="sortable-column">Orgão</td>
+                        <td class="sortable-column">Situação</td>
+                        <td class="sortable-column">Matrícula</td>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
