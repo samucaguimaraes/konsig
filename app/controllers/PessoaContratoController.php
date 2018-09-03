@@ -124,22 +124,6 @@ class PessoaContratoController extends TMetroUIv3 {
             unset($arrayList);
 
 
-//            $objPessoaOrgaoLogic = new PessoaOrgaoLogic();
-//            $objPessoaOrgao = $objPessoaOrgaoLogic->obterPorId($this->getParam("id"),true);
-//            $this->addDados('objPessoaOrgao', $objPessoaOrgao);
-            //Verificando se o Acesso a Credencial esta público.
-            //$this->addDados('isCredencialPublica', ($objPessoaOrgao->getIsCredencialPublica() == "A")?true:false);
-            //Verificando se o ID passado achou um Orgão de uma Pessoa
-//            if(!is_object($objPessoaOrgao)){
-//                TFeedbackMetroUIv3Helper::notifyWarning('Não foi possível acessar as informações.');
-//                TFeedbackMetroUIv3Helper::notifyWarning('Caso o problema persista, contate o suporte técnico.');
-//                RedirectorHelper::goToAction("cadastrar");
-//            }
-            //Validando o aparecimento da div Detalhamento e Margem Disponível
-            //$this->addDados('isDetalhamento', (in_array($objPessoaOrgao->getOrgao()->getId(),array(2)))?true:false); //[2] Previdência Social
-            //$this->addDados('isMargemDisponivel', (in_array($objPessoaOrgao->getOrgao()->getId(),array(2)))?false:true); //[2] Exclui Previdência Social
-            //unset($objPessoaOrgaoLogic);
-
             $this->TPageAdmin($this->getAction());
         } else {
             $this->HTML->addJavaScript(PATH_JS_CORE_URL . "jquery.pstrength-min.1.2.js");
