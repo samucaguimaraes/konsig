@@ -113,10 +113,10 @@ class PessoaContratoController extends TMetroUIv3 {
             $this->addDados('listTipoSituacao', $arrayList);
             unset($arrayList);
 
-            //$objConvenioLogic = new ConvenioLogic();
-            //$arrayList = $objConvenioLogic->listar();
-            //$this->addDados('listConvenio', $arrayList);
-            //unset($arrayList);
+            $objConvenioLogic = new ConvenioLogic();
+            $arrayList = $objConvenioLogic->listar();
+            $this->addDados('listConvenio', $arrayList);
+            unset($arrayList);
 
             $objPessoaConsultaEmprestimoLogic = new PessoaConsultaEmprestimoLogic();
             $arrayList = $objPessoaConsultaEmprestimoLogic->listar("ide_pessoa_consulta = {$this->getParam("id")}", null, true);

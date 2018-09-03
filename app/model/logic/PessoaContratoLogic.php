@@ -38,7 +38,6 @@ class PessoaContratoLogic extends LogicModel {
         if (isset($_POST['isCredencialPublica'])) {
             $objPessoaContrato->setIsComissionado("D"); //Contrato não comissionado
         }
-
         //Corretagem
         $objPessoaContrato->setCorretor($_POST['corretor']);
         if (isset($_POST['corretorBanco']))
@@ -51,6 +50,7 @@ class PessoaContratoLogic extends LogicModel {
         $objPessoaContrato->setDataCriacao(date('Y-m-d H:i:s'));
 
         $salvar = $this->salvar($objPessoaContrato);
+        echo "<pre>";        var_dump($_POST,$objPessoaContrato); exit();
         //$salvar = array(0 => true);
         if ($salvar[0]) {
             TFeedbackMetroUIv3Helper::notifySuccess('Contrato cadastrado com sucesso!');
