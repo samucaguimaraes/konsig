@@ -123,6 +123,7 @@ class PessoaContratoController extends TMetroUIv3 {
             $this->addDados('listEmprestimos', $arrayList);
             unset($arrayList);
 
+
 //            $objPessoaOrgaoLogic = new PessoaOrgaoLogic();
 //            $objPessoaOrgao = $objPessoaOrgaoLogic->obterPorId($this->getParam("id"),true);
 //            $this->addDados('objPessoaOrgao', $objPessoaOrgao);
