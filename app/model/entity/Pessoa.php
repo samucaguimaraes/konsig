@@ -125,7 +125,7 @@ class Pessoa {
     * @Persistence (type=inteiro)
     */
     private $numeroEstrela;
-
+    
     public function getId() {
         return $this->id;
     }
@@ -277,5 +277,7 @@ class Pessoa {
     public function setNumeroEstrela($numeroEstrela) {
         $this->numeroEstrela = $numeroEstrela;
     }
+
+
 
 }

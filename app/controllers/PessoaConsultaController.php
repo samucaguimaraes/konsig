@@ -113,25 +113,14 @@ class PessoaConsultaController extends TMetroUIv3 {
         //Verificando se o Acesso a Credencial esta público.
         $this->addDados('isCredencialPublica', ($objPessoaOrgao->getIsCredencialPublica() == "A") ? true : false);
 
-        //$objOrgaoLogic = new OrgaoLogic();
-        //$arrayList = $objOrgaoLogic->listar();
-        //$this->addDados('listOrgao', $arrayList);
-        //unset($arrayList);
-        //$objTipoEspecieBeneficioLogic = new TipoEspecieBeneficioLogic();
-        //$arrayList = $objTipoEspecieBeneficioLogic->listar();
-        //$this->addDados('listTipoEspecieBeneficio', $arrayList);
-        //unset($arrayList);
-        ///$objTipoSituacaoLogic = new TipoSituacaoLogic();
-        //$arrayList = $objTipoSituacaoLogic->listar("ide_tipo_situacao IN (13,14,15)");
-        //$this->addDados('listTipoSituacao', $arrayList);
-        ////unset($arrayList);
         //Validando o aparecimento da div Detalhamento e Margem Disponível
         $this->addDados('isDetalhamento', (in_array($objPessoaOrgao->getOrgao()->getId(), array(2))) ? true : false); //[2] Previdência Social
         $this->addDados('isMargemDisponivel', (in_array($objPessoaOrgao->getOrgao()->getId(), array(2))) ? false : true); //[2] Exclui Previdência Social
+        
         //Lista Emprestimos Existentes
         $objPessoaConsultaEmprestimoLogic = new PessoaConsultaEmprestimoLogic();
         $arrayList = $objPessoaConsultaEmprestimoLogic->listar("ide_pessoa_consulta = {$objPessoaConsulta->getId()} AND des_status = 'A'");
-
+               
         if ($arrayList != null) {
             $key_Alternativa = 0;
             $html = '';
@@ -189,6 +178,13 @@ class PessoaConsultaController extends TMetroUIv3 {
         $this->TPageAdmin($this->getAction());
     }
 
+    /**
+     * 
+     */
+     public function excluir() {
+        
+    }
+    
     public function informar() {
 
         $this->HTML->addJavaScript(PATH_JS_URL . $this->getController() . "/" . $this->getAction() . ".js");

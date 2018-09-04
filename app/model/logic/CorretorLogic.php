@@ -27,13 +27,13 @@ class CorretorLogic extends LogicModel {
         $objCorretor->setDataCriacao(date('Y-m-d H:i:s'));
         
         $salvar = $this->salvar($objCorretor);
-        //var_dump($salvar);exit();
+        
         if ($salvar[0]) {
             TFeedbackMetroUIv3Helper::notifySuccess('Corretor cadastrado com sucesso!');
             RedirectorHelper::addUrlParameter('id', $salvar[1]->getId());
             RedirectorHelper::goToControllerAction('Corretor', 'informar');
         } else {
-            TFeedbackMetroUIv3Helper::notifyError('Não foi possível cadastrar. Um error ocorreu. Tente novamente ou contate o suporte para maiores informações');
+            TFeedbackMetroUIv3Helper::notifyError('Nï¿½o foi possï¿½vel cadastrar. Um error ocorreu. Tente novamente ou contate o suporte para maiores informaï¿½ï¿½es');
             RedirectorHelper::goToControllerAction('Corretor', 'cadastrar');
         }
     }
@@ -87,5 +87,6 @@ class CorretorLogic extends LogicModel {
         $corretor = $this->obter("num_cpf = '{$cpf}'");
         return (is_object($corretor)) ? 'true' : 'false';
     }
+    
     
 }

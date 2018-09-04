@@ -22,7 +22,7 @@
             <span class="mif-pencil"></span>
         </button>
         <button data-role="hint" data-hint="Desativar|Clique para excluir a consulta e possibilitar a inserção de uma nova" 
-                onclick="redirectUrl('<?php //echo UrlRequestHelper::mountUrl('Orgao', 'editar', array('id' => $view_objOrgao->getId()));                    ?>')" 
+                onclick="redirectUrl('<?php echo UrlRequestHelper::mountUrl('PessoaConsulta', 'excluir', array('id' => $view_objPessoaConsulta->getId()));                    ?>')" 
                 class="toolbar-button"><span class="mif-cross"></span></button>
         <button data-role="hint"
                 data-hint-background='bg-gray' 

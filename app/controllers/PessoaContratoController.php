@@ -18,53 +18,64 @@ class PessoaContratoController extends TMetroUIv3 {
         $this->TPageAdmin('index');
     }
 
-    public function cadastrar() {
+    /*     * *
+     * @access public 
+     * @package model 
+     * @subpackage Controller
+     */
 
+    public function cadastrar() {
         $this->HTML->addJavaScript(PATH_JS_CORE_URL . "jquery.mask.min.js");
         if (isset($_POST['numeroCPF']) OR $this->isParam("id")) {
-            //$this->HTML->addJavaScript(PATH_JS_CORE_URL . 'JQueryUI/jquery-ui.min.js');
-            //$this->HTML->addCss(PATH_JS_CORE_URL . 'JQueryUI/jquery-ui.min.css');
+            $this->HTML->addJavaScript(PATH_JS_CORE_URL . 'JQueryUI/jquery-ui.min.js');
+            $this->HTML->addCss(PATH_JS_CORE_URL . 'JQueryUI/jquery-ui.min.css');
             $this->HTML->addJavaScript(PATH_TEMPLATE_JS_URL . "select2.min.js");
             $this->HTML->addJavaScript(PATH_JS_CORE_URL . 'jquery.maskMoney.min.js');
             $this->HTML->addJavaScript(PATH_JS_CORE_URL . "jquery.pstrength-min.1.2.js");
             $this->HTML->addJavaScript(PATH_JS_URL . $this->getController() . "/" . $this->getAction() . ".js");
 
+            /* Instancia de objetos a serem usados - Tipo de operações (Consulta ou Empréstimo e o orgão de vínculo do cliente */
+            $objPessoaConsultaEmprestimoLogic = new PessoaConsultaEmprestimoLogic();
+            $objPessoaConsultaLogic = new PessoaConsultaLogic();
+            $objOrgaoLogic = new OrgaoLogic();
+
+            /* Obetendo dados básicos da do cliente */
             $objPessoaLogic = new PessoaLogic();
             $objPessoa = $objPessoaLogic->obterPorId($this->getParam("id"));
             $this->addDados('objPessoa', $objPessoa);
-            //unset($objPessoaLogic);
 
-            $objPessoaConsultaLogic = new PessoaConsultaLogic();
-            $objPessoaConsultaEmprestimoLogic = new PessoaConsultaEmprestimoLogic();
-
+            #Verificando o tipo de contrato
             if (!$this->isParam("op")) {
                 if ($this->isParam('consulta')) {
-
-                    $objPessoaConsulta = $objPessoaConsultaLogic->obterPorId($this->getParam("consulta"), true);
                     
+                    $objPessoaConsulta = $objPessoaConsultaLogic->obterPorId($this->getParam("consulta"), true);
                     $arrayList = $objPessoaConsultaEmprestimoLogic->listar("ide_pessoa_consulta = {$objPessoaConsulta->getId()}", null, true);
 
-                    $objOrgaoLogic = new OrgaoLogic();
                     $objOrgao = $objOrgaoLogic->obterPorId($objPessoaConsulta->getPessoaOrgao()->getOrgao());
                     $this->addDados('objOrgao', $objOrgao);
                     $this->addDados('objPessoaConsulta', $objPessoaConsulta);
-                } else {
+                                    
+                  
+                } else { 
+                    # Obtendo as consultas cadastradas e ativas para o cliente
                     $arrayObjPessoaConsulta = $objPessoaConsultaLogic->listar("ide_pessoa = {$objPessoa->getId()} AND des_status = 'A'");
-             
+
                     $inArray = "";
                     if ($arrayObjPessoaConsulta) {
                         foreach ($arrayObjPessoaConsulta as $objPessoaConsulta) {
-                            $inArray.=$objPessoaConsulta->getId() . ",";
+                            $inArray .= $objPessoaConsulta->getId() . ",";
                         }
                         $inArray = substr_replace($inArray, '', -1);
-                        
                     }
                     $arrayList = $objPessoaConsultaEmprestimoLogic->listar("ide_pessoa_consulta IN ({$inArray}) AND des_status = 'A'", null, true);
+                    echo "Empréstimo <pre>";
+                    var_dump($inArray);
+                    exit();
                 }
                 $this->addDados('isEmprestimo', ($arrayList) ? true : false);
                 $this->addDados('listEmprestimos', $arrayList);
                 unset($arrayList);
-                //var_dump($inArray);exit();
+              
                 $this->TPageAdmin('selecionar_cadastrar');
             }
 
@@ -84,8 +95,9 @@ class PessoaContratoController extends TMetroUIv3 {
             }
 
             $objTipoContratoLogic = new TipoContratoLogic();
+            
             //Filtro de Tipos de Contratos
-            $arrayList = ($this->getParam('op') == 1) ? $objTipoContratoLogic->listar('ide_tipo_contrato = 1') : $objTipoContratoLogic->listar('ide_tipo_contrato IN (2,3)');
+            $arrayList = ($this->getParam('op') == 1) ? $objTipoContratoLogic->listar('ide_tipo_contrato = 1') : $objTipoContratoLogic->listar('ide_tipo_contrato IN (2)');
             $this->addDados('listTipoContrato', $arrayList);
             unset($arrayList);
 
@@ -180,7 +192,7 @@ class PessoaContratoController extends TMetroUIv3 {
         $objTipoSituacaoLogic = new TipoSituacaoLogic();
         $arrayList = $objTipoSituacaoLogic->listar('ide_tipo_situacao IN (16,17)');
         $this->addDados('listTipoSituacao', $arrayList);
-        
+
         unset($arrayList);
 
         $this->TPageAdmin('atualizar_status_massa');

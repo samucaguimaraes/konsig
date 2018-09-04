@@ -30,5 +30,26 @@ class CorretorBancoLogic extends LogicModel {
             RedirectorHelper::goToControllerAction('CorretorBanco', 'cadastrar');
         }
     }
+    
+    /**
+     * 
+     * @param type $params
+     * @return type
+     */
+    public function ajaxListSelect2Banco($params) {
+       
+        $arrayCorretorBanco = $this->listar("ide_corretor = {$params['corretor']}");
+        
+        if (isset($arrayCorretorBanco[0])) {
+            foreach ($arrayCorretorBanco as $objCorretorBanco) {
+                $descricao = utf8_encode($objCorretorBanco->getNumeroAgencia()." - ".$objCorretorBanco->getNumeroConta());
+                $arrayJson[] = array('value' => $objCorretorBanco->getId(), 'nome' => $descricao);
+            }
+        } else {
+            $arrayJson = false;
+        }
+
+        return json_encode($arrayJson);
+    }
 
 }
