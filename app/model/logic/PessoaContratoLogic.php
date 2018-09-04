@@ -11,7 +11,7 @@ class PessoaContratoLogic extends LogicModel {
         $objPessoaContrato = new PessoaContrato();
         $objPessoaContrato->setPessoa($_POST['pessoa']);
         $objPessoaContrato->setPessoaOrgao($_POST['pessoaOrgao']); //Importante!
-        $objPessoaContrato->setConvenio($_POST['convenio']);
+        $objPessoaContrato->setConvenio($_POST['Convenio']);
         if (isset($_POST['emprestimo']))
             $objPessoaContrato->setPessoaConsultaEmprestimo($_POST['emprestimo']);
         $objPessoaContrato->setTipoContrato($_POST['tipoContrato']);
@@ -38,7 +38,6 @@ class PessoaContratoLogic extends LogicModel {
         if (isset($_POST['isCredencialPublica'])) {
             $objPessoaContrato->setIsComissionado("D"); //Contrato não comissionado
         }
-
         //Corretagem
         $objPessoaContrato->setCorretor($_POST['corretor']);
         if (isset($_POST['corretorBanco']))
@@ -49,6 +48,8 @@ class PessoaContratoLogic extends LogicModel {
 
         $objPessoaContrato->setUsuarioCriador(SecurityHelper::getInstancia()->getUsuario()->getId());
         $objPessoaContrato->setDataCriacao(date('Y-m-d H:i:s'));
+       
+       
 
         $salvar = $this->salvar($objPessoaContrato);
         //$salvar = array(0 => true);

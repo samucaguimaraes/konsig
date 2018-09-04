@@ -145,14 +145,15 @@ class PessoaConsultaLogic extends LogicModel {
                 }
                 $stringIN = substr($stringIN, 0, -1);
             }
-            $objPessoaConsulta->setEmprestimos($arrayEmprestimo);
+            ($arrayEmprestimo != NULL ) ? $objPessoaConsulta->setEmprestimos($arrayEmprestimo): "";
+            //var_dump($arrayEmprestimo); exit();
 
             if (in_array($_POST['orgao'], array(2))) {
                 $margemDisponivel = ACalculosHelper::calcularMargemDisponivel($objPessoaConsulta);
                 $_POST['vlrMargemDisponivel'] = FormatHelper::formatNumeroMonetario($margemDisponivel);
             }
             //Excluir emprestimos retirados da consulta
-            $excluir = $objPessoaConsultaEmprestimoLogic->excluir("des_status = 'A' AND ide_pessoa_consulta = {$_POST['id']} AND ide_pessoa_consulta_emprestimo NOT IN ({$stringIN})");
+            //$excluir = $objPessoaConsultaEmprestimoLogic->excluir("des_status = 'A' AND ide_pessoa_consulta = {$_POST['id']} AND ide_pessoa_consulta_emprestimo NOT IN ({$stringIN})");
             
             $salvar = $this->salvar($_POST);
 
@@ -173,6 +174,33 @@ class PessoaConsultaLogic extends LogicModel {
         }
     }
 
+    /**
+     * 
+     * @param type $params
+     * @return type
+     */
+      public function excluir($requisitante, $params = null) {
+
+        $USER_SECURITY = SecurityHelper::getInstancia()->getUsuario();
+
+        if ($_SERVER['REQUEST_METHOD'] === "POST") {
+           
+//            if ($salvar[0]) {
+//                TFeedbackMetroUIv3Helper::notifySuccess('Dados atualizados com sucesso!');
+//                //$_SESSION['frame'] = 'frameR';
+//                RedirectorHelper::addUrlParameter('id', $salvar[1]->getId());
+//                RedirectorHelper::goToControllerAction('PessoaConsulta', 'informar');
+//            } else {
+//                TFeedbackMetroUIv3Helper::notifyError('Ocorreu um error na atualização, tente novamente ou contate o administrador!!!');
+//                RedirectorHelper::addUrlParameter('id', $_POST['id']);
+//                RedirectorHelper::goToControllerAction($requisitante->modulo, "editar");
+//            }
+//        } else {
+//            RedirectorHelper::addUrlParameter('id', $_POST['id']);
+//            TFeedbackMetroUIv3Helper::notifyWarning('É constrangedor, mas tive problemas para processar a operação');
+//            RedirectorHelper::goToControllerAction("PessoaConsulta", "informar");
+        }
+    }
     public function ajaxListConsulta($params) {
 
         /* Atributos do objeto que poderam ser ordenado */

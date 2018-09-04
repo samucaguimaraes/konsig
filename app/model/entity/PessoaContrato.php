@@ -189,6 +189,7 @@ class PessoaContrato {
     /**
     * @Colmap = ide_corretor_banco
     * @Persistence (type=inteiro)
+    * @Relationship (objeto=CorretorBanco,type=OneToOne)
     */
     private $corretorBanco;
 
