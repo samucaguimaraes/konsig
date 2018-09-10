@@ -6,6 +6,9 @@ $(document).ready(function() {
 
     $("#parceiro").select2({placeholder: 'Selecione...'});
     $("#corretor").select2({placeholder: 'Selecione...'});
+    $("#corretorBanco").select2({placeholder: 'Selecione...'});
+    $('#corretor').on('change',select2TipoResposta);
+    
     $('#convenio').select2({placeholder: "Selecione..."});
     $('#pessoaOrgao').select2({placeholder: "Selecione..."});
     $('#pessoaOrgao').on('change', select2Convenio);
@@ -191,4 +194,21 @@ function select2Convenio() {
     };
     /* Exibir dados na tela com os options encontrados */
     ListSelect2Option(pessoaOrgao, fromObject, AjaxParams);
+}
+
+function select2TipoResposta() {
+    /* Pegar tipoQuesito selecionado */
+    var corretor = $(this).val();
+    /* Configurar a requisição ajax*/
+    var AjaxParams = {objeto: 'CorretorBanco', method: 'ListSelect2Banco', corretor: corretor};
+    /* Configurar o retorno do objeto no html*/
+    var fromObject = {
+        id: '#corretorBanco',
+        object: $('div[id="s2id_corretor"] a:first'),
+        msgEmpty: 'Selecione o corretor.',
+        msgSuccess: 'Selecione...',
+        msgError: 'Nenhuma conta para esse corretor.'
+    };
+    /* Exibir dados na tela com os options encontrados */
+    ListSelect2Option(corretor, fromObject, AjaxParams);
 }

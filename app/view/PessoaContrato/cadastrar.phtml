@@ -116,38 +116,7 @@
             </div>
         </div>
         <?php endif; ?>
-        <!--
-                <div class="row cell-auto-size">            
-                    <div class="cell colspan12" id="cell_emprestimos">
-                        <div data-text="Empréstimo" class="example" id="div_emprestimos">
-                            <table id="tabela_emprestimo" class="table border bordered hovered">
-                                <thead>
-                                    <tr>
-                                        <th style="width: 5%"></th>
-                                        <th style="width: 65%">Convênio</th>
-                                        <th style="width: 15%">Valor Parcela</th>
-                                        <th style="width: 15%">Prazo</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-        <?php //foreach ($view_listEmprestimos as $objEmprestimo): ?>
-                                        <tr>
-                                            <td>
-                                                <label class="input-control radio small-check no-margin">
-                                                    <input class="radioEmprestimo" type="radio" name="emprestimo" value="<?php //echo $objEmprestimo->getConvenio()->getId();   ?>" id="<?php //echo $objEmprestimo->getId();   ?>">
-                                                    <span class="check"></span>
-                                                </label>
-                                            </td>
-                                            <td><?php // echo $objEmprestimo->getConvenio()->getNome();   ?></td>
-                                            <td><?php // echo $objEmprestimo->getVlrParcela();   ?></td>
-                                            <td><?php // echo $objEmprestimo->getTotalParcela() . " meses";   ?></td>
-                                        </tr>
-        <?php //endforeach; ?>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div> -->
+        
         <div class="row cell-auto-size">            
             <div class="cell colspan3">
                 <label>Tipo Contrato <b class="fg-red">*</b></label>
@@ -349,18 +318,19 @@
                 </div>
             </div>
             <div class="cell colspan3 padding-inputs-left1">
-                <label>Conta Depósito</label>
-                <div class="input-control full-size" data-role="select" data-placeholder="Informe o corretor">
-                    <select name="contaCorretor"
-                            id="contaCorretor"
-                            >
-                        <option></option>
-                        <?php foreach ($view_listCorretor as $objCorretor): ?>
-                            <option value="<?php echo $objCorretor->getId(); ?>"><?php echo $objCorretor->getNome(); ?></option>
-                        <?php endforeach; ?>
+                <label>Conta</label>
+                <div class="input-control full-size" data-role="select" data-placeholder="Selecione uma Conta">
+                    <select name="corretorBanco"
+                            id="corretorBanco"
+                            data-validate-func="required"
+                            data-validate-hint-position="top"
+                            data-validate-hint="Por Favor, preencha esse campo.">
+                        <option value=""></option>
                     </select>
                 </div>
+
             </div>
+            
             <div class="cell colspan2 padding-inputs-left1">
                 <label>Data do Dep<span class="no-tablet">ósito</span></label>
                 <div class="input-control text full-size" data-role="input">
@@ -487,6 +457,10 @@
                             data-validate-hint-position="top"
                             data-validate-hint="Por Favor, preencha esse campo.">
                         <option value=""></option>
+                         <option></option>
+                        <?php foreach ($view_listConvenio as $objConvenio): ?>
+                            <option value="<?php echo $objConvenio->getId(); ?>"><?php echo $objConvenio->getNome(); ?></option>
+                        <?php endforeach; ?>
                     </select>
                 </div>
             </div>

@@ -119,6 +119,7 @@ class Corretor {
     */
     private $dataAtualizacao;
 
+   
     public function getId() {
         return $this->id;
     }
@@ -262,5 +263,6 @@ class Corretor {
     public function setDataAtualizacao($dataAtualizacao) {
         $this->dataAtualizacao = $dataAtualizacao;
     }
+
 
 }
