@@ -37,7 +37,7 @@ class PessoaConsultaController extends TMetroUIv3 {
             $inArray = "";
             if ($arrayConsultas) {
                 foreach ($arrayConsultas as $objPessoaConsulta) {
-                    $inArray.=$objPessoaConsulta->getPessoaOrgao() . ",";
+                    $inArray .= $objPessoaConsulta->getPessoaOrgao() . ",";
                 }
                 $inArray = substr_replace($inArray, '', -1);
             }
@@ -55,12 +55,12 @@ class PessoaConsultaController extends TMetroUIv3 {
                 $this->TPageAdmin('selecionar_cadastrar');
             } else {
                 //Obtenho o orgão passado no GET
-                if($this->isParam("idOrgao")){
+                if ($this->isParam("idOrgao")) {
                     $objPessoaOrgao = $objPessoaOrgaoLogic->obter("ide_pessoa_orgao = " . $this->getParam("idOrgao"), true);
                 } else {
                     $objPessoaOrgao = $objPessoaOrgaoLogic->obter("ide_pessoa = " . $objPessoa->getId(), true);
                 }
-                
+
                 $this->addDados('objPessoaOrgao', $objPessoaOrgao);
 
                 //Verificando se o Acesso a Credencial esta público.
@@ -116,13 +116,12 @@ class PessoaConsultaController extends TMetroUIv3 {
         //Validando o aparecimento da div Detalhamento e Margem Disponível
         $this->addDados('isDetalhamento', (in_array($objPessoaOrgao->getOrgao()->getId(), array(2))) ? true : false); //[2] Previdência Social
         $this->addDados('isMargemDisponivel', (in_array($objPessoaOrgao->getOrgao()->getId(), array(2))) ? false : true); //[2] Exclui Previdência Social
-        
         //Lista Emprestimos Existentes
         $objPessoaConsultaEmprestimoLogic = new PessoaConsultaEmprestimoLogic();
         $arrayList = $objPessoaConsultaEmprestimoLogic->listar("ide_pessoa_consulta = {$objPessoaConsulta->getId()} AND des_status = 'A'");
-               
+
+        $key_Alternativa = 0;
         if ($arrayList != null) {
-            $key_Alternativa = 0;
             $html = '';
             foreach ($arrayList as $objPessoaConsultaEmprestimo) {
                 $html .= '<div class="row" id=div_Alternativa_' . $key_Alternativa . '>';
@@ -181,10 +180,10 @@ class PessoaConsultaController extends TMetroUIv3 {
     /**
      * 
      */
-     public function excluir() {
+    public function excluir() {
         
     }
-    
+
     public function informar() {
 
         $this->HTML->addJavaScript(PATH_JS_URL . $this->getController() . "/" . $this->getAction() . ".js");
