@@ -198,7 +198,7 @@ class PessoaOrgaoLogic extends LogicModel {
         if (isset($arrayList[0])) {
             foreach ($arrayList as $array) {
                 //$excluir = "<button class='button mini-button rounded square-button place-right' data-role='hint' data-hint-background='bg-lightBlue' data-hint-color='fg-white' data-hint-mode='2' data-hint='|Excluir Registro' data-hint-position='top'><span class='icon mif-bin'></span></button>";
-                $url = UrlRequestHelper::mountUrl('PessoaConsulta', 'cadastrar', array('id' => $array['ide_pessoa_orgao']));
+                $url = UrlRequestHelper::mountUrl('PessoaConsulta', 'cadastrar', array('idOrgao' => $array['ide_pessoa_orgao']));
                 $link = "<a href='{$url}'>" . $array['nom_orgao'] . "</a>";
                 $output["aaData"][] = array(
                     $link,

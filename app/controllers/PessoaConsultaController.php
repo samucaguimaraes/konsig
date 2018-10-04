@@ -15,10 +15,9 @@ class PessoaConsultaController extends TMetroUIv3 {
     }
 
     public function cadastrar() {
-
         $this->HTML->addJavaScript(PATH_JS_CORE_URL . "jquery.mask.min.js");
 
-        if (isset($_POST['numeroCPF']) OR $this->isParam("id")) {
+        if (isset($_POST['numeroCPF']) OR $this->isParam("id") OR $this->isParam("idOrgao")) {
             $this->HTML->addJavaScript(PATH_JS_CORE_URL . 'JQueryUI/jquery-ui.min.js');
             $this->HTML->addCss(PATH_JS_CORE_URL . 'JQueryUI/jquery-ui.min.css');
             $this->HTML->addJavaScript(PATH_TEMPLATE_JS_URL . "select2.min.js");
@@ -26,9 +25,27 @@ class PessoaConsultaController extends TMetroUIv3 {
             $this->HTML->addJavaScript(PATH_JS_CORE_URL . "jquery.pstrength-min.1.2.js");
             $this->HTML->addJavaScript(PATH_JS_URL . $this->getController() . "/" . $this->getAction() . ".js");
 
+            /*             * *
+             * Verificando qual o fluxo de cadastro de consulta
+             * Fluxo 1 - Através da tela de informar de pessoa, obtendo os dados do objeto pessoa
+             * Fluxo 2 - Através de um orgão que ainda não foi consultado, identificado com o número do CPF cliente
+             */
+
+            #Logic Instanciados
             $objPessoaLogic = new PessoaLogic();
-            $objPessoa = $objPessoaLogic->obterPorId($this->getParam("id"));
-            unset($objPessoaLogic);
+            $objPessoaOrgaoLogic = new PessoaOrgaoLogic();
+
+            #Fluxo 1
+            if ($this->isParam("id")) {
+                $objPessoa = $objPessoaLogic->obterPorId($this->getParam("id"));
+                unset($objPessoaLogic);
+                #Fluxo 2  
+            } elseif ($this->isParam("idOrgao")) {
+                $objPessoaOrgaoLogic = new PessoaOrgaoLogic();
+                $objPessoaOrgao = $objPessoaOrgaoLogic->obterPorId($this->isParam("idOrgao"));
+                $objPessoa = $objPessoaLogic->obterPorId($objPessoaOrgao->getPessoa());
+                unset($objPessoaLogic);
+            }
 
             $this->addDados('objPessoa', $objPessoa);
 
@@ -41,10 +58,10 @@ class PessoaConsultaController extends TMetroUIv3 {
                 }
                 $inArray = substr_replace($inArray, '', -1);
             }
+            
             //Calculando o total de Orgãos Associados ao Cliente
-            $objPessoaOrgaoLogic = new PessoaOrgaoLogic();
             $tPessoaOrgao = $objPessoaOrgaoLogic->totalRegistro("ide_pessoa = " . $objPessoa->getId());
-
+          
             if ($this->isParam("idOrgao") === false && $tPessoaOrgao > 1) {
                 $notIN = ($inArray != "") ? " AND ide_pessoa_orgao NOT IN (" . $inArray . ")" : "";
 
